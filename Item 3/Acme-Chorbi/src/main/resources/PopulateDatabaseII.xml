@@ -57,7 +57,7 @@
 	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Layne" />
 		<property name="surname" value="Ozzie" />
-		<property name="email" value="admin@acme-cng.com" />
+		<property name="email" value="admin@acme.com" />
 		<property name="phone" value="+34666666666" />
 		<property name="userAccount" ref="userAccountAdministrator1" />
 	</bean>	
