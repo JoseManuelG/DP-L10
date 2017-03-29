@@ -25,7 +25,7 @@ public class SearchTemplate extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 
 	private String	desiredRelationship;
-	private Integer	aporxAge;
+	private Integer	age;
 	private String	genre;
 	private String	keyword;
 	private Date	cacheMoment;
@@ -40,15 +40,15 @@ public class SearchTemplate extends DomainEntity {
 		this.desiredRelationship = desiredRelationship;
 	}
 
-	public Integer getAporxAge() {
-		return this.aporxAge;
+	public Integer getAge() {
+		return this.age;
 	}
 
-	public void setAporxAge(final Integer aporxAge) {
-		this.aporxAge = aporxAge;
+	public void setAge(final Integer age) {
+		this.age = age;
 	}
 
-	@Pattern(regexp = "^$^man$|^woman$")
+	@Pattern(regexp = "^$|^man$|^woman$")
 	public String getGenre() {
 		return this.genre;
 	}

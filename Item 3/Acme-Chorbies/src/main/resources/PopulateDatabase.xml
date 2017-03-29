@@ -151,7 +151,8 @@
 		<property name="desiredRelationship" value="love" />
 		<property name="birthDate" value="06/20/1990" />
 		<property name="genre" value="man" />
-		<property name="banned" value="false" />		
+		<property name="banned" value="false" />	
+		<property name="coordinates" ref="coordinatesChorbi1" />		
 	</bean>
 	
 	<bean id="chorbi2" class="domain.Chorbi">
@@ -166,6 +167,7 @@
 		<property name="birthDate" value="06/20/1970" />
 		<property name="genre" value="man" />
 		<property name="banned" value="false" />	
+		<property name="coordinates" ref="coordinatesChorbi2" />	
 	</bean>
 	
 	<bean id="chorbi3" class="domain.Chorbi">
@@ -180,6 +182,7 @@
 		<property name="birthDate" value="06/20/1988" />
 		<property name="genre" value="man" />
 		<property name="banned" value="false" />	
+		<property name="coordinates" ref="coordinatesChorbi3" />	
 	</bean>
 	
 	<bean id="chorbi4" class="domain.Chorbi">
@@ -194,6 +197,7 @@
 		<property name="birthDate" value="06/20/1979" />
 		<property name="genre" value="woman" />
 		<property name="banned" value="false" />	
+		<property name="coordinates" ref="coordinatesChorbi4" />	
 	</bean>
 	
 	<bean id="chorbi5" class="domain.Chorbi">
@@ -208,6 +212,7 @@
 		<property name="birthDate" value="06/20/1995" />
 		<property name="genre" value="woman" />
 		<property name="banned" value="false" />	
+		<property name="coordinates" ref="coordinatesChorbi5" />	
 	</bean>
 	
 	<bean id="chorbi6" class="domain.Chorbi">
@@ -222,6 +227,7 @@
 		<property name="birthDate" value="04/21/1980" />
 		<property name="genre" value="woman" />
 		<property name="banned" value="true" />	
+		<property name="coordinates" ref="coordinatesChorbi6" />	
 	</bean>
 	
 	<bean id="chorbi7" class="domain.Chorbi">
@@ -236,6 +242,7 @@
 		<property name="birthDate" value="04/21/1980" />
 		<property name="genre" value="woman" />
 		<property name="banned" value="true" />	
+		<property name="coordinates" ref="coordinatesChorbi7" />	
 	</bean>
 	
 	<bean id="chorbi8" class="domain.Chorbi">
@@ -249,7 +256,8 @@
 		<property name="desiredRelationship" value="friendship" />
 		<property name="birthDate" value="04/21/1980" />
 		<property name="genre" value="woman" />
-		<property name="banned" value="true" />	
+		<property name="banned" value="true" />
+		<property name="coordinates" ref="coordinatesChorbi8" />	
 	</bean>
 
 	<!-- Chirp -->
@@ -526,10 +534,227 @@
 				<ref bean="chorbi7" />
 			</list>
 		</property>
+		<property name="desiredRelationship" value="love" />
+		<property name="age" value="20" />
+		<property name="genre" value="man" />
+		<property name="keyword" value="" />
+		<property name="cacheMoment" value="10/10/2016 22:22" />
+		<property name="coordinates" ref="coordinatesSearchTemplateChorbi1" />
+	</bean>
+	
+	<bean id="searchTemplateChorbi2" class="domain.SearchTemplate">
+		<property name="chorbi" ref="chorbi2" />
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi3" />
+			</list>
+		</property>
 		<property name="desiredRelationship" value="" />
+		<property name="age" value="" />
+		<property name="genre" value="" />
+		<property name="keyword" value="chorbi3" />
+		<property name="cacheMoment" value="10/10/2016 22:22" />
+		<property name="coordinates" ref="coordinatesSearchTemplateChorbi2" />
+	</bean>
+	
+	<bean id="searchTemplateChorbi3" class="domain.SearchTemplate">
+		<property name="chorbi" ref="chorbi3" />
+		<property name="chorbies">
+			<list>
+			</list>
+		</property>
+		<property name="desiredRelationship" value="friendship" />
+		<property name="age" value="" />
+		<property name="genre" value="" />
+		<property name="keyword" value="" />
+		<property name="cacheMoment" value="10/10/2016 22:22" />
+		<property name="coordinates" ref="coordinatesSearchTemplateChorbi3" />
+	</bean>
+	
+	<bean id="searchTemplateChorbi4" class="domain.SearchTemplate">
+		<property name="chorbi" ref="chorbi4" />
+		<property name="chorbies">
+			<list>
+			</list>
+		</property>
+		<property name="desiredRelationship" value="" />
+		<property name="age" value="" />
+		<property name="genre" value="woman" />
+		<property name="keyword" value="" />
+		<property name="cacheMoment" value="10/10/2016 22:22" />
+		<property name="coordinates" ref="coordinatesSearchTemplateChorbi4" />
+	</bean>
+	
+	<bean id="searchTemplateChorbi5" class="domain.SearchTemplate">
+		<property name="chorbi" ref="chorbi5" />
+		<property name="chorbies">
+			<list>
+			</list>
+		</property>
+		<property name="desiredRelationship" value="" />
+		<property name="age" value="40" />
+		<property name="genre" value="" />
+		<property name="keyword" value="" />
+		<property name="cacheMoment" value="10/10/2016 22:22" />
+		<property name="coordinates" ref="coordinatesSearchTemplateChorbi5" />
+	</bean>
+	
+	<bean id="searchTemplateChorbi6" class="domain.SearchTemplate">
+		<property name="chorbi" ref="chorbi6" />
+		<property name="chorbies">
+			<list>
+			</list>
+		</property>
+		<property name="desiredRelationship" value="" />
+		<property name="age" value="" />
+		<property name="genre" value="" />
+		<property name="keyword" value="" />
+		<property name="cacheMoment" value="10/10/2016 22:22" />
+		<property name="coordinates" ref="coordinatesSearchTemplateChorbi6" />
+	</bean>
+	
+	<bean id="searchTemplateChorbi7" class="domain.SearchTemplate">
+		<property name="chorbi" ref="chorbi7" />
+		<property name="chorbies">
+			<list>
+			</list>
+		</property>
+		<property name="desiredRelationship" value="" />
+		<property name="age" value="" />
+		<property name="genre" value="" />
+		<property name="keyword" value="" />
+		<property name="cacheMoment" value="10/10/2016 22:22" />
+		<property name="coordinates" ref="coordinatesSearchTemplateChorbi7" />
+	</bean>
+	
+	<bean id="searchTemplateChorbi8" class="domain.SearchTemplate">
+		<property name="chorbi" ref="chorbi8" />
+		<property name="chorbies">
+			<list>
+			</list>
+		</property>
+		<property name="desiredRelationship" value="" />
+		<property name="age" value="" />
+		<property name="genre" value="" />
+		<property name="keyword" value="" />
+		<property name="cacheMoment" value="10/10/2016 22:22" />
+		<property name="coordinates" ref="coordinatesSearchTemplateChorbi8" />
 	</bean>
 	
 	<!-- Coordinates	-->
+	
+	<bean id="coordinatesChorbi1" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesSearchTemplateChorbi1" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesChorbi2" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesSearchTemplateChorbi2" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesChorbi3" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesSearchTemplateChorbi3" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesChorbi4" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesSearchTemplateChorbi4" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesChorbi5" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesSearchTemplateChorbi5" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesChorbi6" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesSearchTemplateChorbi6" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesChorbi7" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesSearchTemplateChorbi7" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesChorbi8" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
+	<bean id="coordinatesSearchTemplateChorbi8" class="domain.Coordinates">
+		<property name="state" value="" />
+		<property name="country" value="" />
+		<property name="pronvince" value="" />
+		<property name="city" value="" />
+	</bean>
+	
 	<!-- CreditCard	-->
 	<!-- Banner	-->
 	
