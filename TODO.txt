@@ -1,6 +1,7 @@
 B+ tree
 Informe de costes 
 A+
+Hacer un banenr de cada acme, subirlos a una url y añadirlos a los dos populates
 
 
 ---------------COMPLETO---------------------

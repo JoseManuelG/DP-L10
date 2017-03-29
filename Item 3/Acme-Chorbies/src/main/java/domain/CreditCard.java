@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
@@ -73,6 +75,19 @@ public class CreditCard extends DomainEntity {
 		this.cvvCode = cvvCode;
 	}
 
+
 	// Relationships -------------------------------------------------------------
 
+	private Chorbi	chorbi;
+
+
+	@Valid
+	@OneToOne(optional = false)
+	public Chorbi getChorbi() {
+		return this.chorbi;
+	}
+
+	public void setChorbi(final Chorbi chorbi) {
+		this.chorbi = chorbi;
+	}
 }

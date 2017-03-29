@@ -469,51 +469,51 @@
 		<property name="chirp" ref="chirp2Chorbi1Copy" />
 	</bean>
 	
-	<!-- Like	-->
+	<!-- Likes	-->
 	
-	<bean id="like1Chorbi1" class="domain.Like">
+	<bean id="likes1Chorbi1" class="domain.Likes">
 		<property name="liker" ref="chorbi1" />
 		<property name="liked" ref="chorbi2" />
 		<property name="moment" value="10/10/2016 20:30" />
 		<property name="comment" value="nice" />
 	</bean>
 	
-	<bean id="like2Chorbi1" class="domain.Like">
+	<bean id="likes2Chorbi1" class="domain.Likes">
 		<property name="liker" ref="chorbi1" />
 		<property name="liked" ref="chorbi3" />
 		<property name="moment" value="10/10/2016 20:33" />
 		<property name="comment" value="niiiice" />
 	</bean>
 	
-	<bean id="like3Chorbi1" class="domain.Like">
+	<bean id="likes3Chorbi1" class="domain.Likes">
 		<property name="liker" ref="chorbi1" />
 		<property name="liked" ref="chorbi4" />
 		<property name="moment" value="10/10/2016 20:34" />
 		<property name="comment" value="" />
 	</bean>
 	
-	<bean id="like4Chorbi1" class="domain.Like">
+	<bean id="likes4Chorbi1" class="domain.Likes">
 		<property name="liker" ref="chorbi1" />
 		<property name="liked" ref="chorbi5" />
 		<property name="moment" value="10/10/2016 20:35" />
 		<property name="comment" value="" />
 	</bean>
 	
-	<bean id="like5Chorbi1" class="domain.Like">
+	<bean id="likes5Chorbi1" class="domain.Likes">
 		<property name="liker" ref="chorbi1" />
 		<property name="liked" ref="chorbi6" />
 		<property name="moment" value="10/10/2016 20:36" />
 		<property name="comment" value="" />
 	</bean>
 	
-	<bean id="like6Chorbi1" class="domain.Like">
+	<bean id="likes6Chorbi1" class="domain.Likes">
 		<property name="liker" ref="chorbi1" />
 		<property name="liked" ref="chorbi7" />
 		<property name="moment" value="10/10/2016 20:37" />
 		<property name="comment" value="" />
 	</bean>
 	
-	<bean id="like1Chorbi2" class="domain.Like">
+	<bean id="likes1Chorbi2" class="domain.Likes">
 		<property name="liker" ref="chorbi2" />
 		<property name="liked" ref="chorbi1" />
 		<property name="moment" value="10/10/2016 20:38" />
@@ -645,118 +645,179 @@
 	
 	<bean id="coordinatesChorbi1" class="domain.Coordinates">
 		<property name="state" value="" />
-		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="country" value="Spain" />
+		<property name="province" value="Seville" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi1" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="province" value="" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesChorbi2" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="province" value="" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi2" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
+		<property name="province" value="" />
 		<property name="city" value="" />
 	</bean>
 	
 	<bean id="coordinatesChorbi3" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="province" value="" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi3" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
+		<property name="province" value="" />
 		<property name="city" value="" />
 	</bean>
 	
 	<bean id="coordinatesChorbi4" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="province" value="" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi4" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
+		<property name="province" value="" />
 		<property name="city" value="" />
 	</bean>
 	
 	<bean id="coordinatesChorbi5" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="province" value="" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi5" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
+		<property name="province" value="" />
 		<property name="city" value="" />
 	</bean>
 	
 	<bean id="coordinatesChorbi6" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="province" value="" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi6" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
+		<property name="province" value="" />
 		<property name="city" value="" />
 	</bean>
 	
 	<bean id="coordinatesChorbi7" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="province" value="" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi7" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
+		<property name="province" value="" />
 		<property name="city" value="" />
 	</bean>
 	
 	<bean id="coordinatesChorbi8" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
-		<property name="city" value="" />
+		<property name="province" value="" />
+		<property name="city" value="Seville" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi8" class="domain.Coordinates">
 		<property name="state" value="" />
 		<property name="country" value="" />
-		<property name="pronvince" value="" />
+		<property name="province" value="" />
 		<property name="city" value="" />
 	</bean>
 	
 	<!-- CreditCard	-->
+	
+	<bean id="creditCardChorbi1" class="domain.CreditCard">
+		<property name="holderName" value="Chorbi1"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="10"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="500"/>
+		<property name="chorbi" ref="chorbi1"/>
+	</bean>
+	
+	<bean id="creditCardChorbi2" class="domain.CreditCard">
+		<property name="holderName" value="Chorbi2"/>
+		<property name="brandName" value="MASTERCARD"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="10"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="500"/>
+		<property name="chorbi" ref="chorbi2"/>
+	</bean>
+	
+	<bean id="creditCardChorbi3" class="domain.CreditCard">
+		<property name="holderName" value="Chorbi3"/>
+		<property name="brandName" value="AMEX"/>
+		<property name="number" value="4485733078654607"/>
+		<property name="expirationMonth" value="10"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="500"/>
+		<property name="chorbi" ref="chorbi3"/>
+	</bean>
+	
 	<!-- Banner	-->
+	
+	<bean id="Banner1" class="domain.Banner">
+		<property name="link" value="http://www.acme-pad-thai.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
+	
+	<bean id="Banner2" class="domain.Banner">
+		<property name="link" value="http://www.acme-bnb.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
+	
+	<bean id="Banner3" class="domain.Banner">
+		<property name="link" value="http://www.acme-cng.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
+	
+	<bean id="Banner4" class="domain.Banner">
+		<property name="link" value="http://www.link1.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
+	
+	<bean id="Banner5" class="domain.Banner">
+		<property name="link" value="http://www.link2.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
+	
+	<bean id="Banner6" class="domain.Banner">
+		<property name="link" value="http://www.link3.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
 	
 	<!-- Configuration (12h in ms)	-->
 	

@@ -6,8 +6,6 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Access(AccessType.PROPERTY)
 public class Coordinates extends DomainEntity {
@@ -47,7 +45,7 @@ public class Coordinates extends DomainEntity {
 		this.province = province;
 	}
 
-	@NotBlank
+	@NotNull
 	public String getCity() {
 		return this.city;
 	}

@@ -9,9 +9,11 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -40,6 +42,7 @@ public class SearchTemplate extends DomainEntity {
 		this.desiredRelationship = desiredRelationship;
 	}
 
+	@Min(13)
 	public Integer getAge() {
 		return this.age;
 	}
@@ -83,6 +86,7 @@ public class SearchTemplate extends DomainEntity {
 
 	private Coordinates			coordinates;
 	private Collection<Chorbi>	chorbies;
+	private Chorbi				chorbi;
 
 
 	@Valid
@@ -105,6 +109,16 @@ public class SearchTemplate extends DomainEntity {
 
 	public void setChorbies(final Collection<Chorbi> chorbies) {
 		this.chorbies = chorbies;
+	}
+
+	@Valid
+	@OneToOne(optional = false)
+	public Chorbi getChorbi() {
+		return this.chorbi;
+	}
+
+	public void setChorbi(final Chorbi chorbi) {
+		this.chorbi = chorbi;
 	}
 
 }

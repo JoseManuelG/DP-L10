@@ -32,43 +32,39 @@
 
 
 	<!-- Other domain beans come here -->
-	
-	<!-- Message -->
-	
-
-	
-	<!-- Message Copies -->
-
-<!-- Attachment -->
-	
-	
-	<!-- Customer -->
-
-	<!-- Trip -->
-
-	
-	
-	
-	<!-- Apply -->
-	
-	
+		
 	<!-- Administrator -->
 	
 	<bean id="administrator1" class="domain.Administrator">
-		<property name="name" value="Layne" />
-		<property name="surname" value="Ozzie" />
+		<property name="name" value="admin" />
+		<property name="surname" value="admin" />
 		<property name="email" value="admin@acme.com" />
 		<property name="phone" value="+34666666666" />
 		<property name="userAccount" ref="userAccountAdministrator1" />
 	</bean>	
 	
-	<!-- Configuration 	-->
+	<!-- Banner	-->
+	
+	<bean id="Banner1" class="domain.Banner">
+		<property name="link" value="http://www.acme-pad-thai.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
+	
+	<bean id="Banner2" class="domain.Banner">
+		<property name="link" value="http://www.acme-bnb.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
+	
+	<bean id="Banner3" class="domain.Banner">
+		<property name="link" value="http://www.acme-cng.com"/>
+		<property name="image" value="http://www.imgBanner.com"/>
+	</bean>
+	
+	<!-- Configuration (12h in ms)	-->
 	
 	<bean id="configuration" class="domain.Configuration">
-		<property name="banner" value="https://www.edrawsoft.com/template/homepage-banner.png"/>
+		<property name="cachedTime" value="43200000"/>
 	</bean>	
-	
-	<!-- Comment -->
 
 	
 	
