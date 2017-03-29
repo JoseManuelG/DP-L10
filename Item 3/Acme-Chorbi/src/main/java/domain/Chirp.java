@@ -6,9 +6,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.Index;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -21,17 +19,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(indexes = {
-	@Index(columnList = "isSender")
-})
-public class Message extends DomainEntity {
+public class Chirp extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
 	private String	senderName;
 	private String	recipientName;
 	private Date	sendingMoment;
-	private String	title;
+	private String	subject;
 	private String	text;
 	private boolean	isSender;
 
@@ -70,12 +65,12 @@ public class Message extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml
-	public String getTitle() {
-		return this.title;
+	public String getSubject() {
+		return this.subject;
 	}
 
-	public void setTitle(final String title) {
-		this.title = title;
+	public void setSubject(final String title) {
+		this.subject = title;
 	}
 
 	@NotBlank

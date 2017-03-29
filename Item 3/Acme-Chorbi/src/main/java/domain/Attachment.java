@@ -45,18 +45,18 @@ public class Attachment extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
-	private Message	message;
+	private Chirp	chirp;
 
 
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Message getMessage() {
-		return this.message;
+	public Chirp getChirp() {
+		return this.chirp;
 	}
 
-	public void setMessage(final Message message) {
-		this.message = message;
+	public void setChirp(final Chirp chirp) {
+		this.chirp = chirp;
 	}
 
 }

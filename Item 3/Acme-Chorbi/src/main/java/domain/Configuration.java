@@ -5,28 +5,21 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.URL;
-
 @Entity
 @Access(AccessType.PROPERTY)
 public class Configuration extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	private String	banner;
+	private long	cachedTime;
 
 
-	@NotBlank
-	@URL
-	@SafeHtml
-	public String getBanner() {
-		return this.banner;
+	public long getCachedTime() {
+		return this.cachedTime;
 	}
 
-	public void setBanner(final String banner) {
-		this.banner = banner;
+	public void setCachedTime(final long cachedTime) {
+		this.cachedTime = cachedTime;
 	}
 
 	// Relationships ----------------------------------------------------------

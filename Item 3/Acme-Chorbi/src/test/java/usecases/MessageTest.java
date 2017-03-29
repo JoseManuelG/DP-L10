@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import services.MessageService;
 import utilities.AbstractTest;
 import domain.Attachment;
-import domain.Message;
+import domain.Chirp;
 import forms.MessageForm;
 
 @ContextConfiguration(locations = {
@@ -219,7 +219,7 @@ public class MessageTest extends AbstractTest {
 
 	protected void templateWriteMessage(final String username, final int recipientId, final String title, final String text, final Class<?> expected) {
 		Class<?> caught;
-		Message message;
+		Chirp message;
 		Collection<Attachment> attachments;
 
 		caught = null;
@@ -244,7 +244,7 @@ public class MessageTest extends AbstractTest {
 
 	protected void templateReplyMessage(final String username, final int messageId, final String title, final String text, final Class<?> expected) {
 		Class<?> caught;
-		Message message;
+		Chirp message;
 		Collection<Attachment> attachments;
 		MessageForm messageForm;
 
@@ -271,7 +271,7 @@ public class MessageTest extends AbstractTest {
 
 	protected void templateForwardMessage(final String username, final int messageId, final int recipientId, final Class<?> expected) {
 		Class<?> caught;
-		Message message;
+		Chirp message;
 		Collection<Attachment> attachments;
 		MessageForm messageForm;
 		caught = null;

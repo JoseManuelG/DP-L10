@@ -1,12 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -14,47 +16,22 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Chorbi extends Actor {
+public class SearchTemplate extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
-	private String	picture;
-	private String	description;
 	private String	desiredRelationship;
-	private Date	birthDate;
+	private Integer	aporxAge;
 	private String	genre;
-	private boolean	banned;
+	private String	keyword;
+	private Date	cacheMoment;
 
 
-	@URL
-	@NotBlank
-	@SafeHtml
-	public String getPicture() {
-		return this.picture;
-	}
-
-	public void setPicture(final String picture) {
-		this.picture = picture;
-	}
-
-	@NotBlank
-	@SafeHtml
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(final String description) {
-		this.description = description;
-	}
-
-	@Pattern(regexp = "^activities$|^friendship$|^love$")
+	@Pattern(regexp = "^$|^activities$|^friendship$|^love$")
 	public String getDesiredRelationship() {
 		return this.desiredRelationship;
 	}
@@ -63,19 +40,15 @@ public class Chorbi extends Actor {
 		this.desiredRelationship = desiredRelationship;
 	}
 
-	@Past
-	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Temporal(TemporalType.DATE)
-	public Date getBirthDate() {
-		return this.birthDate;
+	public Integer getAporxAge() {
+		return this.aporxAge;
 	}
 
-	public void setBirthDate(final Date birthDate) {
-		this.birthDate = birthDate;
+	public void setAporxAge(final Integer aporxAge) {
+		this.aporxAge = aporxAge;
 	}
 
-	@Pattern(regexp = "^man$|^woman$")
+	@Pattern(regexp = "^$^man$|^woman$")
 	public String getGenre() {
 		return this.genre;
 	}
@@ -84,29 +57,54 @@ public class Chorbi extends Actor {
 		this.genre = genre;
 	}
 
-	public boolean getBanned() {
-		return this.banned;
+	@NotNull
+	public String getKeyword() {
+		return this.keyword;
 	}
 
-	public void setBanned(final boolean banned) {
-		this.banned = banned;
+	public void setKeyword(final String keyword) {
+		this.keyword = keyword;
+	}
+
+	@NotNull
+	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getCacheMoment() {
+		return this.cacheMoment;
+	}
+
+	public void setCacheMoment(final Date cacheMoment) {
+		this.cacheMoment = cacheMoment;
 	}
 
 
 	// Relationships ----------------------------------------------------------
 
-	private Coordinates	coordinates;
+	private Coordinates			coordinates;
+	private Collection<Chorbi>	chorbies;
 
 
 	@Valid
 	@NotNull
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	public Coordinates getCoordinates() {
 		return this.coordinates;
 	}
 
 	public void setCoordinates(final Coordinates coordinates) {
 		this.coordinates = coordinates;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToMany
+	public Collection<Chorbi> getChorbies() {
+		return this.chorbies;
+	}
+
+	public void setChorbies(final Collection<Chorbi> chorbies) {
+		this.chorbies = chorbies;
 	}
 
 }
