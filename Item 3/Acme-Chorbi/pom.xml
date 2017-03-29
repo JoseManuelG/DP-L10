@@ -18,7 +18,7 @@
 	<!-- Artifact identification and properties -->
 
 	<groupId>Design-and-Testing</groupId>
-	<artifactId>Acme-Chorbi</artifactId>
+	<artifactId>Acme-Chorbies</artifactId>
 	<version>1.8</version>
 	<packaging>war</packaging>
 	
