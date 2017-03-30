@@ -20,11 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import services.MessageService;
 import utilities.AbstractTest;
 import domain.Attachment;
 import domain.Chirp;
-import forms.MessageForm;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"

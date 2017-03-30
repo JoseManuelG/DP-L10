@@ -1,0 +1,160 @@
+
+package services;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+
+import org.hibernate.engine.config.spi.ConfigurationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+
+import repositories.SearchTemplateRepository;
+import domain.Chorbi;
+import domain.SearchTemplate;
+
+@Service
+@Transactional
+public class SearchTemplateService {
+
+	// Managed Repository --------------------------------------
+	@Autowired
+	private SearchTemplateRepository	searchTemplateRepository;
+
+	// Supporting Services --------------------------------------
+	@Autowired
+	private ActorService				actorService;
+	@Autowired
+	private ConfigurationService		configurationService;
+	@Autowired
+	private Validator					validator;
+
+
+	// Simple CRUD methods --------------------------------------
+	public SearchTemplate create() {
+		SearchTemplate result;
+
+		result = new SearchTemplate();
+		result.setCacheMoment(new Date(System.currentTimeMillis() - this.configurationService.findOne().getCachedTime()));
+		result.setChorbies(new ArrayList<Chorbi>());
+
+		return result;
+	}
+	public Collection<SearchTemplate> findAll() {
+		Collection<SearchTemplate> result;
+
+		result = this.searchTemplateRepository.findAll();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public SearchTemplate findOne(final int searchTemplateId) {
+		SearchTemplate result;
+
+		result = this.searchTemplateRepository.findOne(searchTemplateId);
+
+		return result;
+	}
+
+	public SearchTemplate save(final SearchTemplate searchTemplate) {
+		SearchTemplate result;
+		final SearchTemplate old;
+		final Double min;
+		//Collection<Property> results;
+		Date timeOfCache, lastSearch;
+
+		timeOfCache = this.configurationService.findOne().getCachedTime();
+		lastSearch = new Date(searchTemplate.getCacheMoment().getTime());
+		//TODO - Revisar que el search guardado sea del Principal, falta el actorService y y la navegabilidad de las entidades
+		//Assert.isTrue(((Chorbi) this.actorService.findByPrincipal()).getSearchTemplate().getId() == searchTemplate.getId());
+
+		result = searchTemplate;
+		//Comprobamos si el SearchTemplate ha sido modificado
+		if (lastSearch.before(timeOfCache) || this.searchTemplateHasBeenModified(searchTemplate)) {
+
+			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
+
+			//TODO montar query de busqueda
+			//results = this.searchTemplateRepository.searchPropertiesWithMaxPrice(result.getDestination(), result.getKeyword(), min, result.getMaxPrice());
+
+			//result.setResults(results);
+
+			result = this.searchTemplateRepository.save(result);
+		}
+
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	private boolean searchTemplateHasBeenModified(final SearchTemplate searchTemplate) {
+		SearchTemplate old;
+		boolean result;
+		old = this.searchTemplateRepository.findOne(searchTemplate.getId());
+		result = !searchTemplate.getAge().equals(old.getAge())
+
+		|| !(searchTemplate.getDesiredRelationship().equals(old.getDesiredRelationship()))
+
+		|| !(searchTemplate.getGenre().equals(old.getGenre()))
+
+		|| !(searchTemplate.getKeyword().equals(old.getKeyword()))
+
+		|| !(searchTemplate.getCoordinates().getCity().equals(old.getCoordinates().getCity()))
+
+		|| !(searchTemplate.getCoordinates().getCountry().equals(old.getCoordinates().getCountry()))
+
+		|| !(searchTemplate.getCoordinates().getProvince().equals(old.getCoordinates().getProvince()))
+
+		|| !(searchTemplate.getCoordinates().getState().equals(old.getCoordinates().getState()));
+
+		return result;
+
+	}
+	public void delete(final SearchTemplate searchTemplate) {
+		Assert.notNull(searchTemplate, "searchTemplate.error.null");
+		//TODO - Revisar que el search guardado sea del Principal, falta el actorService y y la navegabilidad de las entidades
+		//Assert.isTrue(((Chorbi) this.actorService.findByPrincipal()).getSearchTemplate().getId() == searchTemplate.getId());
+
+		Assert.isTrue(this.searchTemplateRepository.exists(searchTemplate.getId()), "searchTemplate.error.exists");
+
+		this.searchTemplateRepository.delete(searchTemplate);
+	}
+
+	// Other business methods --------------------------------------
+
+	public SearchTemplate findByPrincipal() {
+		SearchTemplate result;
+
+		result = this.searchTemplateRepository.findByTenant(this.actorService.findByPrincipal().getId());
+
+		return result;
+	}
+
+	public SearchTemplate reconstruct(final SearchTemplate searchTemplate, final BindingResult binding) {
+		SearchTemplate res, old;
+
+		old = this.findOne(searchTemplate.getId());
+
+		res = this.create();
+		//old things
+		res.setId(old.getId());
+		res.setVersion(old.getVersion());
+		res.setCacheMoment(old.getCacheMoment());
+		res.setChorbies(old.getChorbies());
+
+		//New things
+		res.setDesiredRelationship(searchTemplate.getDesiredRelationship());
+		res.setAge(searchTemplate.getAge());
+		res.setGenre(searchTemplate.getGenre());
+		res.setKeyword(searchTemplate.getKeyword());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+}
