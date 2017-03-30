@@ -33,8 +33,8 @@ public class ConfigurationService {
 	public Configuration save(final Configuration configuration) {
 		Configuration result;
 
-		Assert.notNull(configuration, "La configuración no puede ser nula");
-		Assert.isTrue(this.administratorService.findAdministratorByPrincipal().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("ADMINISTRATOR"), "Solo el administrador podra modificar la configurcion");
+		Assert.notNull(configuration, "configuration.error.null");
+		Assert.isTrue(this.administratorService.findAdministratorByPrincipal().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("ADMINISTRATOR"), "configuration.error.notadmin");
 		result = this.configurationRepository.save(configuration);
 		return result;
 	}
