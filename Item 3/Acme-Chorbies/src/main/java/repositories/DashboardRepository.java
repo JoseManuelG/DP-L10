@@ -83,19 +83,17 @@ public interface DashboardRepository extends JpaRepository<Administrator, Intege
 
 	//Dashboard - 08
 	@Query("select count(m) from Chirp m where m.isSender=true and m.sender is not null group by m.sender.id order by count(m) asc")
-	public Double minOfChirpsSentPerChorbi();
+	public List<Double> minOfChirpsSentPerChorbi();
 
 	//Dashboard - 08
 	@Query("select count(m) from Chirp m where m.isSender=true and m.sender is not null group by m.sender.id order by count(m) desc")
-	public Double maxOfChirpsSentPerChorbi();
+	public List<Double> maxOfChirpsSentPerChorbi();
 
 	//Dashboard - 09
-
 	@Query("select m.recipient from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient having count(m)=?1 order by count(m) desc")
-	public Double findChorbiesWhoGotMoreChirps(Double max);
+	public List<Chorbi> findChorbiesWhoGotMoreChirps(Double max);
 
 	//Dashboard - 10
-
 	@Query("select m.sender from Chirp m where m.isSender=true and m.sender is not null group by m.sender having count(m)=?1 order by count(m) desc")
-	public Double findChorbiesWhoSentMoreChirps(Double max);
+	public List<Chorbi> findChorbiesWhoSentMoreChirps(Double max);
 }

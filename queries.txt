@@ -68,9 +68,11 @@ max:	select count(m) from Chirp m where m.isSender=true and m.sender is not null
 
 select m.recipient from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient having count(m)=?1 order by count(m) desc;
 //donde ?1 es el maximo de chirp recibidos de un actor (query resulta en un apartado arriba)
+//si el maximo es 0 tiene que devolver todos los chorbies
 
 10 -The chorbies who have sent more chirps.
 
 select m.sender from Chirp m where m.isSender=true and m.sender is not null group by m.sender having count(m)=?1 order by count(m) desc;
 //donde ?1 es el maximo de chirp enviados de un actor (query resulta en un apartado arriba)
+//si el maximo es 0 tiene que devolver todos los chorbies
 

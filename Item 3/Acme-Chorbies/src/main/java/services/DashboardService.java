@@ -133,7 +133,7 @@ public class DashboardService {
 		counts = new ArrayList<Double>();
 
 		chorbies = this.chorbiRepository.count();
-		counts.addAll(this.chorbiRepository.minNumberOfLikesPerChorbi());
+		counts.addAll(this.dashboardRepository.minNumberOfLikesPerChorbi());
 
 		if (chorbies > 0 && counts.size() == chorbies)
 			res = counts.get(0);
@@ -149,7 +149,7 @@ public class DashboardService {
 		Double res;
 
 		counts = new ArrayList<Double>();
-		counts.addAll(this.chorbiRepository.maxNumberOfLikesPerChorbi());
+		counts.addAll(this.dashboardRepository.maxNumberOfLikesPerChorbi());
 
 		if (counts.size() > 0)
 			res = counts.get(0);
@@ -171,6 +171,134 @@ public class DashboardService {
 			res = 1.0 * likes / chorbies;
 		else
 			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 07
+	public Double averageOfChirpsReceivedPerChorbi() {
+		Long chorbies;
+		Double chirps;
+		Double res;
+
+		chorbies = this.chorbiRepository.count();
+		chirps = this.dashboardRepository.averageOfChirpsReceivedPerChorbi();
+
+		if (chorbies > 0)
+			res = chirps / chorbies;
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 07
+	public Double minOfChirpsReceivedPerChorbi() {
+		Long chorbies;
+		List<Double> chirps;
+		Double res;
+
+		chorbies = this.chorbiRepository.count();
+		chirps = this.dashboardRepository.minOfChirpsReceivedPerChorbi();
+
+		if (chorbies > 0 && chirps.size() == chorbies)
+			res = chirps.get(0);
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 07
+	public Double maxOfChirpsReceivedPerChorbi() {
+		List<Double> chirps;
+		Double res;
+
+		chirps = this.dashboardRepository.maxOfChirpsReceivedPerChorbi();
+
+		if (chirps.size() > 0)
+			res = chirps.get(0);
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 08
+	public Double averageOfChirpsSentPerChorbi() {
+		Long chorbies;
+		Double chirps;
+		Double res;
+
+		chorbies = this.chorbiRepository.count();
+		chirps = this.dashboardRepository.averageOfChirpsSentPerChorbi();
+
+		if (chorbies > 0)
+			res = chirps / chorbies;
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 08
+	public Double minOfChirpsSentPerChorbi() {
+		Long chorbies;
+		List<Double> chirps;
+		Double res;
+
+		chorbies = this.chorbiRepository.count();
+		chirps = this.dashboardRepository.minOfChirpsSentPerChorbi();
+
+		if (chorbies > 0 && chirps.size() == chorbies)
+			res = chirps.get(0);
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 08
+	public Double maxOfChirpsSentPerChorbi() {
+		List<Double> chirps;
+		Double res;
+
+		chirps = this.dashboardRepository.maxOfChirpsSentPerChorbi();
+
+		if (chirps.size() > 0)
+			res = chirps.get(0);
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 09
+	public List<Chorbi> findChorbiesWhoGotMoreChirps() {
+		List<Chorbi> res;
+		Double max;
+
+		max = this.maxOfChirpsReceivedPerChorbi();
+		res = new ArrayList<Chorbi>();
+		res.addAll(this.dashboardRepository.findChorbiesWhoGotMoreChirps(max));
+
+		if (res.size() == 0)
+			res.addAll(this.chorbiRepository.findAll());
+
+		return res;
+	}
+
+	//Dashboard - 10
+	public List<Chorbi> findChorbiesWhoSentMoreChirps() {
+		List<Chorbi> res;
+		Double max;
+
+		max = this.maxOfChirpsSentPerChorbi();
+		res = new ArrayList<Chorbi>();
+		res.addAll(this.dashboardRepository.findChorbiesWhoSentMoreChirps(max));
+
+		if (res.size() == 0)
+			res.addAll(this.chorbiRepository.findAll());
 
 		return res;
 	}
