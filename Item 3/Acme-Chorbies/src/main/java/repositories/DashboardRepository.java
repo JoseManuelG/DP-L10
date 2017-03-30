@@ -33,4 +33,17 @@ public interface DashboardRepository extends JpaRepository<Administrator, Intege
 	@Query(name = "select count(c) from CreditCard c where c.expirationYear > YEAR(CURRENT_DATE) and c.expirationMonth >= MONTH(CURRENT_DATE)")
 	Double countValidCreditCard();
 
+	// Dashboard - 04
+	@Query(name = "select count(c) from Chorbi c where c.desiredRelationship='activities'")
+	Double countChorbiesWhoDesiredActivities();
+	@Query(name = "select count(c) from Chorbi c where c.desiredRelationship='friendship'")
+	Double countChorbiesWhoDesiredFriendship();
+	@Query(name = "select count(c) from Chorbi c where c.desiredRelationship='love'")
+	Double countChorbiesWhoDesiredLove();
+	
+	// Dashboard - 05
+	@Query(name = "select c from Likes l, Chorbi c where c=l.liked group by c order by count(c) desc;
+	//habria que añadirle los chorbies que no estan en ningun likes que te los da la siguiente query
+	@Query(name = "select c from Chorbi c where c not in (select distinct l.liked from Likes l);
+	
 }
