@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -17,6 +18,9 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -31,6 +35,8 @@ public class Chorbi extends Actor {
 	private Date	birthDate;
 	private String	genre;
 	private boolean	banned;
+	@SuppressWarnings("unused")
+	private int		age;
 
 
 	@URL
@@ -90,6 +96,22 @@ public class Chorbi extends Actor {
 
 	public void setBanned(final boolean banned) {
 		this.banned = banned;
+	}
+
+	@Transient
+	public int getAge() {
+		LocalDate birthdate, now;
+		Period period;
+
+		birthdate = new LocalDate(this.birthDate);
+		now = new LocalDate();
+		period = new Period(birthdate, now, PeriodType.yearMonthDay());
+
+		return period.getYears();
+	}
+
+	public void setAge(final int age) {
+		this.age = age;
 	}
 
 
