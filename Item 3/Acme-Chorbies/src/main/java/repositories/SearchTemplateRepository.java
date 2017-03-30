@@ -10,8 +10,9 @@ import domain.SearchTemplate;
 public interface SearchTemplateRepository extends JpaRepository<SearchTemplate, Integer> {
 
 	/*
-	 * @Query("select f from Tenant t join t.finder f where t.id=?1")
+	 * @Query("select f from Chorbi t join t.finder f where t.id=?1")
 	 * SearchTemplate findByTenant(int corbiId);
+	 * /*
 	 * 
 	 * @Query("select p from Property p where p.address like concat('%', ?1, '%') and p.rate>=?3 and (p.address like concat('%', ?2, '%') or p.name like concat('%', ?2, '%') or p.description like concat('%', ?2, '%'))")
 	 * Collection<Property> searchPropertiesWithoutMaxPrice(String destination, String keyword, Double min);

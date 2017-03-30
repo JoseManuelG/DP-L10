@@ -130,7 +130,7 @@ public class SearchTemplateService {
 	public SearchTemplate findByPrincipal() {
 		SearchTemplate result;
 
-		result = this.searchTemplateRepository.findByTenant(this.actorService.findByPrincipal().getId());
+		result = this.searchTemplateRepository.findByChorbi(this.actorService.findActorByPrincipal().getId());
 
 		return result;
 	}
