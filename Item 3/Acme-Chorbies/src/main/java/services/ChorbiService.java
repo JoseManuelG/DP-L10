@@ -47,6 +47,9 @@ public class ChorbiService {
 	@Autowired
 	private CreditCardService		creditCardService;
 
+	@Autowired
+	private ActorService			actorService;
+
 
 	//Simple CRUD methods-------------------------------------------------------------------
 	public Chorbi create() {
@@ -115,6 +118,19 @@ public class ChorbiService {
 
 		this.validator.validate(result, binding);
 		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		return result;
+	}
+
+	public Chorbi reconstruct(final ActorForm actorForm, final Chorbi chorbi, final BindingResult binding) {
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		Chorbi result;
+
+		result = new Chorbi();
+
+		this.actorService.reconstruct(result, chorbi, actorForm);
+
+		this.validator.validate(result, binding);
+		result.getUserAccount().setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
 	}
 

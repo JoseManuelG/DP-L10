@@ -1,6 +1,8 @@
 
 package forms;
 
+import java.util.Date;
+
 import security.UserAccount;
 
 public class ActorForm {
@@ -11,6 +13,11 @@ public class ActorForm {
 	private String		surname;
 	private String		email;
 	private String		phone;
+	private String		picture;
+	private String		description;
+	private String		desiredRelationship;
+	private String		genre;
+	private Date		birthDate;
 	private Boolean		acepted;
 	private UserAccount	userAccount;
 
@@ -79,6 +86,46 @@ public class ActorForm {
 
 	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
+	}
+
+	public String getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(final String picture) {
+		this.picture = picture;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
+	}
+
+	public String getDesiredRelationship() {
+		return this.desiredRelationship;
+	}
+
+	public void setDesiredRelationship(final String desiredRelationship) {
+		this.desiredRelationship = desiredRelationship;
+	}
+
+	public Date getBirthDate() {
+		return this.birthDate;
+	}
+
+	public void setBirthDate(final Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getGenre() {
+		return this.genre;
+	}
+
+	public void setGenre(final String genre) {
+		this.genre = genre;
 	}
 
 }
