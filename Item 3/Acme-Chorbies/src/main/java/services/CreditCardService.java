@@ -60,7 +60,7 @@ public class CreditCardService {
 		return result;
 	}
 
-	public CreditCard saveForBook(final CreditCard creditCard) {
+	public CreditCard save(final CreditCard creditCard) {
 		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
 		CreditCard result;
 		result = this.creditCardRepository.save(creditCard);
@@ -110,6 +110,14 @@ public class CreditCardService {
 
 	public void maskCreditCard(final CreditCard creditCard) {
 		creditCard.setNumber(this.getMaskedCreditCardAsString(creditCard));
+	}
+
+	public CreditCard getCreditCardByChorbi() {
+		CreditCard creditCard;
+		Chorbi chorbi;
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+		creditCard = this.creditCardRepository.findCreditCardByChorbiId(chorbi.getId());
+		return creditCard;
 	}
 
 }
