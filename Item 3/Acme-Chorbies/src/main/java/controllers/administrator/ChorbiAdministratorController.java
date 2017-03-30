@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ChorbiService;
 import controllers.AbstractController;
 import domain.Chorbi;
 
@@ -36,7 +37,7 @@ public class ChorbiAdministratorController extends AbstractController {
 
 		this.chorbiService.banChorbi(chorbiId);
 		//TODO averiguar formato url
-		result = new ModelAndView("redirect:/actor/view.do?actorId=" + chorbi.getId());
+		result = new ModelAndView("redirect:/chorbi/view.do?chorbiId=" + chorbi.getId());
 		return result;
 	}
 
@@ -49,9 +50,9 @@ public class ChorbiAdministratorController extends AbstractController {
 
 		chorbi = this.chorbiService.findOne(chorbiId);
 
-		this.chorbiService.banChorbi(chorbiId);
+		this.chorbiService.unbanChorbi(chorbiId);
 		//TODO averiguar formato url
-		result = new ModelAndView("redirect:/actor/view.do?actorId=" + chorbi.getId());
+		result = new ModelAndView("redirect:/chorbi/view.do?chorbiId=" + chorbi.getId());
 		return result;
 	}
 

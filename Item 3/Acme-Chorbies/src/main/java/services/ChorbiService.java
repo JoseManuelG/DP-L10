@@ -134,4 +134,18 @@ public class ChorbiService {
 		return result;
 	}
 
+	public void banChorbi(final int chorbiId) {
+		Chorbi chorbi;
+		chorbi = this.chorbiRepository.findOne(chorbiId);
+		chorbi.setBanned(true);
+		this.chorbiRepository.save(chorbi);
+	}
+
+	public void unbanChorbi(final int chorbiId) {
+		Chorbi chorbi;
+		chorbi = this.chorbiRepository.findOne(chorbiId);
+		chorbi.setBanned(false);
+		this.chorbiRepository.save(chorbi);
+	}
+
 }

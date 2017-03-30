@@ -3,16 +3,22 @@ package controllers.administrator;
 
 import java.text.DecimalFormat;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.DashboardService;
 import controllers.AbstractController;
 
 @Controller
 @RequestMapping("/dashboard/administrator")
 public class DashboardAdministratorController extends AbstractController {
+
+	@Autowired
+	private DashboardService	dashboardService;
+
 
 	// Constructors -----------------------------------------------------------
 	public DashboardAdministratorController() {
@@ -36,34 +42,34 @@ public class DashboardAdministratorController extends AbstractController {
 
 		//result.addObject("chorbiesGroupedByCity",metododelservicio);
 		//result.addObject("chorbiesGroupedByCountry",metododelservicio);
-		//result.addObject("minumumChorbiAge",metododelservicio);
-		//result.addObject("maximumChorbiAge",metododelservicio);
-		//result.addObject("averageChorbiAge",metododelservicio);
-		//result.addObject("ratioOfNoCCAndInvalidCCVersusValidCC",metododelservicio);
+		result.addObject("minumumChorbiAge", this.dashboardService.minAgeOfChorbies());
+		result.addObject("maximumChorbiAge", this.dashboardService.maxAgeOfChorbies());
+		result.addObject("averageChorbiAge", DashboardAdministratorController.df2.format(this.dashboardService.averageAgeOfChorbies()));
+		result.addObject("ratioOfNoCCAndInvalidCCVersusValidCC", DashboardAdministratorController.df2.format(this.dashboardService.ratioChorbiesWithoutValidCreditCard()));
 
 		//Queries SearchService
 
-		//result.addObject("ratioActivitiesSearch"metododelservicio);
-		//result.addObject("ratioFriendshipSearch"metododelservicio);
-		//result.addObject("ratioLoveSearch"metododelservicio);
+		result.addObject("ratioActivitiesSearch", DashboardAdministratorController.df2.format(this.dashboardService.ratioChorbiesWhoDesireActivities()));
+		result.addObject("ratioFriendshipSearch", DashboardAdministratorController.df2.format(this.dashboardService.ratioChorbiesWhoDesireFriendship()));
+		result.addObject("ratioLoveSearch", DashboardAdministratorController.df2.format(this.dashboardService.ratioChorbiesWhoDesireLove()));
 
 		//Queries LikeService
 
-		//result.addObject("chorbiesOrderedByLikes",metododelservicio);
-		//result.addObject("minimumChorbiLikes",metododelservicio);
-		//result.addObject("maximumChorbiLikes",metododelservicio);
-		//result.addObject("averageChorbiLikes",metododelservicio);
+		result.addObject("chorbiesOrderedByLikes", this.dashboardService.chorbiesOrderedByLikes());
+		result.addObject("minimumChorbiLikes", this.dashboardService.minNumberOfLikesPerChorbi());
+		result.addObject("maximumChorbiLikes", this.dashboardService.maxNumberOfLikesPerChorbi());
+		result.addObject("averageChorbiLikes", DashboardAdministratorController.df2.format(this.dashboardService.avgNumberOfLikesPerChorbi()));
 
 		//Queries ChirpService
 
-		//result.addObject("minimumChirpsReceivedByChorbi",metododelservicio);
-		//result.addObject("maximumChirpsReceivedByChorbi",metododelservicio);
-		//result.addObject("averageChirpsReceivedByChorbi",metododelservicio);
-		//result.addObject("minimumChirpsSentByChorbi",metododelservicio);
-		//result.addObject("maximumChirpsSentByChorbi",metododelservicio);
-		//result.addObject("averageChirpsSentByChorbi",metododelservicio);
-		//result.addObject("ChorbiesWithMoreReceivedChirps",metododelservicio);
-		//result.addObject("ChorbiesWithMoreSentChirps",metododelservicio);
+		result.addObject("minimumChirpsReceivedByChorbi", this.dashboardService.minOfChirpsReceivedPerChorbi());
+		result.addObject("maximumChirpsReceivedByChorbi", this.dashboardService.maxOfChirpsReceivedPerChorbi());
+		result.addObject("averageChirpsReceivedByChorbi", DashboardAdministratorController.df2.format(this.dashboardService.averageOfChirpsReceivedPerChorbi()));
+		result.addObject("minimumChirpsSentByChorbi", this.dashboardService.minOfChirpsSentPerChorbi());
+		result.addObject("maximumChirpsSentByChorbi", this.dashboardService.maxOfChirpsSentPerChorbi());
+		result.addObject("averageChirpsSentByChorbi", DashboardAdministratorController.df2.format(this.dashboardService.averageOfChirpsSentPerChorbi()));
+		result.addObject("ChorbiesWithMoreReceivedChirps", this.dashboardService.findChorbiesWhoGotMoreChirps());
+		result.addObject("ChorbiesWithMoreSentChirps", this.dashboardService.findChorbiesWhoSentMoreChirps());
 
 		return result;
 	}
