@@ -54,7 +54,7 @@ public class BannerAdministratorController extends AbstractController {
 
 		banners = this.bannerService.findAll();
 
-		result = new ModelAndView("banner/list");
+		result = new ModelAndView("banner/administrator/list");
 		result.addObject("banners", banners);
 		result.addObject("requestURI", "banner/administrator/list.do");
 
