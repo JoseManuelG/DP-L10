@@ -28,6 +28,8 @@ public class SearchTemplateService {
 	@Autowired
 	private ActorService				actorService;
 	@Autowired
+	private chorbiService				chorbiService;
+	@Autowired
 	private ConfigurationService		configurationService;
 	@Autowired
 	private Validator					validator;
@@ -62,7 +64,7 @@ public class SearchTemplateService {
 
 	public SearchTemplate save(final SearchTemplate searchTemplate) {
 		SearchTemplate result;
-		final Collection<Chorbi> results;
+		final Collection<Chorbi> chorbies;
 		Date timeOfCache, lastSearch;
 
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
@@ -79,9 +81,9 @@ public class SearchTemplateService {
 
 			//TODO montar query de busqueda
 			//results = this.searchTemplateRepository.searchPropertiesWithMaxPrice(result.getDestination(), result.getKeyword(), min, result.getMaxPrice());
-
+			chorbies = this.chorbiService.findAll();
 			//result.setResults(results);
-
+			result.setChorbies(chorbies);
 			result = this.searchTemplateRepository.save(result);
 		}
 
@@ -115,8 +117,8 @@ public class SearchTemplateService {
 	}
 	public void delete(final SearchTemplate searchTemplate) {
 		Assert.notNull(searchTemplate, "searchTemplate.error.null");
-		//TODO - Revisar que el search guardado sea del Principal, falta el actorService y y la navegabilidad de las entidades
-		//Assert.isTrue(((Chorbi) this.actorService.findByPrincipal()).getSearchTemplate().getId() == searchTemplate.getId());
+		//TODO - Revisar que el search guardado sea del Principal, falta la navegabilidad de las entidades
+		Assert.isTrue(this.actorService.findActorByPrincipal().getId() == searchTemplate.getId());
 
 		Assert.isTrue(this.searchTemplateRepository.exists(searchTemplate.getId()), "searchTemplate.error.exists");
 
@@ -129,7 +131,6 @@ public class SearchTemplateService {
 		final SearchTemplate result = this.create();
 		//TODO hasta no tener clara la navegabilidad nada
 		//result = this.searchTemplateRepository.findByChorbi(this.actorService.findActorByPrincipal().getId());
-
 		return result;
 	}
 	public SearchTemplate reconstruct(final SearchTemplate searchTemplate, final BindingResult binding) {
