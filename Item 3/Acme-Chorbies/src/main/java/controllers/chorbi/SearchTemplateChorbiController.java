@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.chorbi;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+
+import services.ConfigurationService;
 import services.SearchTemplateService;
 import domain.Chorbi;
 import domain.SearchTemplate;
@@ -22,6 +25,8 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 	@Autowired
 	private SearchTemplateService	searchTemplateService;
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -33,9 +38,9 @@ public class SearchTemplateChorbiController extends AbstractController {
 		Date timeOfCache, lastSearch;
 
 		search = this.searchTemplateService.findByPrincipal();
-
+		//TODO revisar tiempo de cacheo
 		lastSearch = new Date(search.getCacheMoment().getTime());
-		timeOfCache = this.configurationService.findOne().getCachedTime();
+		timeOfCache = new Date(this.configurationService.findConfiguration().getCachedTime());
 
 		if (lastSearch.after(timeOfCache))
 			results = search.getChorbies();
@@ -49,7 +54,6 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 		return result;
 	}
-
 	@RequestMapping(value = "/search", method = RequestMethod.POST, params = "save")
 	public ModelAndView search(final SearchTemplate search, final BindingResult binding) {
 		ModelAndView result;
@@ -76,7 +80,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 				result.addObject("search", search);
 				result.addObject("requestURI", "searchTemplate/chorbi/search.do");
 				result.addObject("results", results);
-				result.addObject("message", "finder.commit.error");
+				result.addObject("message", "searchTemplate.commit.error");
 			}
 
 		return result;

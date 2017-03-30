@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import org.hibernate.engine.config.spi.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +38,7 @@ public class SearchTemplateService {
 		SearchTemplate result;
 
 		result = new SearchTemplate();
-		result.setCacheMoment(new Date(System.currentTimeMillis() - this.configurationService.findOne().getCachedTime()));
+		result.setCacheMoment(new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime()));
 		result.setChorbies(new ArrayList<Chorbi>());
 
 		return result;
@@ -63,18 +62,17 @@ public class SearchTemplateService {
 
 	public SearchTemplate save(final SearchTemplate searchTemplate) {
 		SearchTemplate result;
-		final SearchTemplate old;
-		final Double min;
-		//Collection<Property> results;
+		final Collection<Chorbi> results;
 		Date timeOfCache, lastSearch;
 
-		timeOfCache = this.configurationService.findOne().getCachedTime();
+		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
 		lastSearch = new Date(searchTemplate.getCacheMoment().getTime());
-		//TODO - Revisar que el search guardado sea del Principal, falta el actorService y y la navegabilidad de las entidades
-		//Assert.isTrue(((Chorbi) this.actorService.findByPrincipal()).getSearchTemplate().getId() == searchTemplate.getId());
+		//TODO - Revisar que el search guardado sea del Principal, falta la navegabilidad de las entidades
+		Assert.isTrue(this.actorService.findActorByPrincipal().getId() == searchTemplate.getId());
 
 		result = searchTemplate;
 		//Comprobamos si el SearchTemplate ha sido modificado
+		//TODO Probar a pasar el bloque if al FindOne() para que saliera actualizado automaticamente
 		if (lastSearch.before(timeOfCache) || this.searchTemplateHasBeenModified(searchTemplate)) {
 
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
@@ -128,13 +126,12 @@ public class SearchTemplateService {
 	// Other business methods --------------------------------------
 
 	public SearchTemplate findByPrincipal() {
-		SearchTemplate result;
-
-		result = this.searchTemplateRepository.findByChorbi(this.actorService.findActorByPrincipal().getId());
+		final SearchTemplate result = this.create();
+		//TODO hasta no tener clara la navegabilidad nada
+		//result = this.searchTemplateRepository.findByChorbi(this.actorService.findActorByPrincipal().getId());
 
 		return result;
 	}
-
 	public SearchTemplate reconstruct(final SearchTemplate searchTemplate, final BindingResult binding) {
 		SearchTemplate res, old;
 

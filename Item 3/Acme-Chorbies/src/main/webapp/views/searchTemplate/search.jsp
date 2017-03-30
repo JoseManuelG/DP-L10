@@ -21,6 +21,10 @@
 		<acme:textbox code="searchTemplate.keyword" path="keyword"/>
 		<acme:textbox code="searchTemplate.coordinates.city" path="city"/>
 		<acme:textbox code="searchTemplate.coordinates.province" path="province"/>
+		<acme:textbox code="searchTemplate.coordinates.country" path="country"/>
+		<acme:textbox code="searchTemplate.coordinates.state" path="state"/>
+		
+		
 		
 		
 		
@@ -34,33 +38,25 @@
 	<display:table excludedParams="*" pagesize="5" class="displaytag" name="results" requestURI="${requestURI}" id="row">
 		
 		<!-- Action links -->
-		
-		<display:column>
+		<!-- TODO- No se Si abrá display de chorbi-->
+		<!--<display:column>
 			<a href="book/tenant/book.do?propertyId=${row.id}">
 				<spring:message	code="finder.book" />
 			</a>
 		</display:column>
-		
+		-->
 		<!-- Attributes -->
 		
-		<acme:column sorteable="true" code="finder.property.name" path="name"/>
+		<acme:column sorteable="false" code="searchTemplate.chorbi.name" path="name"/>
 		
-		<acme:column sorteable="true" code="finder.property.rate" path="rate"/>
+		<acme:column sorteable="true" code="searchTemplate.chorbi.surname" path="surname"/>
 		
-		<acme:column sorteable="false" code="finder.property.description" path="description"/>
+		<acme:column sorteable="true" code="searchTemplate.genre" path="genre"/>
 		
-		<acme:column sorteable="false" code="finder.property.address" path="address"/>
+		<acme:column sorteable="true" code="searchTemplate.chorbi.birthDate" path="birthDate"/>
 		
-		<spring:message code="property.number" var="numberHeader" />
-		<display:column title="${numberHeader}" sortable="false">
-			<jstl:out value="${row.books.size()}"/>
-		</display:column>
+		<acme:column sorteable="true" code="searchTemplate.desiredRelationship" path="desiredRelationship"/>
 		
-		<display:column>
-			<a href="property/view.do?propertyId=${row.id}">
-				<spring:message	code="finder.display" />
-			</a>
-		</display:column>
 		
 	</display:table>
 </jstl:if>
