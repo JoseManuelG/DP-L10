@@ -1,0 +1,38 @@
+A listing with the number of chorbies per country and city.
+select c.coordinates.country, c.userAccount.username from Chorbi c order by c.coordinates.country; 
+select c.coordinates.city, c.userAccount.username from Chorbi c order by c.coordinates.city;
+// Las dos estan puestas para que te saquen una lista de array de dos objects: {pais/ciudad, username del chorbi}. Adaptar a lo que sea necesario.
+
+The minimum, the maximum, and the average ages of the chorbies.
+select min(c.birthDate) from Chorbi c; //Sacar edad en java a partir del birthDate.
+select max(c.birthDate) from Chorbi c; //Sacar edad en java a partir del birthDate.
+select c.birthDate from Chorbi c;	   //Sacar edad para cada uno y hacer media?
+
+The ratio of chorbies who have not registered a credit card or have registered an invalid credit card.
+select count(c) from CreditCard c; // falta restriccion de fecha
+select count(c) from Chorbi c; // dividir en java
+
+
+The ratios of chorbies who search for “activities”, “friendship”, and “love”.
+
+
+The list of chorbies, sorted by the number of likes they have got.
+
+
+The minimum, the maximum, and the average number of likes per chorbi.
+
+
+The minimum, the maximum, and the average number of chirps that a chorbi receives from other chorbies.
+
+
+The minimum, the maximum, and the average number of chirps that a chorbi sends to other chorbies.
+
+
+The chorbies who have got more chirps.
+
+
+The chorbies who have sent more chirps.
+
+
+
+
