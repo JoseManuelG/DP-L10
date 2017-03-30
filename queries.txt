@@ -16,6 +16,8 @@ select count(c) from Chorbi c; // dividir en java
 select count(c) from Chorbi c where c.desiredRelationship='activities';
 select count(c) from Chorbi c where c.desiredRelationship='friendship';
 select count(c) from Chorbi c where c.desiredRelationship='love';
+select count(c) from Chorbi c; // dividir en java
+//HACER EN SERVICIO ([PRIMER COUNT,SEGUNDO COUNT, TERCER COUNT]/ CUARTO COUNT)
 
 05 -The list of chorbies, sorted by the number of likes they have got.
 select c from Likes l, Chorbi c where c=l.liked group by c order by count(c) desc;
