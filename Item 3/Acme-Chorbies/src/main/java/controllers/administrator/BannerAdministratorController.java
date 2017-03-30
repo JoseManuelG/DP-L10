@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +30,20 @@ public class BannerAdministratorController extends AbstractController {
 
 	public BannerAdministratorController() {
 		super();
+	}
+
+	// View ---------------------------------------------------------------
+
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public ModelAndView view(@RequestParam(required = true) final Integer bannerId) {
+		ModelAndView result;
+
+		result = new ModelAndView("banner/administrator/view");
+		final Banner banner = this.bannerService.findOne(bannerId);
+
+		result.addObject("banner", banner);
+		result.addObject("requestURI", "banner/administrator/view.do?bannerId=" + banner.getId());
+		return result;
 	}
 
 	// List ---------------------------------------------------------------
