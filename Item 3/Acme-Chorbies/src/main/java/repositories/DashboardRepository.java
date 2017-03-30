@@ -92,10 +92,10 @@ public interface DashboardRepository extends JpaRepository<Administrator, Intege
 	//Dashboard - 09
 
 	@Query("select m.recipient from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient having count(m)=?1 order by count(m) desc")
-	public Double findChorbiesWithMore();//donde ?1 es el maximo de chirp recibidos de un actor (query resulta en un apartado arriba)
+	public Double findChorbiesWhoGotMoreChirps(Double max);
 
 	//Dashboard - 10
 
 	@Query("select m.sender from Chirp m where m.isSender=true and m.sender is not null group by m.sender having count(m)=?1 order by count(m) desc")
-	public Double maxOfChirpsSentPerChorbi();//donde ?1 es el maximo de chirp enviados de un actor (query resulta en un apartado arriba)
+	public Double findChorbiesWhoSentMoreChirps(Double max);
 }
