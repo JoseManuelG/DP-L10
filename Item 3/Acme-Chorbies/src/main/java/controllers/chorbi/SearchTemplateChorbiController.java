@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.ConfigurationService;
 import services.SearchTemplateService;
+import controllers.AbstractController;
 import domain.Chorbi;
 import domain.SearchTemplate;
 
@@ -47,7 +46,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 		else
 			results = new ArrayList<Chorbi>();
 
-		result = new ModelAndView("searchTemplate/chorbi/search");
+		result = new ModelAndView("searchTemplate/chorbi/search.do");
 		result.addObject("results", results);
 		result.addObject("search", search);
 		result.addObject("requestURI", "searchTemplate/chorbi/search.do");
@@ -64,7 +63,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 		if (binding.hasErrors()) {
 			results = new ArrayList<Chorbi>();
 
-			result = new ModelAndView("searchTemplate/chorbi/search");
+			result = new ModelAndView("searchTemplate/chorbi/search.do");
 			result.addObject("search", search);
 			result.addObject("requestURI", "searchTemplate/chorbi/search.do");
 			result.addObject("results", results);
