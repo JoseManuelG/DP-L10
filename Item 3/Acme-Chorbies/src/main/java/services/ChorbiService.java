@@ -1,0 +1,121 @@
+
+package services;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+
+import repositories.ChorbiRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
+import security.UserAccountRepository;
+import domain.Chorbi;
+import forms.ActorForm;
+
+@Service
+@Transactional
+public class ChorbiService {
+
+	//Managed Repository--------------------------------------------------------------------
+
+	@Autowired
+	private ChorbiRepository		chorbiRepository;
+
+	@Autowired
+	private UserAccountRepository	userAccountRepository;
+
+	// Supporting Services --------------------------------------
+
+	@Autowired
+	private Validator				validator;
+
+	@Autowired
+	private ChirpService			chirpService;
+
+	@Autowired
+	private LikesService			likesService;
+
+	@Autowired
+	private CreditCardService		creditCardService;
+
+
+	//Simple CRUD methods-------------------------------------------------------------------
+	public Chorbi create() {
+		final Chorbi result = new Chorbi();
+		return result;
+	}
+
+	public Chorbi save(final Chorbi chorbi) {
+		Chorbi result;
+
+		Assert.notNull(chorbi, "chorbi.error.null");
+		chorbi.setUserAccount(this.userAccountRepository.save(chorbi.getUserAccount()));
+		result = this.chorbiRepository.save(chorbi);
+		Assert.notNull(result, "chorbi.error.commit");
+
+		return result;
+
+	}
+	public Chorbi findOne(final int id) {
+		Chorbi result;
+		result = this.chorbiRepository.findOne(id);
+		return result;
+	}
+
+	public Long count() {
+		return this.chorbiRepository.count();
+	}
+
+	public void delete() {
+		final Chorbi chorbi = this.findChorbiByPrincipal();
+
+		this.chorbiRepository.delete(chorbi);
+		this.userAccountRepository.delete(chorbi.getUserAccount().getId());
+
+	}
+	public void flush() {
+		this.chorbiRepository.flush();
+	}
+	//Other Business methods-------------------------------------------------------------------
+
+	public Chorbi findChorbiByPrincipal() {
+		Chorbi result;
+		result = this.chorbiRepository.findByUserAccountId(LoginService.getPrincipal().getId());
+		return result;
+	}
+
+	public Chorbi reconstruct(final ActorForm actorForm, final BindingResult binding) {
+		final Chorbi result = this.create();
+
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final UserAccount userAccount = new UserAccount();
+		userAccount.setUsername(actorForm.getUserAccount().getUsername());
+		userAccount.setPassword(actorForm.getUserAccount().getPassword());
+		final Collection<Authority> authorities = new ArrayList<Authority>();
+		final Authority authority = new Authority();
+		authority.setAuthority("CHORBI");
+		authorities.add(authority);
+		userAccount.setAuthorities(authorities);
+
+		result.setName(actorForm.getName());
+		result.setSurname(actorForm.getSurname());
+		result.setEmail(actorForm.getEmail());
+		result.setPhone(actorForm.getPhone());
+
+		result.setUserAccount(userAccount);
+
+		this.validator.validate(result, binding);
+		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
+		return result;
+	}
+
+}
