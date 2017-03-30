@@ -1,6 +1,6 @@
 -A listing with the number of chorbies per country and city.
-select c from Chorbi c order by c.coordinates.country; 
-select c from Chorbi c order by c.coordinates.city;
+select count(c), c.coordinates.country from Chorbi c group by c.coordinates.country; 
+select count(c), c.coordinates.city from Chorbi c group by c.coordinates.city;
 
 -The minimum, the maximum, and the average ages of the chorbies.
 maximo: select min(DATEDIFF(CURRENT_DATE, c.birthDate)/365.256363004) from Chorbi c; //Sacar como integer
@@ -63,13 +63,11 @@ max:	select count(m) from Chirp m where m.isSender=true and m.sender is not null
 
 -The chorbies who have got more chirps.
 
-select m.recipient from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient order by count(m) desc;
-
-y quedarse con el primero
-
+select m.recipient from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient having count(m)=?1 order by count(m) desc;
+//donde ?1 es el maximo de chirp recibidos de un actor (query resulta en un apartado arriba)
 
 -The chorbies who have sent more chirps.
 
-select m.sender from Chorbi m where m.isSender=true and m.sender is not null group by m.sender order by count(m) desc;
+select m.sender from Chirp m where m.isSender=true and m.sender is not null group by m.sender having count(m)=?1 order by count(m) desc;
+//donde ?1 es el maximo de chirp enviados de un actor (query resulta en un apartado arriba)
 
-y quedarse con el primero
