@@ -1,0 +1,120 @@
+
+package controllers.administrator;
+
+import java.util.Collection;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import controllers.AbstractController;
+import domain.Banner;
+
+@Controller
+@RequestMapping("/banner/administrator")
+public class BannerAdministratorController extends AbstractController {
+
+	// Constructors -----------------------------------------------------------
+
+	public BannerAdministratorController() {
+		super();
+	}
+
+	// List ---------------------------------------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Banner> banners;
+
+		banners = this.bannerService.findAll();
+
+		result = new ModelAndView("banner/list");
+		result.addObject("banners", banners);
+		result.addObject("requestURI", "banner/administrator/list.do");
+
+		return result;
+	}
+
+	// Create ---------------------------------------------------------------
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Banner banner;
+
+		banner = this.bannerService.create();
+		result = this.createEditModelAndView(banner);
+
+		return result;
+
+	}
+
+	// Edit -----------------------------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(final int bannerId) {
+		final Banner banner = bannerService.findOne(bannerId);
+		final ModelAndView result = this.createEditModelAndView(banner);
+		return result;
+
+	}
+
+	// Save ---------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(final Banner banner, final BindingResult binding) {
+		ModelAndView result = null;
+		Banner banner;
+		final String type;
+
+		banner = this.bannerService.reconstruct(banner, binding);
+		if (binding.hasErrors()) {
+			System.out.println(binding.getAllErrors());
+			result = this.createEditModelAndView(banner);
+		} else
+			try {
+				this.bannerService.save(banner);
+				result = new ModelAndView("redirect:/banner/administrator/list.do");
+			} catch (final IllegalArgumentException exception) {
+				result = this.createEditModelAndView(banner, exception.getMessage());
+			}
+		return result;
+
+	}
+
+	// Delete ---------------------------------------------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public @ResponseBody
+	ModelAndView save(final Banner banner) {
+		ModelAndView result = null;
+		try {
+			bannerService.delete(banner);
+			result = new ModelAndView("redirect:/banner/administrator/list.do");
+
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(banner, "banner.commit.error");
+		}
+
+		return result;
+	}
+
+	//Ancillary methods ----------------------------------------------------------------------
+
+	protected ModelAndView createEditModelAndView(final Banner banner) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(banner, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Banner banner, final String message) {
+		ModelAndView result;
+		result = new ModelAndView("banner/administrator/edit");
+		result.addObject("banner", banner);
+		result.addObject("message", message);
+
+		return result;
+	}
+}
