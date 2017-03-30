@@ -1,17 +1,27 @@
 
 package controllers.administrator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConfigurationService;
 import controllers.AbstractController;
+import domain.Configuration;
+import forms.ConfigurationForm;
 
 @Controller
 @RequestMapping("/configuration/administrator")
 public class ConfigurationAdministratorController extends AbstractController {
+
+	// Services -------------------------------------------------------------
+
+	@Autowired
+	private ConfigurationService	configurationService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -22,7 +32,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 	// Edit -----------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
-		final Configuration configuration = configurationService.findOne();
+		final Configuration configuration = this.configurationService.findConfiguration();
 		final ModelAndView result = this.createEditModelAndView(configuration);
 		return result;
 
@@ -31,17 +41,17 @@ public class ConfigurationAdministratorController extends AbstractController {
 	// Save ---------------------------------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final Configuration configuration, final BindingResult binding) {
+	public ModelAndView save(final ConfigurationForm configurationForm, final BindingResult binding) {
 		ModelAndView result;
 		Configuration configuration;
 
-		configuration = configurationService.reconstruct(configuration, binding);
+		configuration = this.configurationService.reconstruct(configurationForm, binding);
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(configuration);
 			System.out.println(binding.getAllErrors().toString());
 		} else
 			try {
-				configurationService.save(configuration);
+				this.configurationService.save(configuration);
 				result = new ModelAndView("redirect:../../");
 
 			} catch (final Throwable oops) {

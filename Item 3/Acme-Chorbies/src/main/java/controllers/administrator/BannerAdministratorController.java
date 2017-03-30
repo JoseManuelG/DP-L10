@@ -3,6 +3,7 @@ package controllers.administrator;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +11,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BannerService;
 import controllers.AbstractController;
 import domain.Banner;
 
 @Controller
 @RequestMapping("/banner/administrator")
 public class BannerAdministratorController extends AbstractController {
+
+	// Services -------------------------------------------------------------
+
+	@Autowired
+	private BannerService	bannerService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -54,7 +62,7 @@ public class BannerAdministratorController extends AbstractController {
 	// Edit -----------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(final int bannerId) {
-		final Banner banner = bannerService.findOne(bannerId);
+		final Banner banner = this.bannerService.findOne(bannerId);
 		final ModelAndView result = this.createEditModelAndView(banner);
 		return result;
 
@@ -62,21 +70,20 @@ public class BannerAdministratorController extends AbstractController {
 
 	// Save ---------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final Banner banner, final BindingResult binding) {
+	public ModelAndView save(final Banner originalBanner, final BindingResult binding) {
 		ModelAndView result = null;
 		Banner banner;
-		final String type;
 
-		banner = this.bannerService.reconstruct(banner, binding);
+		banner = this.bannerService.reconstruct(originalBanner, binding);
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
-			result = this.createEditModelAndView(banner);
+			result = this.createEditModelAndView(originalBanner);
 		} else
 			try {
 				this.bannerService.save(banner);
 				result = new ModelAndView("redirect:/banner/administrator/list.do");
 			} catch (final IllegalArgumentException exception) {
-				result = this.createEditModelAndView(banner, exception.getMessage());
+				result = this.createEditModelAndView(originalBanner, exception.getMessage());
 			}
 		return result;
 
@@ -89,7 +96,7 @@ public class BannerAdministratorController extends AbstractController {
 	ModelAndView save(final Banner banner) {
 		ModelAndView result = null;
 		try {
-			bannerService.delete(banner);
+			this.bannerService.delete(banner);
 			result = new ModelAndView("redirect:/banner/administrator/list.do");
 
 		} catch (final Throwable oops) {

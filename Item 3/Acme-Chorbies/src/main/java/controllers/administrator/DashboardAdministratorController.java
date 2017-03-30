@@ -28,41 +28,42 @@ public class DashboardAdministratorController extends AbstractController {
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public ModelAndView dashboard() {
 		ModelAndView result;
-		//TODO VER NOMBRE EN EL TILES
 		result = new ModelAndView("dashboard/administrator/dashboard");
 
-		//TODO VER NAVEGABILIDAD DE CHORBI A COORDENADAS O AL REVES
-		//result.addObject("chorbisagrupadosporciudad",blalbalbalblalbalb);
-		//result.addObject("chorbisagrupadosporpais",asaasdasdasdasasdf);
+		result.addObject("requestURI", "dashboard/administrator/dashboard.do");
 
 		//Queries ChorbiService
-		result.addObject("RatioOffersVsRequests", DashboardAdministratorController.df2.format(this.tripService.ratioOffersVsRequests()));
-		result.addObject("AvgOfferPerCustomer", DashboardAdministratorController.df2.format(this.tripService.avgOfferPerCustomer()));
-		result.addObject("AvgRequestsPerCustomer", DashboardAdministratorController.df2.format(this.tripService.avgRequestsPerCustomer()));
 
-		//Queries ApplicationService
+		//result.addObject("chorbiesGroupedByCity",metododelservicio);
+		//result.addObject("chorbiesGroupedByCountry",metododelservicio);
+		//result.addObject("minumumChorbiAge",metododelservicio);
+		//result.addObject("maximumChorbiAge",metododelservicio);
+		//result.addObject("averageChorbiAge",metododelservicio);
+		//result.addObject("ratioOfNoCCAndInvalidCCVersusValidCC",metododelservicio);
 
-		result.addObject("AvgApplicationVsCustomerAndRequest", DashboardAdministratorController.df2.format(this.applicationService.avgApplicationVsCustomerAndRequest()));
-		result.addObject("CustomerWithMoreApplicationsAccepted", this.applicationService.customerWithMoreApplicationsAccepted());
-		result.addObject("CustomerWithMoreApplicationsDenied", this.applicationService.customerWithMoreApplicationsDenied());
+		//Queries SearchService
 
-		//Queries CommentService
-		result.addObject("AvgCommentsPerActor", DashboardAdministratorController.df2.format(this.commentService.avgCommentsPerActor()));
-		result.addObject("AvgCommentsPerOffer", DashboardAdministratorController.df2.format(this.commentService.avgCommentsPerOffer()));
-		result.addObject("AvgCommentsPerRequest", DashboardAdministratorController.df2.format(this.commentService.avgCommentsPerRequest()));
-		result.addObject("AvgCommentsByActors", DashboardAdministratorController.df2.format(this.commentService.avgCommentsByActors()));
-		result.addObject("AvgeActorWritingComments", this.commentService.avgActorWritingComments());
-		//Queries CommentService
-		result.addObject("AvgMessagesSentPerActor", DashboardAdministratorController.df2.format(this.messageService.avgMessagesSentPerActor()));
-		result.addObject("MinMessagesSentPerActor", this.messageService.minMessagesSentPerActor());
-		result.addObject("MaxMessagesSentPerActor", this.messageService.maxMessagesSentPerActor());
-		result.addObject("AvgMessagesReceivedPerActor", DashboardAdministratorController.df2.format(this.messageService.avgMessagesReceivedPerActor()));
-		result.addObject("MinMessagesReceivedPerActor", this.messageService.minMessagesReceivedPerActor());
-		result.addObject("MaxMessagesReceivedPerActor", this.messageService.maxMessagesReceivedPerActor());
-		result.addObject("ActorSentMoreMessages", this.messageService.actorSentMoreMessages());
-		result.addObject("ActorReceivedMoreMessages", this.messageService.actorReceivedMoreMessages());
+		//result.addObject("ratioActivitiesSearch"metododelservicio);
+		//result.addObject("ratioFriendshipSearch"metododelservicio);
+		//result.addObject("ratioLoveSearch"metododelservicio);
 
-		result.addObject("requestURI", "dashboard/administrator/dashboard.do");
+		//Queries LikeService
+
+		//result.addObject("chorbiesOrderedByLikes",metododelservicio);
+		//result.addObject("minimumChorbiLikes",metododelservicio);
+		//result.addObject("maximumChorbiLikes",metododelservicio);
+		//result.addObject("averageChorbiLikes",metododelservicio);
+
+		//Queries ChirpService
+
+		//result.addObject("minimumChirpsReceivedByChorbi",metododelservicio);
+		//result.addObject("maximumChirpsReceivedByChorbi",metododelservicio);
+		//result.addObject("averageChirpsReceivedByChorbi",metododelservicio);
+		//result.addObject("minimumChirpsSentByChorbi",metododelservicio);
+		//result.addObject("maximumChirpsSentByChorbi",metododelservicio);
+		//result.addObject("averageChirpsSentByChorbi",metododelservicio);
+		//result.addObject("ChorbiesWithMoreReceivedChirps",metododelservicio);
+		//result.addObject("ChorbiesWithMoreSentChirps",metododelservicio);
 
 		return result;
 	}
