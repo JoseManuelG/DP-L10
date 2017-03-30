@@ -361,6 +361,28 @@
 		<property name="isSender" value="true" />
 	</bean>
 	
+	<bean id="chirp1Chorbi3" class="domain.Chirp">
+		<property name="senderName" value="Chorbi3 Chorbi3" />
+		<property name="recipientName" value="Chorbi4 Chorbi4" />
+		<property name="sendingMoment" value="04/04/2016 11:45" />
+		<property name="subject" value="subject Chirp" />
+		<property name="text" value="text Chirp" />
+		<property name="sender" ref="chorbi3" />
+		<property name="recipient" ref="chorbi4" />
+		<property name="isSender" value="true" />
+	</bean>
+	
+	<bean id="chirp1Chorbi4Copy" class="domain.Chirp">
+		<property name="senderName" value="Chorbi4 Chorbi4" />
+		<property name="recipientName" value="Chorbi3 Chorbi3" />
+		<property name="sendingMoment" value="04/04/2016 11:45" />
+		<property name="subject" value="subject Chirp" />
+		<property name="text" value="text Chirp" />
+		<property name="sender" ref="chorbi4" />
+		<property name="recipient" ref="chorbi3" />
+		<property name="isSender" value="false" />
+	</bean>
+	
 	<bean id="chirpNoSender" class="domain.Chirp">
 		<property name="senderName" value="Chorbi- Chorbi-" />
 		<property name="recipientName" value="Chorbi3 Chorbi3" />
@@ -661,7 +683,7 @@
 		<property name="state" value="" />
 		<property name="country" value="" />
 		<property name="province" value="" />
-		<property name="city" value="Seville" />
+		<property name="city" value="Madrid" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi2" class="domain.Coordinates">
@@ -687,9 +709,9 @@
 	
 	<bean id="coordinatesChorbi4" class="domain.Coordinates">
 		<property name="state" value="" />
-		<property name="country" value="" />
+		<property name="country" value="France" />
 		<property name="province" value="" />
-		<property name="city" value="Seville" />
+		<property name="city" value="Paris" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi4" class="domain.Coordinates">
