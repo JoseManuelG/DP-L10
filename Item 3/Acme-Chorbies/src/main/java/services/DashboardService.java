@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import repositories.ChorbiRepository;
 import repositories.DashboardRepository;
+import domain.Chorbi;
 
 @Service
 @Transactional
@@ -58,6 +59,61 @@ public class DashboardService {
 			res = this.dashboardRepository.countValidCreditCard() / chorbies;
 		else
 			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 04
+	public Double ratioChorbiesWhoDesireActivities() {
+		Long chorbies;
+		Double res;
+
+		chorbies = this.chorbiRepository.count();
+
+		if (chorbies > 0)
+			res = this.dashboardRepository.countChorbiesWhoDesireActivities() / chorbies;
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 04
+	public Double ratioChorbiesWhoDesireFriendship() {
+		Long chorbies;
+		Double res;
+
+		chorbies = this.chorbiRepository.count();
+
+		if (chorbies > 0)
+			res = this.dashboardRepository.countChorbiesWhoDesireFriendship() / chorbies;
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 04
+	public Double ratioChorbiesWhoDesireLove() {
+		Long chorbies;
+		Double res;
+
+		chorbies = this.chorbiRepository.count();
+
+		if (chorbies > 0)
+			res = this.dashboardRepository.countChorbiesWhoDesireLove() / chorbies;
+		else
+			res = 0.;
+
+		return res;
+	}
+
+	//Dashboard - 05
+	public List<Chorbi> chorbiesOrderedByLikes() {
+		List<Chorbi> res;
+
+		res = this.dashboardRepository.findChorbiesOrderedByLikes();
+		res.addAll(this.dashboardRepository.findChorbiesWithoutLikes());
 
 		return res;
 	}
