@@ -2,11 +2,13 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.LikesRepository;
 import security.LoginService;
@@ -67,8 +69,8 @@ public class LikesService {
 
 	@SuppressWarnings("static-access")
 	public Likes save(final Likes likes) {
-		Assert.notNull(likes, "El comentario no puede ser nulo");
-		Assert.isTrue(likes.getId() == 0, "No se pueden modificar comentarios");
+		Assert.notNull(likes, "El like no puede ser nulo");
+		Assert.isTrue(likes.getId() == 0, "No se pueden modificar likes");
 
 		Assert.isTrue(likes.getLiker().getUserAccount().equals(this.loginService.getPrincipal()), "Solo el propietario puede realizar operaciones");
 		Likes result;
@@ -76,6 +78,17 @@ public class LikesService {
 		result = this.likesRepository.save(likes);
 
 		return result;
+	}
+
+	public void delete(final Likes likes) {
+		Assert.notNull(likes, "El attachment no puede ser nulo");
+		Assert.isTrue(likes.getId() != 0, "El attachment debe estar antes en la base de datos");
+
+		this.likesRepository.exists(likes.getId());
+		Assert.isTrue(LoginService.getPrincipal().equals(likes.getLiked()) || LoginService.getPrincipal().equals(likes.getLiker()));
+
+		this.likesRepository.delete(likes);
+
 	}
 
 	//Other bussiness methods------------------------
@@ -93,6 +106,36 @@ public class LikesService {
 			result = true;
 		return result;
 
+	}
+
+	public Likes reconstruct(final Likes likes, final BindingResult binding) {
+		Likes result;
+		result = new Likes();
+
+		// Setear lo que viene del formulario:
+		result.setComment(likes.getComment());
+		result.setLiked(likes.getLiked());
+		result.setLiker(likes.getLiker());
+
+		// Setear lo que no viene del formulario:
+		result.setMoment(likes.getMoment());
+
+		result.setId(likes.getId());
+		result.setVersion(likes.getVersion());
+
+		return null;
+	}
+
+	public Collection<Likes> findReceivedLikesOfPrincipal() {
+		final int recipientId = this.chorbiService.findChorbiByPrincipal().getId();
+		final List<Likes> result = this.likesRepository.findReceivedLikesOfChorbi(recipientId);
+		return result;
+	}
+
+	public Collection<Likes> findSentLikesOfPrincipal() {
+		final int senderId = this.chorbiService.findChorbiByPrincipal().getId();
+		final List<Likes> result = this.likesRepository.findSentLikesOfChorbi(senderId);
+		return result;
 	}
 
 }

@@ -74,6 +74,12 @@ public class ChorbiService {
 		return result;
 	}
 
+	public Collection<Chorbi> findAll() {
+		Collection<Chorbi> result;
+		result = this.chorbiRepository.findAll();
+		return result;
+	}
+
 	public Long count() {
 		return this.chorbiRepository.count();
 	}

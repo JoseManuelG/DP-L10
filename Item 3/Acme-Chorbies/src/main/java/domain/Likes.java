@@ -24,6 +24,7 @@ public class Likes extends DomainEntity {
 
 	private Date	moment;
 	private String	comment;
+	private boolean	isSender;
 
 
 	@NotNull
@@ -45,6 +46,14 @@ public class Likes extends DomainEntity {
 
 	public void setComment(final String text) {
 		this.comment = text;
+	}
+
+	public boolean getIsSender() {
+		return this.isSender;
+	}
+
+	public void setIsSender(final boolean isSender) {
+		this.isSender = isSender;
 	}
 
 
