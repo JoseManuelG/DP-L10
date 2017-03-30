@@ -1,38 +1,75 @@
-A listing with the number of chorbies per country and city.
-select c.coordinates.country, c.userAccount.username from Chorbi c order by c.coordinates.country; 
-select c.coordinates.city, c.userAccount.username from Chorbi c order by c.coordinates.city;
-// Las dos estan puestas para que te saquen una lista de array de dos objects: {pais/ciudad, username del chorbi}. Adaptar a lo que sea necesario.
+-A listing with the number of chorbies per country and city.
+select c from Chorbi c order by c.coordinates.country; 
+select c from Chorbi c order by c.coordinates.city;
 
-The minimum, the maximum, and the average ages of the chorbies.
-select min(c.birthDate) from Chorbi c; //Sacar edad en java a partir del birthDate.
-select max(c.birthDate) from Chorbi c; //Sacar edad en java a partir del birthDate.
-select c.birthDate from Chorbi c;	   //Sacar edad para cada uno y hacer media?
+-The minimum, the maximum, and the average ages of the chorbies.
+maximo: select min(DATEDIFF(CURRENT_DATE, c.birthDate)/365.256363004) from Chorbi c; //Sacar como integer
+minimo: select max(DATEDIFF(CURRENT_DATE, c.birthDate)/365.256363004) from Chorbi c; //Sacar como integer
+avg:	select avg(DATEDIFF(CURRENT_DATE, c.birthDate)/365.256363004) from Chorbi c;	
 
-The ratio of chorbies who have not registered a credit card or have registered an invalid credit card.
-select count(c) from CreditCard c; // falta restriccion de fecha
+-The ratio of chorbies who have not registered a credit card or have registered an invalid credit card.
+select count(c) from CreditCard c where c.expirationYear >= YEAR(CURRENT_DATE) and c.expirationMonth >= MONTH(CURRENT_DATE);
 select count(c) from Chorbi c; // dividir en java
 
+-The ratios of chorbies who search for “activities”, “friendship”, and “love”.
+select c from Chorbi c where c.desiredRelationship='activities';
+select c from Chorbi c where c.desiredRelationship='friendship';
+select c from Chorbi c where c.desiredRelationship='love';
 
-The ratios of chorbies who search for “activities”, “friendship”, and “love”.
+-The list of chorbies, sorted by the number of likes they have got.
+select c from Likes l, Chorbi c where c=l.liked group by c order by count(c) desc;
+//habria que añadirle los chorbies que no estan en ningun likes que te los da la siguiente query
+select c from Chorbi c where c not in (select distinct l.liked from Likes l);
+
+-The minimum, the maximum, and the average number of likes per chorbi.
+//COMPROBAR QUE EXISTEN CHORBIES
+
+minimo: select count(l.liked) from Likes l group by l.liked order by count(l.liked) asc;
+//se hace un count de chorbies y si es mayor que el size de la query de arriba, el minimo es 0, si no es el primer elemento que devuelve
+
+maximo: select count(l.liked) from Likes l group by l.liked order by count(l.liked) desc;
+//el maximo es el primer elemento que devuelve
+
+avg: count de likes entre count de chorbies
+
+-The minimum, the maximum, and the average number of chirps that a chorbi receives from other chorbies.
+
+avg:	select count(m) from Chirp m where m.isSender=false and m.recipient is not null;
+
+	dividido entre	count de chorbi
+
+min:	select count(m) from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient.id order by count(m) asc;
+
+	y quedarse con el primero
+
+max:	select count(m) from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient.id order by count(m) desc;
+
+	y quedarse con el primero
+
+-The minimum, the maximum, and the average number of chirps that a chorbi sends to other chorbies.
+
+avg:	select count(m) from Chirp m where m.isSender=true and m.sender is not null
+
+	dividido entre	count de chorbi
+
+min:	select count(m) from Chirp m where m.isSender=true and m.sender is not null group by m.sender.id order by count(m) asc;
+
+	y quedarse con el primero
+
+max:	select count(m) from Chirp m where m.isSender=true and m.sender is not null group by m.sender.id order by count(m) desc;
+
+	y quedarse con el primero
 
 
-The list of chorbies, sorted by the number of likes they have got.
+-The chorbies who have got more chirps.
+
+select m.recipient from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient order by count(m) desc;
+
+y quedarse con el primero
 
 
-The minimum, the maximum, and the average number of likes per chorbi.
+-The chorbies who have sent more chirps.
 
+select m.sender from Chorbi m where m.isSender=true and m.sender is not null group by m.sender order by count(m) desc;
 
-The minimum, the maximum, and the average number of chirps that a chorbi receives from other chorbies.
-
-
-The minimum, the maximum, and the average number of chirps that a chorbi sends to other chorbies.
-
-
-The chorbies who have got more chirps.
-
-
-The chorbies who have sent more chirps.
-
-
-
-
+y quedarse con el primero

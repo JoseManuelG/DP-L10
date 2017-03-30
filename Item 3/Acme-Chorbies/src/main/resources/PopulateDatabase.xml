@@ -515,7 +515,7 @@
 	
 	<bean id="likes1Chorbi2" class="domain.Likes">
 		<property name="liker" ref="chorbi2" />
-		<property name="liked" ref="chorbi1" />
+		<property name="liked" ref="chorbi3" />
 		<property name="moment" value="10/10/2016 20:38" />
 		<property name="comment" value="" />
 	</bean>
