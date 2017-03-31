@@ -14,6 +14,7 @@ import org.springframework.validation.Validator;
 
 import repositories.SearchTemplateRepository;
 import domain.Chorbi;
+import domain.Coordinates;
 import domain.SearchTemplate;
 
 @Service
@@ -81,8 +82,7 @@ public class SearchTemplateService {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 1000));
 
 			//TODO montar query de busqueda
-			//chorbies = this.searchTemplateRepository.searchPropertiesWithMaxPrice(result.getDestination(), result.getKeyword(), min, result.getMaxPrice());
-			chorbies = this.chorbiService.findAll();
+			chorbies = this.chorbiService.searchChorbis(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(), searchTemplate.getKeyword());
 			result.setChorbies(chorbies);
 
 			result = this.searchTemplateRepository.save(result);
@@ -146,13 +146,21 @@ public class SearchTemplateService {
 		res.setCacheMoment(old.getCacheMoment());
 		res.setChorbies(old.getChorbies());
 		res.setChorbi(old.getChorbi());
+		final Coordinates aux;
+		aux = new Coordinates();
+		aux.setId(old.getCoordinates().getId());
+		aux.setVersion(old.getCoordinates().getVersion());
+		aux.setCity(searchTemplate.getCoordinates().getCity());
+		aux.setCountry(searchTemplate.getCoordinates().getCountry());
+		aux.setProvince(searchTemplate.getCoordinates().getProvince());
+		aux.setState(searchTemplate.getCoordinates().getState());
 
+		res.setCoordinates(aux);
 		//New things
 		res.setDesiredRelationship(searchTemplate.getDesiredRelationship());
 		res.setAge(searchTemplate.getAge());
 		res.setGenre(searchTemplate.getGenre());
 		res.setKeyword(searchTemplate.getKeyword());
-		res.setCoordinates(searchTemplate.getCoordinates());
 		this.validator.validate(res, binding);
 
 		return res;
