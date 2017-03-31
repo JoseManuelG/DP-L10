@@ -16,19 +16,19 @@
       
 <tiles-definitions>
 
-	<definition name="likes/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de likes" />
-		<put-attribute name="body" value="/views/likes/list.jsp" />
+	<definition name="chirp/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de chirps" />
+		<put-attribute name="body" value="/views/chirp/list.jsp" />
 	</definition>
 	
-	<definition name="likes/view" extends="master.page">	
-		<put-attribute name="title" value="Ver like" />
-		<put-attribute name="body" value="/views/likes/view.jsp" />
+	<definition name="chirp/view" extends="master.page">	
+		<put-attribute name="title" value="Vista de chirp" />
+		<put-attribute name="body" value="/views/chirp/view.jsp" />
 	</definition>
 	
-	<definition name="likes/write" extends="master.page">	
-		<put-attribute name="title" value="Escribir like" />
-		<put-attribute name="body" value="/views/likes/write.jsp" />
+	<definition name="chirp/write" extends="master.page">	
+		<put-attribute name="title" value="Escribir chirp" />
+		<put-attribute name="body" value="/views/chirp/write.jsp" />
 	</definition>
 	
 </tiles-definitions>
