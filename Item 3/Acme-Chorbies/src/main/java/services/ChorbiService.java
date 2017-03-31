@@ -153,5 +153,8 @@ public class ChorbiService {
 		chorbi.setBanned(false);
 		this.chorbiRepository.save(chorbi);
 	}
-
+	public Collection<Chorbi> searchChorbis(final String desiredRelathionship, final String genre, final String keyword) {
+		final Collection<Chorbi> res = this.chorbiRepository.searchChorbis(desiredRelathionship, genre, keyword);
+		return res;
+	}
 }
