@@ -19,14 +19,16 @@
 
 	<util:list id="tiles">
 		<value>/views/about/tiles.xml</value>
+		<value>/views/chirp/tiles.xml</value>
 		<value>/views/law/tiles.xml</value>
 		<value>/views/master-page/tiles.xml</value>		
 		<value>/views/misc/tiles.xml</value>		
 		<value>/views/security/tiles.xml</value>
+		<value>/views/searchTemplate/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
 		
 		
-		<value>/views/searchTemplate/tiles.xml</value>
+		
 	</util:list>
 
 </beans>

@@ -22,8 +22,15 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
-<!-- 		<bean class="converters.ActorToStringConverter" /> -->
-<!-- 		<bean class="converters.StringToActorConverter" /> -->
+ 		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		
+		<bean class="converters.ChirpToStringConverter" />
+		<bean class="converters.StringToChirpConverter" />
+		
+		<bean class="converters.AttachmentToStringConverter" />
+		<bean class="converters.StringToAttachmentConverter" />
+		
 	</util:list>
 	
 </beans>

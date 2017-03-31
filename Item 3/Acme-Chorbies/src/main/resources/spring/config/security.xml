@@ -64,6 +64,9 @@
 		<!-- Chorbi -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('CHORBI')" /> -->
 		<security:intercept-url pattern="/searchTemplate/chorbi/search.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/chirp/chorbi/view.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/chirp/chorbi/list.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/chirp/chorbi/write.do" access="hasRole('CHORBI')"  /> 
 		
 		<!--NONE -->
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

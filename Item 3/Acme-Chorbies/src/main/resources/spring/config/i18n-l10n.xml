@@ -19,12 +19,13 @@
 
 	<util:list id="messages">
 		<value>/views/about/messages</value>
+		<value>/views/chirp/messages</value>
 		<value>/views/law/messages</value>
 		<value>/views/master-page/messages</value>
 		<value>/views/misc/messages</value>
-		<value>/views/security/messages</value>		
+		<value>/views/security/messages</value>
+		<value>/views/searchTemplate/messages</value>		
 		<value>/views/welcome/messages</value>
-		<value>/views/searchTemplate/messages</value>
 		
 	</util:list>
 
