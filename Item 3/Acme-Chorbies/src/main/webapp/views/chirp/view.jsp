@@ -65,6 +65,6 @@
 	<spring:message code="chirp.forward"/>
 </a> | 
 
-<a href="chirp/chorbi/delete.do?chirpId=${res.id}" onclick="return confirm('<spring:chirp code="confirm.delete" />')">
+<a href="chirp/chorbi/delete.do?chirpId=${res.id}" onclick="return confirm('<spring:message code="confirm.delete" />')">
 	<spring:message code="chirp.delete"/>
 </a>
