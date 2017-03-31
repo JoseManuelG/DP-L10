@@ -31,6 +31,7 @@ public class SearchTemplateService {
 	private ChorbiService				chorbiService;
 	@Autowired
 	private ConfigurationService		configurationService;
+
 	@Autowired
 	private Validator					validator;
 
@@ -66,24 +67,24 @@ public class SearchTemplateService {
 		SearchTemplate result;
 		final Collection<Chorbi> chorbies;
 		Date timeOfCache, lastSearch;
+		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
 
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
 		lastSearch = new Date(searchTemplate.getCacheMoment().getTime());
-		//TODO - Revisar que el search guardado sea del Principal, falta la navegabilidad de las entidades
-		Assert.isTrue(this.actorService.findActorByPrincipal().getId() == searchTemplate.getId());
+		//Revisar que el search guardado sea del Principal
 
 		result = searchTemplate;
 		//Comprobamos si el SearchTemplate ha sido modificado
 		//TODO Probar a pasar el bloque if al FindOne() para que saliera actualizado automaticamente
 		if (lastSearch.before(timeOfCache) || this.searchTemplateHasBeenModified(searchTemplate)) {
 
-			result.setCacheMoment(new Date(System.currentTimeMillis() - 100));
+			result.setCacheMoment(new Date(System.currentTimeMillis() - 1000));
 
 			//TODO montar query de busqueda
-			//results = this.searchTemplateRepository.searchPropertiesWithMaxPrice(result.getDestination(), result.getKeyword(), min, result.getMaxPrice());
+			//chorbies = this.searchTemplateRepository.searchPropertiesWithMaxPrice(result.getDestination(), result.getKeyword(), min, result.getMaxPrice());
 			chorbies = this.chorbiService.findAll();
-			//result.setResults(results);
 			result.setChorbies(chorbies);
+
 			result = this.searchTemplateRepository.save(result);
 		}
 
@@ -117,8 +118,8 @@ public class SearchTemplateService {
 	}
 	public void delete(final SearchTemplate searchTemplate) {
 		Assert.notNull(searchTemplate, "searchTemplate.error.null");
-		//TODO - Revisar que el search guardado sea del Principal, falta la navegabilidad de las entidades
-		Assert.isTrue(this.actorService.findActorByPrincipal().getId() == searchTemplate.getId());
+		//Revisar que el search guardado sea del Principal
+		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
 
 		Assert.isTrue(this.searchTemplateRepository.exists(searchTemplate.getId()), "searchTemplate.error.exists");
 
@@ -128,9 +129,9 @@ public class SearchTemplateService {
 	// Other business methods --------------------------------------
 
 	public SearchTemplate findByPrincipal() {
-		final SearchTemplate result = this.create();
-		//TODO hasta no tener clara la navegabilidad nada
-		//result = this.searchTemplateRepository.findByChorbi(this.actorService.findActorByPrincipal().getId());
+		final SearchTemplate result;
+		final int actorId = this.actorService.findActorByPrincipal().getId();
+		result = this.searchTemplateRepository.findByChrobi(actorId);
 		return result;
 	}
 	public SearchTemplate reconstruct(final SearchTemplate searchTemplate, final BindingResult binding) {
@@ -144,13 +145,14 @@ public class SearchTemplateService {
 		res.setVersion(old.getVersion());
 		res.setCacheMoment(old.getCacheMoment());
 		res.setChorbies(old.getChorbies());
+		res.setChorbi(old.getChorbi());
 
 		//New things
 		res.setDesiredRelationship(searchTemplate.getDesiredRelationship());
 		res.setAge(searchTemplate.getAge());
 		res.setGenre(searchTemplate.getGenre());
 		res.setKeyword(searchTemplate.getKeyword());
-
+		res.setCoordinates(searchTemplate.getCoordinates());
 		this.validator.validate(res, binding);
 
 		return res;

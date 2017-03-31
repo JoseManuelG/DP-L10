@@ -12,23 +12,36 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <fieldset>
-	<form:form action="searchTemplate/chorbi/search.do" modelAttribute="searchTemplate">
+	<form:form action="searchTemplate/chorbi/search.do" modelAttribute="search">
 		<form:hidden path="id" />
 
-		<acme:textbox code="searchTemplate.desiredRelationship" path="desiredRelationship"/>
+		<!-- <acme:textbox code="searchTemplate.desiredRelationship" path="desiredRelationship"/>-->
+		<form:label path="desiredRelationship">
+		<spring:message code="searchTemplate.desiredRelationship" />
+	</form:label>
+    <form:select id="desiredRelationship" name="desiredRelationship" path="desiredRelationship">
+    	<form:options items="${relation}" />
+    </form:select>
 		<acme:textbox code="searchTemplate.age" path="age"/>
-		<acme:textbox code="searchTemplate.genre" path="genre"/>
+	<!--  	<acme:textbox code="searchTemplate.genre" path="genre"/>-->
+		<form:label path="genre">
+		<spring:message code="searchTemplate.genre" />
+	</form:label>
+	<form:select id="genre" name="genre" path="genre">
+    	<form:options items="${genres}" />
+    </form:select>
+    
 		<acme:textbox code="searchTemplate.keyword" path="keyword"/>
-		<acme:textbox code="searchTemplate.coordinates.city" path="city"/>
-		<acme:textbox code="searchTemplate.coordinates.province" path="province"/>
-		<acme:textbox code="searchTemplate.coordinates.country" path="country"/>
-		<acme:textbox code="searchTemplate.coordinates.state" path="state"/>
+		<acme:textbox code="searchTemplate.coordinates.city" path="coordinates.city"/>
+		<acme:textbox code="searchTemplate.coordinates.province" path="coordinates.province"/>
+		<acme:textbox code="searchTemplate.coordinates.country" path="coordinates.country"/>
+		<acme:textbox code="searchTemplate.coordinates.state" path="coordinates.state"/>
 		
 		
 		
 		
 		
-		<acme:submit name="save" code="finder.search"/>
+		<acme:submit name="save" code="searchTemplate.search"/>
 	</form:form>
 </fieldset>
 
@@ -41,7 +54,7 @@
 		<!-- TODO- No se Si abrá display de chorbi-->
 		<!--<display:column>
 			<a href="book/tenant/book.do?propertyId=${row.id}">
-				<spring:message	code="finder.book" />
+			aaaa
 			</a>
 		</display:column>
 		-->

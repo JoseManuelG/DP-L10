@@ -31,6 +31,15 @@ public class SearchTemplateChorbiController extends AbstractController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search() {
 
+		final Collection<String> genres = new ArrayList<String>();
+		genres.add("man");
+		genres.add("woman");
+		final ArrayList<String> relation = new ArrayList<String>();
+		relation.add("activities");
+		relation.add("friendship");
+		relation.add("love");
+
+		// “activities”, “friendship”, or	“love”. 
 		ModelAndView result;
 		Collection<Chorbi> results;
 		SearchTemplate search;
@@ -48,6 +57,8 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 		result = new ModelAndView("searchTemplate/chorbi/search.do");
 		result.addObject("results", results);
+		result.addObject("genres", genres);
+		result.addObject("relation", relation);
 		result.addObject("search", search);
 		result.addObject("requestURI", "searchTemplate/chorbi/search.do");
 
@@ -75,7 +86,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 			} catch (final Throwable oops) {
 				results = new ArrayList<Chorbi>();
 
-				result = new ModelAndView("searchTemplate/chorbi/search");
+				result = new ModelAndView("searchTemplate/chorbi/search.do");
 				result.addObject("search", search);
 				result.addObject("requestURI", "searchTemplate/chorbi/search.do");
 				result.addObject("results", results);

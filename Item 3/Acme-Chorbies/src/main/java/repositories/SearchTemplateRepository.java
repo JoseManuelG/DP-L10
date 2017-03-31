@@ -2,6 +2,7 @@
 package repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.SearchTemplate;
@@ -9,10 +10,9 @@ import domain.SearchTemplate;
 @Repository
 public interface SearchTemplateRepository extends JpaRepository<SearchTemplate, Integer> {
 
+	@Query("select s from SearchTemplate s where s.chorbi.id=?1")
+	SearchTemplate findByChrobi(int corbiId);
 	/*
-	 * @Query("select f from Chorbi t join t.finder f where t.id=?1")
-	 * SearchTemplate findByTenant(int corbiId);
-	 * /*
 	 * 
 	 * @Query("select p from Property p where p.address like concat('%', ?1, '%') and p.rate>=?3 and (p.address like concat('%', ?2, '%') or p.name like concat('%', ?2, '%') or p.description like concat('%', ?2, '%'))")
 	 * Collection<Property> searchPropertiesWithoutMaxPrice(String destination, String keyword, Double min);
