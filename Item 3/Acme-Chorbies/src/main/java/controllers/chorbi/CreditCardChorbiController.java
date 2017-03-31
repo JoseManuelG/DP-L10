@@ -19,7 +19,7 @@ import domain.Chorbi;
 import domain.CreditCard;
 
 @Controller
-@RequestMapping("/creditCard/lessor")
+@RequestMapping("/creditCard/chorbi")
 public class CreditCardChorbiController extends AbstractController {
 
 	// Services -------------------------------------------------------------

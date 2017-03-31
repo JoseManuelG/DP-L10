@@ -34,6 +34,19 @@
 		
 	<acme:textbox code="security.register.phone" path="phone"/>
 	
+	<acme:textbox code="security.register.picture" path="picture"/>
+	
+	<acme:textbox code="security.register.description" path="description"/>
+	
+	<acme:select items="${desiredRelationships}" itemLabel="desiredRelationship" code="security.register.desiredRelationship" path="desiredRelationship"/>
+
+	<acme:select items="${genre}" itemLabel="genre" code="security.register.genre" path="genre"/>
+
+	<acme:textbox code="security.register.birthDate" path="birthDate"/>
+	
+	
+	
+	
 	<a target="_blank" href="law/terms-conditions.do">
 		<spring:message code="security.register.terms" />
 	</a>
