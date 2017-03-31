@@ -28,7 +28,7 @@ public class SearchTemplateService {
 	@Autowired
 	private ActorService				actorService;
 	@Autowired
-	private chorbiService				chorbiService;
+	private ChorbiService				chorbiService;
 	@Autowired
 	private ConfigurationService		configurationService;
 	@Autowired
