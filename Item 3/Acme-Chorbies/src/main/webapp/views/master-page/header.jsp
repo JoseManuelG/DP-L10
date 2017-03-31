@@ -39,22 +39,16 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<security:authorize access="hasRole('CUSTOMER')">
-					<li><a href="trip/customer/list/my/offers.do"><spring:message code="master.page.trip.my.offers" /></a></li>
-					<li><a href="trip/customer/list/my/requests.do"><spring:message code="master.page.trip.my.requests" /></a></li>
-					<li><a href="application/customer/list.do"><spring:message code="master.page.my.applications" /></a></li>
-					<li><a href="trip/customer/search.do"><spring:message code="master.page.trip.search" /></a></li>
+					<security:authorize access="hasRole('CHORBI')">
+					
+					<li><a href="chirp/chorbi/received.do"><spring:message code="master.page.chirp.received" /></a></li>
+					<li><a href="chirp/chorbi/sent.do"><spring:message code="master.page.chirp.sent" /></a></li>
+					<li><a href="searchTemplate/chorbi/searchs.do"><spring:message code="master.page.search" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('ADMINISTRATOR')">
-					<li><a href="trip/administrator/list/offers.do"><spring:message code="master.page.trip.offers" /></a></li>
-					<li><a href="trip/administrator/list/requests.do"><spring:message code="master.page.trip.requests" /></a></li>
-					<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.configuration.banner" /></a></li>
-					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					
 					</security:authorize>
 					<li><a href="actor/myProfile.do"><spring:message code="master.page.customer.my.profile" /></a></li>
-					<li><a href="message/actor/received.do"><spring:message code="master.page.message.received" /></a></li>
-					<li><a href="message/actor/sent.do"><spring:message code="master.page.message.sent" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>
 				</ul>
 			</li>
