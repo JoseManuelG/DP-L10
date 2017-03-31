@@ -73,7 +73,6 @@
 		<security:intercept-url pattern="/chirp/chorbi/forward.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/chirp/chorbi/write.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/chirp/chorbi/received.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/likes/chorbi/view.do" access="hasRole('CHORBI')"  /> 
 		
 		<security:intercept-url pattern="/likes/chorbi/view.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/likes/chorbi/create.do" access="hasRole('CHORBI')"  /> 
@@ -81,6 +80,11 @@
 		<security:intercept-url pattern="/likes/chorbi/sent.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/likes/chorbi/list.do" access="hasRole('CHORBI')"  /> 
 		
+		<security:intercept-url pattern="/creditCard/chorbi/create.do" access="hasRole('CHORBI')"  /> 	
+		<security:intercept-url pattern="/creditCard/chorbi/myCreditCard.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/creditCard/chorbi/edit.do" access="hasRole('CHORBI')"  /> 	
+		
+		<security:intercept-url pattern="/chorbi/chorbi/list.do" access="hasRole('CHORBI')"  /> 
 
 		
 		<!--NONE -->
