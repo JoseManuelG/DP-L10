@@ -1,9 +1,10 @@
 B+ tree
 Informe de costes 
 A+
-Hacer un baner de cada acme, subirlos a una url y añadirlos a los dos populates
 A+ extra
-Pagina con populate vacio
-Cambiar logo y favicon
+Revisar pagina en general y dashbaord en particular con populate vacio
 
 ---------------COMPLETO---------------------
+
+Hacer un baner de cada acme, subirlos a una url y añadirlos a los dos populates
+Cambiar logo y favicon

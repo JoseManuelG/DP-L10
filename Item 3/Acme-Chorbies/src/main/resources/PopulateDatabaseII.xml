@@ -47,17 +47,17 @@
 	
 	<bean id="Banner1" class="domain.Banner">
 		<property name="link" value="http://www.acme-pad-thai.com"/>
-		<property name="image" value="http://www.imgBanner.com"/>
+		<property name="image" value="http://i.imgur.com/HfkbICf.png"/>
 	</bean>
 	
 	<bean id="Banner2" class="domain.Banner">
 		<property name="link" value="http://www.acme-bnb.com"/>
-		<property name="image" value="http://www.imgBanner.com"/>
+		<property name="image" value="http://i.imgur.com/pA52wSC.png"/>
 	</bean>
 	
 	<bean id="Banner3" class="domain.Banner">
 		<property name="link" value="http://www.acme-cng.com"/>
-		<property name="image" value="http://www.imgBanner.com"/>
+		<property name="image" value="http://i.imgur.com/GgsILAX.png"/>
 	</bean>
 	
 	<!-- Configuration (12h in ms)	-->
