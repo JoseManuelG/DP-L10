@@ -18,7 +18,7 @@
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme CnG Co., Inc.</b> | 
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme Chorbies Co., Inc.</b> | 
 
 <a href="<spring:url value='/about/about.do'/>"><spring:message code="footer.about" /></a> | 
 

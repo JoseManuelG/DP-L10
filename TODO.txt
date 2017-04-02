@@ -2,9 +2,10 @@ B+ tree
 Informe de costes 
 A+
 A+ extra
-Revisar pagina en general y dashbaord en particular con populate vacio
+Revisar pagina en general con populate vacio
 
 ---------------COMPLETO---------------------
 
 Hacer un baner de cada acme, subirlos a una url y añadirlos a los dos populates
 Cambiar logo y favicon
+Revisar dashboard con populate vacio

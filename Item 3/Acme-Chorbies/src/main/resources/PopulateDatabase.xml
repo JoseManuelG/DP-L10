@@ -207,7 +207,7 @@
 		<property name="phone" value="+34444444444" />
 		<property name="userAccount" ref="userAccountChorbi5" />
 		<property name="picture" value="https://image.freepik.com/iconos-gratis/avatar-de-usuario-de-esquema_318-34741.jpg" />
-		<property name="description" value="description chorbi5, add me chorbi5@cng.com" />
+		<property name="description" value="description chorbi5, add me chorbi5@acme.com" />
 		<property name="desiredRelationship" value="love" />
 		<property name="birthDate" value="06/20/1995" />
 		<property name="genre" value="woman" />
@@ -348,6 +348,72 @@
 		<property name="sender" ref="chorbi1" />
 		<property name="recipient" ref="chorbi2" />
 		<property name="isSender" value="true" />
+	</bean>
+	
+	<bean id="chirp1Chorbi1Received" class="domain.Chirp">
+		<property name="senderName" value="Chorbi2 Chorbi2" />
+		<property name="recipientName" value="Chorbi1 Chorbi1" />
+		<property name="sendingMoment" value="04/04/2016 11:45" />
+		<property name="subject" value="subject Chirp" />
+		<property name="text" value="text Chirp" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+		<property name="isSender" value="false" />
+	</bean>
+	
+	<bean id="chirp2Chorbi1Received" class="domain.Chirp">
+		<property name="senderName" value="Chorbi2 Chorbi2" />
+		<property name="recipientName" value="Chorbi1 Chorbi1" />
+		<property name="sendingMoment" value="04/04/2016 11:45" />
+		<property name="subject" value="subject Chirp" />
+		<property name="text" value="text Chirp" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+		<property name="isSender" value="false" />
+	</bean>
+	
+	<bean id="chirp3Chorbi1Received" class="domain.Chirp">
+		<property name="senderName" value="Chorbi2 Chorbi2" />
+		<property name="recipientName" value="Chorbi1 Chorbi1" />
+		<property name="sendingMoment" value="04/04/2016 11:45" />
+		<property name="subject" value="subject Chirp" />
+		<property name="text" value="text Chirp" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+		<property name="isSender" value="false" />
+	</bean>
+	
+	<bean id="chirp4Chorbi1Received" class="domain.Chirp">
+		<property name="senderName" value="Chorbi2 Chorbi2" />
+		<property name="recipientName" value="Chorbi1 Chorbi1" />
+		<property name="sendingMoment" value="04/04/2016 11:45" />
+		<property name="subject" value="subject Chirp" />
+		<property name="text" value="text Chirp" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+		<property name="isSender" value="false" />
+	</bean>
+	
+	<bean id="chirp5Chorbi1Received" class="domain.Chirp">
+		<property name="senderName" value="Chorbi2 Chorbi2" />
+		<property name="recipientName" value="Chorbi1 Chorbi1" />
+		<property name="sendingMoment" value="04/04/2016 11:45" />
+		<property name="subject" value="subject Chirp" />
+		<property name="text" value="text Chirp" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+		<property name="isSender" value="false" />
+	</bean>
+	
+	<bean id="chirp6Chorbi1Received" class="domain.Chirp">
+		<property name="senderName" value="Chorbi2 Chorbi2" />
+		<property name="recipientName" value="Chorbi1 Chorbi1" />
+		<property name="sendingMoment" value="04/04/2016 11:45" />
+		<property name="subject" value="subject Chirp" />
+		<property name="text" value="text Chirp" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+		<property name="isSender" value="false" />
 	</bean>
 	
 	<bean id="chirp1Chorbi2" class="domain.Chirp">

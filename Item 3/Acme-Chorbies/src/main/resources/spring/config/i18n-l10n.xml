@@ -29,6 +29,7 @@
 		<value>/views/likes/messages</value>
 		<value>/views/chorbi/messages</value>
 		<value>/views/creditCard/messages</value>
+		<value>/views/dashboard/messages</value>
 		
 	</util:list>
 

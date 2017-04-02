@@ -59,11 +59,11 @@ public interface DashboardRepository extends JpaRepository<Administrator, Intege
 
 	//Dashboard - 06
 	@Query("select count(l.liked) from Likes l group by l.liked order by count(l.liked) asc")
-	public List<Double> minNumberOfLikesPerChorbi();
+	public List<Long> minNumberOfLikesPerChorbi();
 
 	//Dashboard - 06
 	@Query("select count(l.liked) from Likes l group by l.liked order by count(l.liked) desc")
-	public List<Double> maxNumberOfLikesPerChorbi();
+	public List<Long> maxNumberOfLikesPerChorbi();
 
 	//Dashboard - 07
 	@Query("select count(m) from Chirp m where m.isSender=false and m.recipient is not null")
@@ -71,11 +71,11 @@ public interface DashboardRepository extends JpaRepository<Administrator, Intege
 
 	//Dashboard - 07
 	@Query("select count(m) from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient.id order by count(m) asc")
-	public List<Double> minOfChirpsReceivedPerChorbi();
+	public List<Long> minOfChirpsReceivedPerChorbi();
 
 	//Dashboard - 07
 	@Query("select count(m) from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient.id order by count(m) desc")
-	public List<Double> maxOfChirpsReceivedPerChorbi();
+	public List<Long> maxOfChirpsReceivedPerChorbi();
 
 	//Dashboard - 08
 	@Query("select count(m) from Chirp m where m.isSender=true and m.sender is not null")
@@ -83,17 +83,17 @@ public interface DashboardRepository extends JpaRepository<Administrator, Intege
 
 	//Dashboard - 08
 	@Query("select count(m) from Chirp m where m.isSender=true and m.sender is not null group by m.sender.id order by count(m) asc")
-	public List<Double> minOfChirpsSentPerChorbi();
+	public List<Long> minOfChirpsSentPerChorbi();
 
 	//Dashboard - 08
 	@Query("select count(m) from Chirp m where m.isSender=true and m.sender is not null group by m.sender.id order by count(m) desc")
-	public List<Double> maxOfChirpsSentPerChorbi();
+	public List<Long> maxOfChirpsSentPerChorbi();
 
 	//Dashboard - 09
 	@Query("select m.recipient from Chirp m where m.isSender=false and m.recipient is not null group by m.recipient having count(m)=?1 order by count(m) desc")
-	public List<Chorbi> findChorbiesWhoGotMoreChirps(Double max);
+	public List<Chorbi> findChorbiesWhoGotMoreChirps(Long max);
 
 	//Dashboard - 10
 	@Query("select m.sender from Chirp m where m.isSender=true and m.sender is not null group by m.sender having count(m)=?1 order by count(m) desc")
-	public List<Chorbi> findChorbiesWhoSentMoreChirps(Double max);
+	public List<Chorbi> findChorbiesWhoSentMoreChirps(Long max);
 }

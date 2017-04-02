@@ -58,8 +58,7 @@
 		<!-- Administrator -->
 		
 <!-- 		<security:intercept-url pattern="" access="hasRole('ADMINISTRATOR')" /> -->
-		
-		
+		<security:intercept-url pattern="/dashboard/administrator/dashboard.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- Chorbi -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('CHORBI')" /> -->

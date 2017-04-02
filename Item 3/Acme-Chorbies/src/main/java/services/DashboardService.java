@@ -50,7 +50,11 @@ public class DashboardService {
 
 	//Dashboard - 02
 	public Double averageAgeOfChorbies() {
-		return this.dashboardRepository.averageAgeOfChorbies();
+		Double res;
+		res = this.dashboardRepository.averageAgeOfChorbies();
+		if (res == null)
+			res = 0.;
+		return res;
 	}
 
 	//Dashboard - 03
@@ -127,38 +131,37 @@ public class DashboardService {
 	//Dashboard - 06
 	public Integer minNumberOfLikesPerChorbi() {
 		Long chorbies;
-		List<Double> counts;
-		Double res;
+		List<Long> counts;
+		Integer res;
 
-		counts = new ArrayList<Double>();
+		counts = new ArrayList<Long>();
 
 		chorbies = this.chorbiRepository.count();
 		counts.addAll(this.dashboardRepository.minNumberOfLikesPerChorbi());
 
 		if (chorbies > 0 && counts.size() == chorbies)
-			res = counts.get(0);
+			res = counts.get(0).intValue();
 		else
-			res = 0.;
+			res = 0;
 
-		return res.intValue();
+		return res;
 	}
 
 	//Dashboard - 06
 	public Integer maxNumberOfLikesPerChorbi() {
-		List<Double> counts;
-		Double res;
+		List<Long> counts;
+		Integer res;
 
-		counts = new ArrayList<Double>();
+		counts = new ArrayList<Long>();
 		counts.addAll(this.dashboardRepository.maxNumberOfLikesPerChorbi());
 
 		if (counts.size() > 0)
-			res = counts.get(0);
+			res = counts.get(0).intValue();
 		else
-			res = 0.;
+			res = 0;
 
-		return res.intValue();
+		return res;
 	}
-
 	//Dashboard - 06
 	public Double avgNumberOfLikesPerChorbi() {
 		Long chorbies, likes;
@@ -193,33 +196,35 @@ public class DashboardService {
 	}
 
 	//Dashboard - 07
-	public Double minOfChirpsReceivedPerChorbi() {
+	public Integer minOfChirpsReceivedPerChorbi() {
 		Long chorbies;
-		List<Double> chirps;
-		Double res;
+		List<Long> chirps;
+		Integer res;
 
 		chorbies = this.chorbiRepository.count();
+		chirps = new ArrayList<Long>();
 		chirps = this.dashboardRepository.minOfChirpsReceivedPerChorbi();
 
 		if (chorbies > 0 && chirps.size() == chorbies)
-			res = chirps.get(0);
+			res = chirps.get(0).intValue();
 		else
-			res = 0.;
+			res = 0;
 
 		return res;
 	}
 
 	//Dashboard - 07
-	public Double maxOfChirpsReceivedPerChorbi() {
-		List<Double> chirps;
-		Double res;
+	public Integer maxOfChirpsReceivedPerChorbi() {
+		List<Long> chirps;
+		Integer res;
 
+		chirps = new ArrayList<Long>();
 		chirps = this.dashboardRepository.maxOfChirpsReceivedPerChorbi();
 
 		if (chirps.size() > 0)
-			res = chirps.get(0);
+			res = chirps.get(0).intValue();
 		else
-			res = 0.;
+			res = 0;
 
 		return res;
 	}
@@ -242,33 +247,35 @@ public class DashboardService {
 	}
 
 	//Dashboard - 08
-	public Double minOfChirpsSentPerChorbi() {
+	public Integer minOfChirpsSentPerChorbi() {
 		Long chorbies;
-		List<Double> chirps;
-		Double res;
+		List<Long> chirps;
+		Integer res;
 
 		chorbies = this.chorbiRepository.count();
+		chirps = new ArrayList<Long>();
 		chirps = this.dashboardRepository.minOfChirpsSentPerChorbi();
 
 		if (chorbies > 0 && chirps.size() == chorbies)
-			res = chirps.get(0);
+			res = chirps.get(0).intValue();
 		else
-			res = 0.;
+			res = 0;
 
 		return res;
 	}
 
 	//Dashboard - 08
-	public Double maxOfChirpsSentPerChorbi() {
-		List<Double> chirps;
-		Double res;
+	public Integer maxOfChirpsSentPerChorbi() {
+		List<Long> chirps;
+		Integer res;
 
+		chirps = new ArrayList<Long>();
 		chirps = this.dashboardRepository.maxOfChirpsSentPerChorbi();
 
 		if (chirps.size() > 0)
-			res = chirps.get(0);
+			res = chirps.get(0).intValue();
 		else
-			res = 0.;
+			res = 0;
 
 		return res;
 	}
@@ -276,9 +283,9 @@ public class DashboardService {
 	//Dashboard - 09
 	public List<Chorbi> findChorbiesWhoGotMoreChirps() {
 		List<Chorbi> res;
-		Double max;
+		Long max;
 
-		max = this.maxOfChirpsReceivedPerChorbi();
+		max = this.maxOfChirpsReceivedPerChorbi() + 0l;
 		res = new ArrayList<Chorbi>();
 		res.addAll(this.dashboardRepository.findChorbiesWhoGotMoreChirps(max));
 
@@ -291,9 +298,9 @@ public class DashboardService {
 	//Dashboard - 10
 	public List<Chorbi> findChorbiesWhoSentMoreChirps() {
 		List<Chorbi> res;
-		Double max;
+		Long max;
 
-		max = this.maxOfChirpsSentPerChorbi();
+		max = this.maxOfChirpsSentPerChorbi() + 0l;
 		res = new ArrayList<Chorbi>();
 		res.addAll(this.dashboardRepository.findChorbiesWhoSentMoreChirps(max));
 

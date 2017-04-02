@@ -15,7 +15,7 @@
 
 <div>
 	<a href="<spring:url value='/' />">
-		<img src="images/logo.png" height="300"  alt="Acme CnG Co., Inc." />
+		<img src="images/logo.png" height="200"  alt="Acme Chorbies Co., Inc." />
 	</a>
 </div>
 
@@ -46,7 +46,7 @@
 					<li><a href="searchTemplate/chorbi/searchs.do"><spring:message code="master.page.search" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('ADMINISTRATOR')">
-					
+					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
 					</security:authorize>
 					<li><a href="actor/myProfile.do"><spring:message code="master.page.customer.my.profile" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>

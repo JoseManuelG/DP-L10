@@ -12,6 +12,39 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <fieldset>
+	
+	
+	<spring:message code="dashboard.actorName" var="actorName" />
+	<spring:message code="dashboard.city" var="city" />
+	<spring:message code="dashboard.country" var="country" />
+
+	<spring:message code="dashboard.chorbiesGroupedByCity" />:<br>
+	<display:table pagesize="5" class="displaytag1" name="chorbiesGroupedByCity"
+		requestURI="${requestURI}" id="row" uid="chorbiesGroupedByCity" excludedParams="*">
+		
+	    <display:column title="${city}">
+	   	  <jstl:out value="${chorbiesGroupedByCity[1]}"/>
+	    </display:column>
+	    
+	     <display:column >
+	   	  <jstl:out value="${chorbiesGroupedByCity[0]}"/>
+	    </display:column>
+	</display:table>
+	<br>
+	
+	<spring:message code="dashboard.chorbiesGroupedByCountry" />:<br>
+	<display:table pagesize="5" class="displaytag1" name="chorbiesGroupedByCountry"
+		requestURI="${requestURI}" id="row" uid="chorbiesGroupedByCountry" excludedParams="*">
+		
+	    <display:column title="${country}">
+	   	  <jstl:out value="${chorbiesGroupedByCountry[1]}"/>
+	    </display:column>
+	    
+	     <display:column >
+	   	  <jstl:out value="${chorbiesGroupedByCountry[0]}"/>
+	    </display:column>
+	</display:table>
+	<br>
 
 	<spring:message code="dashboard.minumumChorbiAge" />: <jstl:out value="${minumumChorbiAge}"/><br/>
 	<spring:message code="dashboard.maximumChorbiAge" />: <jstl:out value="${maximumChorbiAge}"/><br/>
@@ -24,9 +57,8 @@
 	
 	<spring:message code="dashboard.chorbiesOrderedByLikes" />:<br>
 	<display:table pagesize="5" class="displaytag1" name="chorbiesOrderedByLikes"
-		requestURI="${requestURI}" id="row" uid="chorbiesOrderedByLikes">
+		requestURI="${requestURI}" id="row" uid="chorbiesOrderedByLikes" excludedParams="*">
 		
-		<spring:message code="dashboard.chorbiesOrderedByLikes" var="chorbi" />
 	    <display:column title="${actorName}">
 	   	  <jstl:out value="${chorbiesOrderedByLikes.name}"/>
 	   	  <jstl:out value="${chorbiesOrderedByLikes.surname}"/>
@@ -49,9 +81,8 @@
 	
 	<spring:message code="dashboard.ChorbiesWithMoreReceivedChirps" />:<br>
 	<display:table pagesize="5" class="displaytag1" name="ChorbiesWithMoreReceivedChirps"
-		requestURI="${requestURI}" id="row" uid="ChorbiesWithMoreReceivedChirps">
+		requestURI="${requestURI}" id="row" uid="ChorbiesWithMoreReceivedChirps" excludedParams="*">
 		
-		<spring:message code="dashboard.ChorbiesWithMoreReceivedChirps" var="chorbi" />
 	    <display:column title="${actorName}">
 	   	  <jstl:out value="${ChorbiesWithMoreReceivedChirps.name}"/>
 	   	  <jstl:out value="${ChorbiesWithMoreReceivedChirps.surname}"/>
@@ -61,9 +92,8 @@
 	
 	<spring:message code="dashboard.ChorbiesWithMoreSentChirps" />:<br>
 	<display:table pagesize="5" class="displaytag1" name="ChorbiesWithMoreSentChirps"
-		requestURI="${requestURI}" id="row" uid="ChorbiesWithMoreSentChirps">
+		requestURI="${requestURI}" id="row" uid="ChorbiesWithMoreSentChirps" excludedParams="*">
 		
-		<spring:message code="dashboard.ChorbiesWithMoreSentChirps" var="chorbi" />
 	    <display:column title="${actorName}">
 	   	  <jstl:out value="${ChorbiesWithMoreSentChirps.name}"/>
 	   	  <jstl:out value="${ChorbiesWithMoreSentChirps.surname}"/>

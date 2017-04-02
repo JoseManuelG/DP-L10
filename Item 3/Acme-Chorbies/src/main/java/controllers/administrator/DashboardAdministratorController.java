@@ -40,8 +40,8 @@ public class DashboardAdministratorController extends AbstractController {
 
 		//Queries ChorbiService
 
-		//result.addObject("chorbiesGroupedByCity",metododelservicio);
-		//result.addObject("chorbiesGroupedByCountry",metododelservicio);
+		result.addObject("chorbiesGroupedByCity", this.dashboardService.numberOfChorbiesPerCity());
+		result.addObject("chorbiesGroupedByCountry", this.dashboardService.numberOfChorbiesPerCountry());
 		result.addObject("minumumChorbiAge", this.dashboardService.minAgeOfChorbies());
 		result.addObject("maximumChorbiAge", this.dashboardService.maxAgeOfChorbies());
 		result.addObject("averageChorbiAge", DashboardAdministratorController.df2.format(this.dashboardService.averageAgeOfChorbies()));
