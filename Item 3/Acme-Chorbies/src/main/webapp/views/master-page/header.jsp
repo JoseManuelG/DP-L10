@@ -43,7 +43,7 @@
 					
 					<li><a href="chirp/chorbi/received.do"><spring:message code="master.page.chirp.received" /></a></li>
 					<li><a href="chirp/chorbi/sent.do"><spring:message code="master.page.chirp.sent" /></a></li>
-					<li><a href="searchTemplate/chorbi/searchs.do"><spring:message code="master.page.search" /></a></li>
+					<li><a href="searchTemplate/chorbi/search.do"><spring:message code="master.page.search" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('ADMINISTRATOR')">
 					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>

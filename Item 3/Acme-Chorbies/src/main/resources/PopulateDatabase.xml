@@ -252,7 +252,7 @@
 		<property name="phone" value="+34555555555" />
 		<property name="userAccount" ref="userAccountChorbi8" />
 		<property name="picture" value="https://image.freepik.com/iconos-gratis/avatar-de-usuario-de-esquema_318-34741.jpg" />
-		<property name="description" value="description chorbi6" />
+		<property name="description" value="description chorbi8" />
 		<property name="desiredRelationship" value="friendship" />
 		<property name="birthDate" value="04/21/1980" />
 		<property name="genre" value="woman" />
@@ -760,10 +760,10 @@
 	</bean>
 	
 	<bean id="coordinatesChorbi3" class="domain.Coordinates">
-		<property name="state" value="" />
+		<property name="state" value="Texas" />
 		<property name="country" value="" />
 		<property name="province" value="" />
-		<property name="city" value="Seville" />
+		<property name="city" value="Austin" />
 	</bean>
 	
 	<bean id="coordinatesSearchTemplateChorbi3" class="domain.Coordinates">

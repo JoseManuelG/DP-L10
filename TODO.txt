@@ -4,6 +4,15 @@ A+
 A+ extra
 Revisar pagina en general con populate vacio
 
+SearchTemplate:
+-cuando entras al search y la busqueda se hizo hace mas de 12 horas te muestra la antigua, no se vuelve a hacer
+-Keyword solo busca en descripción, se deja asi?
+-Deberia de poder salir el principal en la busqueda?
+-Si pones edad negativas o letras se desconfigura la vista y no sale ningun error
+-Cando pones edad 0 se guarda edad 0 pero te sale en el formulario como null y te sa hace como si la edad fuera null, ademas sigue funcionando pero sale un error en el eclipse a partir de que se hace esto
+-Cambiar tabla de resultados (sale un link de a tenant book(?))
+-Estaría bien quitar los metodos deprecated
+
 ---------------COMPLETO---------------------
 
 Hacer un baner de cada acme, subirlos a una url y añadirlos a los dos populates
