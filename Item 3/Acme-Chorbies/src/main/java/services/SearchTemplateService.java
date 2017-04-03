@@ -82,7 +82,12 @@ public class SearchTemplateService {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 1000));
 
 			//TODO montar query de busqueda
-			chorbies = this.chorbiService.searchChorbis(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(), searchTemplate.getKeyword());
+			chorbies = this.chorbiService.searchChorbis(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(),
+
+			searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
+
+			searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState(), searchTemplate.getAge());
+
 			result.setChorbies(chorbies);
 
 			result = this.searchTemplateRepository.save(result);
@@ -92,7 +97,6 @@ public class SearchTemplateService {
 
 		return result;
 	}
-
 	private boolean searchTemplateHasBeenModified(final SearchTemplate searchTemplate) {
 		SearchTemplate old;
 		boolean result;

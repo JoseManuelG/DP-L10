@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -153,8 +154,15 @@ public class ChorbiService {
 		chorbi.setBanned(false);
 		this.chorbiRepository.save(chorbi);
 	}
-	public Collection<Chorbi> searchChorbis(final String desiredRelathionship, final String genre, final String keyword) {
-		final Collection<Chorbi> res = this.chorbiRepository.searchChorbis(desiredRelathionship, genre, keyword);
+	public Collection<Chorbi> searchChorbis(final String desiredRelathionship, final String genre, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate,
+		final Integer age) {
+
+		final Date aux = new Date(System.currentTimeMillis());
+		final Date aux2 = new Date(aux.getYear() - age, aux.getMonth(), aux.getDay());
+		final Date firstDate = new Date(aux2.getYear() - 5, aux.getMonth(), aux.getDay());
+		final Date secondDate = new Date(aux2.getYear() + 5, aux.getMonth(), aux.getDay());
+
+		final Collection<Chorbi> res = this.chorbiRepository.searchChorbis(desiredRelathionship, genre, keyword, cityCoordinate, provinceCoordinate, countryCoordinate, stateCoordinate, firstDate, secondDate);
 		return res;
 	}
 }
