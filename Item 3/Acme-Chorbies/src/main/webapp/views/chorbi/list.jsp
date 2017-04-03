@@ -40,6 +40,26 @@
 			<spring:message code="chorbi.view"/>
 		</a>
 	</display:column>
+	
+	
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<jstl:choose>
+		    <jstl:when test="${{chorbi.banned == true}">
+		        <display:column>
+					<a href="chorbi/administrator/unban.do?chorbiId=${row.id}">
+						<spring:message code="chorbi.view"/>
+					</a>
+				</display:column>
+		    </jstl:when>    
+		    <jstl:otherwise>
+		        <display:column>
+					<a href="chorbi/administrator/ban.do?chorbiId=${row.id}">
+						<spring:message code="chorbi.view"/>
+					</a>
+				</display:column>
+		    </jstl:otherwise>
+		</jstl:choose>
+	</security:authorize>
 
 </display:table>
 
