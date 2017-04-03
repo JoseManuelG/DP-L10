@@ -19,9 +19,12 @@
 
 
 <security:authorize access="hasRole('ADMINISTRATOR')">	
-
-	<spring:message code="banner.link" />: <jstl:out value="${banner.link}"/>
+	<jstl:set var="link" value="${banner.link}"/>
+	<jstl:set var="image" value="${banner.image}"/>
+	<spring:message code="banner.link" />: <a href="${banner.link }"><jstl:out value="${banner.link}"/></a>
 	<br/>
-	<spring:message code="banner.image" />: <jstl:out value="${banner.image}"/>
+	<spring:message code="banner.image" />:
+	<br>
+	 <img src="${image}" />
 
 </security:authorize>

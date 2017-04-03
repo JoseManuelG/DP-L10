@@ -25,9 +25,20 @@
 			</a>
 	</display:column>
 	
+	<spring:message code="banner.edit.title" var="viewTitleHeader" />
+	<display:column title="${viewTitleHeader}">
+			<a href="banner/administrator/edit.do?bannerId=${row.id}">
+				<spring:message	code="banner.edit" />
+			</a>
+	</display:column>
+	
 	<!-- Attributes -->
 	
 	<acme:column sorteable="false" code="banner.link" path="link"/>
 	<acme:column sorteable="false" code="banner.image" path="image"/>
 	
 </display:table>
+
+	<a href="banner/administrator/create.do">
+				<spring:message	code="banner.create" />
+			</a>

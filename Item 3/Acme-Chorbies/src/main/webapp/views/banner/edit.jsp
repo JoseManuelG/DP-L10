@@ -18,10 +18,13 @@
 
 <form:form action="banner/administrator/edit.do" modelAttribute="banner">
 
+	<form:hidden path="id" />
+
 	<acme:textbox code="banner.link" path="link"/>
 	<acme:textbox code="banner.image" path="image"/>
-
+	<br>
+	<acme:submit code="banner.delete" name="delete" />
 	<acme:submit code="banner.save" name="save" />
-	<acme:cancel code="banner.cancel" url="/" />
+	<acme:cancel code="banner.cancel" url="/banner/administrator/list.do" />
 	
 </form:form>

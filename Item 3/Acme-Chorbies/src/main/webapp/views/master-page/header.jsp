@@ -48,6 +48,8 @@
 					<security:authorize access="hasRole('ADMINISTRATOR')">
 					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a href="configuration/administrator/view.do"><spring:message code="master.page.administrator.configuration" /></a></li>
+					<li><a href="banner/administrator/list.do"><spring:message code="master.page.administrator.banner" /></a></li>
+					
 					</security:authorize>
 					<li><a href="actor/myProfile.do"><spring:message code="master.page.customer.my.profile" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>
