@@ -68,6 +68,7 @@ public class SearchTemplateService {
 		SearchTemplate result;
 		final Collection<Chorbi> chorbies;
 		Date timeOfCache, lastSearch;
+
 		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
 
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
@@ -82,6 +83,7 @@ public class SearchTemplateService {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 1000));
 
 			//TODO montar query de busqueda
+
 			chorbies = this.chorbiService.searchChorbis(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(),
 
 			searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
@@ -140,9 +142,10 @@ public class SearchTemplateService {
 	}
 	public SearchTemplate reconstruct(final SearchTemplate searchTemplate, final BindingResult binding) {
 		SearchTemplate res, old;
-
+		Integer auxAge = 18;
 		old = this.findOne(searchTemplate.getId());
-
+		if (searchTemplate.getAge() != null)
+			auxAge = searchTemplate.getAge();
 		res = this.create();
 		//old things
 		res.setId(old.getId());
@@ -162,7 +165,7 @@ public class SearchTemplateService {
 		res.setCoordinates(aux);
 		//New things
 		res.setDesiredRelationship(searchTemplate.getDesiredRelationship());
-		res.setAge(searchTemplate.getAge());
+		res.setAge(auxAge);
 		res.setGenre(searchTemplate.getGenre());
 		res.setKeyword(searchTemplate.getKeyword());
 		this.validator.validate(res, binding);

@@ -68,6 +68,13 @@ public class SearchTemplateChorbiController extends AbstractController {
 	public ModelAndView search(final SearchTemplate search, final BindingResult binding) {
 		ModelAndView result;
 		SearchTemplate res;
+		final Collection<String> genres = new ArrayList<String>();
+		genres.add("man");
+		genres.add("woman");
+		final ArrayList<String> relation = new ArrayList<String>();
+		relation.add("activities");
+		relation.add("friendship");
+		relation.add("love");
 
 		res = this.searchTemplateService.reconstruct(search, binding);
 		Collection<Chorbi> results;
@@ -90,6 +97,8 @@ public class SearchTemplateChorbiController extends AbstractController {
 				result.addObject("search", search);
 				result.addObject("requestURI", "searchTemplate/chorbi/search.do");
 				result.addObject("results", results);
+				result.addObject("genres", genres);
+				result.addObject("relation", relation);
 				result.addObject("message", "searchTemplate.commit.error");
 			}
 
