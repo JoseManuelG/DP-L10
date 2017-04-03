@@ -1,6 +1,8 @@
 
 package controllers.administrator;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,6 +31,24 @@ public class ConfigurationAdministratorController extends AbstractController {
 		super();
 	}
 
+	// View ---------------------------------------------------------------------------------
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public ModelAndView view() {
+		ModelAndView result;
+		final Configuration conf = this.configurationService.findConfiguration();
+
+		final long millis = conf.getCachedTime();
+
+		final String time = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis), TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis)
+			- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+
+		result = new ModelAndView("configuration/administrator/view");
+		result.addObject("time", time);
+		result.addObject("requestURI", "configuration/administrator/view");
+
+		return result;
+	}
+
 	// Edit -----------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
@@ -52,7 +72,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 		} else
 			try {
 				this.configurationService.save(configuration);
-				result = new ModelAndView("redirect:../../");
+				result = new ModelAndView("redirect:view.do");
 
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(configurationForm, "configuration.commit.error");

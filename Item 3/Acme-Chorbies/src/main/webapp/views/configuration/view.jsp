@@ -1,7 +1,7 @@
 <%--
+ * action-1.jsp
  *
- *
- * Copyright (C) 2017 Universidad de Sevilla
+ * Copyright (C) 2016 Universidad de Sevilla
  * 
  * The use of this project is hereby constrained to the conditions of the 
  * TDG Licence, a copy of which you may download from 
@@ -14,15 +14,14 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="configuration/administrator/edit.do" modelAttribute="configurationForm">
 
-	<acme:textbox code="configuration.hours" path="hours"/>
-	<acme:textbox code="configuration.minutes" path="minutes"/>
-	<acme:textbox code="configuration.seconds" path="seconds"/>
+	<spring:message  code="configuration.cachedTime" />: <jstl:out value="${time}" />
+	<br>
+	<br>
+	<a href="configuration/administrator/edit.do">
+		      <spring:message  code="configuration.edit" />
+	</a>
+
 	
-	<acme:submit code="configuration.save" name="save" />
-	<acme:cancel code="configuration.cancel" url="/configuration/administrator/view.do" />
-	
-</form:form>

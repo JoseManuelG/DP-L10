@@ -46,7 +46,8 @@
 					<li><a href="searchTemplate/chorbi/searchs.do"><spring:message code="master.page.search" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('ADMINISTRATOR')">
-					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.dashboard" /></a></li>
+					<li><a href="dashboard/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
+					<li><a href="configuration/administrator/view.do"><spring:message code="master.page.administrator.configuration" /></a></li>
 					</security:authorize>
 					<li><a href="actor/myProfile.do"><spring:message code="master.page.customer.my.profile" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>

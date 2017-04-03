@@ -56,7 +56,13 @@ public class ConfigurationService {
 
 		result = this.findConfiguration();
 
-		result.setCachedTime(configurationForm.getCachedTime().getTime());
+		final long hours = configurationForm.getHours() * 3600000;
+		final long minutes = configurationForm.getMinutes() * 60000;
+		final long seconds = configurationForm.getSeconds() * 1000;
+
+		final long cacheTime = hours + minutes + seconds;
+
+		result.setCachedTime(cacheTime);
 
 		this.validator.validate(result, binding);
 
