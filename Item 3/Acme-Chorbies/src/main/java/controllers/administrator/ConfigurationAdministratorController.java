@@ -32,8 +32,8 @@ public class ConfigurationAdministratorController extends AbstractController {
 	// Edit -----------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
-		final Configuration configuration = this.configurationService.findConfiguration();
-		final ModelAndView result = this.createEditModelAndView(configuration);
+		final ConfigurationForm configurationForm = new ConfigurationForm();
+		final ModelAndView result = this.createEditModelAndView(configurationForm);
 		return result;
 
 	}
@@ -47,7 +47,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 		configuration = this.configurationService.reconstruct(configurationForm, binding);
 		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(configuration);
+			result = this.createEditModelAndView(configurationForm);
 			System.out.println(binding.getAllErrors().toString());
 		} else
 			try {
@@ -55,26 +55,26 @@ public class ConfigurationAdministratorController extends AbstractController {
 				result = new ModelAndView("redirect:../../");
 
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(configuration, "configuration.commit.error");
+				result = this.createEditModelAndView(configurationForm, "configuration.commit.error");
 			}
 		return result;
 	}
 
 	// Ancillary Methods ----------------------------------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final Configuration configuration) {
+	protected ModelAndView createEditModelAndView(final ConfigurationForm configurationForm) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(configuration, null);
+		result = this.createEditModelAndView(configurationForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Configuration configuration, final String message) {
+	protected ModelAndView createEditModelAndView(final ConfigurationForm configurationForm, final String message) {
 		ModelAndView result;
 		result = new ModelAndView("configuration/administrator/edit");
 
-		result.addObject("configuration", configuration);
+		result.addObject("configurationForm", configurationForm);
 		result.addObject("message", message);
 		result.addObject("requestURI", "configuration/administrator/edit.do");
 		return result;

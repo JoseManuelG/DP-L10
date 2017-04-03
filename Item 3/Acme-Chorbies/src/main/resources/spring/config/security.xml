@@ -58,6 +58,11 @@
 		<!-- Administrator -->
 		
 <!-- 		<security:intercept-url pattern="" access="hasRole('ADMINISTRATOR')" /> -->
+		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/banner/administrator/view.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/banner/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/banner/administrator/create.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/banner/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/dashboard/administrator/dashboard.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- Chorbi -->

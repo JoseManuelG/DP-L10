@@ -29,6 +29,8 @@
 		<value>/views/likes/tiles.xml</value>
 		<value>/views/chorbi/tiles.xml</value>
 		<value>/views/creditCard/tiles.xml</value>
+		<value>/views/banner/tiles.xml</value>
+		<value>/views/configuration/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>
 		
 		

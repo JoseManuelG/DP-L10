@@ -52,13 +52,10 @@ public class ConfigurationService {
 	// Other Business Methods --------------------------------------------------------------------
 
 	public Configuration reconstruct(final ConfigurationForm configurationForm, final BindingResult binding) {
-		Configuration result, original;
+		Configuration result;
 
-		original = this.findConfiguration();
+		result = this.findConfiguration();
 
-		result = new Configuration();
-		result.setId(original.getId());
-		result.setVersion(original.getVersion());
 		result.setCachedTime(configurationForm.getCachedTime().getTime());
 
 		this.validator.validate(result, binding);
