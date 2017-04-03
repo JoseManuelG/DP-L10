@@ -69,27 +69,33 @@ public class SearchTemplateService {
 		final Collection<Chorbi> chorbies;
 		Date timeOfCache, lastSearch;
 
+		//Revisar que el search guardado sea del Principal
 		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
-
+		//Fechas para comprobar el tiempo de caché
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
 		lastSearch = new Date(searchTemplate.getCacheMoment().getTime());
-		//Revisar que el search guardado sea del Principal
 
 		result = searchTemplate;
+
 		//Comprobamos si el SearchTemplate ha sido modificado
 		//TODO Probar a pasar el bloque if al FindOne() para que saliera actualizado automaticamente
 		if (lastSearch.before(timeOfCache) || this.searchTemplateHasBeenModified(searchTemplate)) {
 
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 1000));
 
-			//TODO montar query de busqueda
+			//Busqueda en base de Datos
+			if (!searchTemplate.getAge().equals(0))
+				chorbies = this.chorbiService.searchChorbis(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(),
 
-			chorbies = this.chorbiService.searchChorbis(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(),
+				searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
 
-			searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
+				searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState(), searchTemplate.getAge());
+			else
+				chorbies = this.chorbiService.searchChorbisWithoutAge(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(),
 
-			searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState(), searchTemplate.getAge());
+				searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
 
+				searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState());
 			result.setChorbies(chorbies);
 
 			result = this.searchTemplateRepository.save(result);
@@ -99,6 +105,8 @@ public class SearchTemplateService {
 
 		return result;
 	}
+
+	//Comprueba si ha sido modificado el searchTemplate
 	private boolean searchTemplateHasBeenModified(final SearchTemplate searchTemplate) {
 		SearchTemplate old;
 		boolean result;
@@ -124,9 +132,9 @@ public class SearchTemplateService {
 	}
 	public void delete(final SearchTemplate searchTemplate) {
 		Assert.notNull(searchTemplate, "searchTemplate.error.null");
-		//Revisar que el search guardado sea del Principal
+		//Revisa que el search guardado sea del Principal
 		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
-
+		//Revisa que exista el SearchTemplate
 		Assert.isTrue(this.searchTemplateRepository.exists(searchTemplate.getId()), "searchTemplate.error.exists");
 
 		this.searchTemplateRepository.delete(searchTemplate);
@@ -142,17 +150,35 @@ public class SearchTemplateService {
 	}
 	public SearchTemplate reconstruct(final SearchTemplate searchTemplate, final BindingResult binding) {
 		SearchTemplate res, old;
-		Integer auxAge = 18;
+		Integer auxAge;
+		String auxGender;
+		String auxDesiredRelationship;
+
 		old = this.findOne(searchTemplate.getId());
+		res = this.create();
+
+		//Valores genericos por si el usuario no quiere especificar estos datos-->
+		auxAge = 0;
+		auxGender = "";
+		auxDesiredRelationship = "";
 		if (searchTemplate.getAge() != null)
 			auxAge = searchTemplate.getAge();
-		res = this.create();
+
+		if (!searchTemplate.getDesiredRelationship().equals("all"))
+			auxDesiredRelationship = searchTemplate.getDesiredRelationship();
+
+		if (!searchTemplate.getGenre().equals("all"))
+			auxGender = searchTemplate.getGenre();
+		//<--
+
 		//old things
 		res.setId(old.getId());
 		res.setVersion(old.getVersion());
 		res.setCacheMoment(old.getCacheMoment());
 		res.setChorbies(old.getChorbies());
 		res.setChorbi(old.getChorbi());
+
+		//Coordinates
 		final Coordinates aux;
 		aux = new Coordinates();
 		aux.setId(old.getCoordinates().getId());
@@ -164,9 +190,9 @@ public class SearchTemplateService {
 
 		res.setCoordinates(aux);
 		//New things
-		res.setDesiredRelationship(searchTemplate.getDesiredRelationship());
+		res.setDesiredRelationship(auxDesiredRelationship);
 		res.setAge(auxAge);
-		res.setGenre(searchTemplate.getGenre());
+		res.setGenre(auxGender);
 		res.setKeyword(searchTemplate.getKeyword());
 		this.validator.validate(res, binding);
 

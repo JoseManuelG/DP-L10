@@ -42,7 +42,7 @@ public class SearchTemplate extends DomainEntity {
 		this.desiredRelationship = desiredRelationship;
 	}
 
-	@Min(13)
+	@Min(0)
 	public Integer getAge() {
 		return this.age;
 	}

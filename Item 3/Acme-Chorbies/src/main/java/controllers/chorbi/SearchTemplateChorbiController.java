@@ -32,21 +32,22 @@ public class SearchTemplateChorbiController extends AbstractController {
 	public ModelAndView search() {
 
 		final Collection<String> genres = new ArrayList<String>();
+		genres.add("all");
 		genres.add("man");
 		genres.add("woman");
 		final ArrayList<String> relation = new ArrayList<String>();
+		relation.add("all");
 		relation.add("activities");
 		relation.add("friendship");
 		relation.add("love");
 
-		// “activities”, “friendship”, or	“love”. 
 		ModelAndView result;
 		Collection<Chorbi> results;
 		SearchTemplate search;
 		Date timeOfCache, lastSearch;
 
 		search = this.searchTemplateService.findByPrincipal();
-		//TODO revisar tiempo de cacheo
+		//revisa tiempo de cacheo
 		lastSearch = new Date(search.getCacheMoment().getTime());
 		timeOfCache = new Date(this.configurationService.findConfiguration().getCachedTime());
 
@@ -54,6 +55,9 @@ public class SearchTemplateChorbiController extends AbstractController {
 			results = search.getChorbies();
 		else
 			results = new ArrayList<Chorbi>();
+
+		if (search.getAge().equals(0))
+			search.setAge(null);
 
 		result = new ModelAndView("searchTemplate/chorbi/search.do");
 		result.addObject("results", results);
@@ -69,9 +73,11 @@ public class SearchTemplateChorbiController extends AbstractController {
 		ModelAndView result;
 		SearchTemplate res;
 		final Collection<String> genres = new ArrayList<String>();
+		genres.add("all");
 		genres.add("man");
 		genres.add("woman");
 		final ArrayList<String> relation = new ArrayList<String>();
+		relation.add("all");
 		relation.add("activities");
 		relation.add("friendship");
 		relation.add("love");
