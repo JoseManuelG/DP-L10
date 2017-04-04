@@ -123,7 +123,7 @@ public class LikesService {
 		result.setId(likes.getId());
 		result.setVersion(likes.getVersion());
 
-		return null;
+		return result;
 	}
 
 	public Collection<Likes> findReceivedLikesOfPrincipal() {
