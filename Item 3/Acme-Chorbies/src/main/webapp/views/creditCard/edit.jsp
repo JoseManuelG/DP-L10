@@ -19,7 +19,18 @@
 	<br />
 	
 	<acme:textbox code="creditCard.holderName" path="holderName"/>
-	<acme:textbox code="creditCard.brandName" path="brandName"/>
+	
+	<form:label path="brandName">
+		<spring:message code="creditCard.brandName" />
+	</form:label>
+	<form:select id="brandName" name="brandName" path="brandName">
+    	<form:option value="VISA"><spring:message code="creditCard.brandName.visa" /></form:option>
+    	<form:option value="MASTERCARD"><spring:message code="creditCard.brandName.mastercard" /></form:option>    	
+    	<form:option value="DISCOVER"><spring:message code="creditCard.brandName.discover" /></form:option>
+    	<form:option value="DINNERS"><spring:message code="creditCard.brandName.dinners" /></form:option>
+    	<form:option value="AMEX"><spring:message code="creditCard.brandName.amex" /></form:option>
+    </form:select>
+    <br />
 	<acme:textbox code="creditCard.number" path="number"/>
 	<acme:textbox code="creditCard.expirationMonth" path="expirationMonth"/>
 	<acme:textbox code="creditCard.expirationYear" path="expirationYear"/>

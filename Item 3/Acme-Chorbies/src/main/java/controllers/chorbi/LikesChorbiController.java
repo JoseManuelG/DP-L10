@@ -44,9 +44,10 @@ public class LikesChorbiController extends AbstractController {
 	// Create --------------------------------------------------------------------
 	@RequestMapping(value = "/chorbi/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int chorbiId) {
+		Chorbi liked, liker;
 
-		final Chorbi liked = this.chorbiService.findOne(chorbiId);
-		final Chorbi liker = this.chorbiService.findChorbiByPrincipal();
+		liked = this.chorbiService.findOne(chorbiId);
+		liker = this.chorbiService.findChorbiByPrincipal();
 		ModelAndView result;
 		Likes likes;
 		likes = this.likesService.create();

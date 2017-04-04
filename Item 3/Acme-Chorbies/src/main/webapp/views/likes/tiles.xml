@@ -26,9 +26,9 @@
 		<put-attribute name="body" value="/views/likes/view.jsp" />
 	</definition>
 	
-	<definition name="likes/write" extends="master.page">	
+	<definition name="likes/chorbi/create" extends="master.page">	
 		<put-attribute name="title" value="Write like" />
-		<put-attribute name="body" value="/views/likes/write.jsp" />
+		<put-attribute name="body" value="/views/likes/create.jsp" />
 	</definition>
 	
 </tiles-definitions>

@@ -196,4 +196,12 @@ public class ChorbiService {
 		return res;
 	}
 
+	Coordinates findCoordinatesByUserAccount() {
+		final Chorbi chorbi = this.findChorbiByPrincipal();
+		Coordinates coordinates;
+
+		coordinates = this.chorbiRepository.findCoordinatesByUserAccountId(chorbi.getId());
+		return coordinates;
+	}
+
 }
