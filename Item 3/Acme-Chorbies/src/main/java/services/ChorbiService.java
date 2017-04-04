@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -142,6 +143,9 @@ public class ChorbiService {
 	}
 
 	public void banChorbi(final int chorbiId) {
+		final List<Authority> auths = new ArrayList<Authority>(this.actorService.findActorByPrincipal().getUserAccount().getAuthorities());
+		final Authority auth = auths.get(0);
+		Assert.isTrue(auth.getAuthority().equals("ADMINISTRATOR"), "chorbi.error.notadmin");
 		Chorbi chorbi;
 		chorbi = this.chorbiRepository.findOne(chorbiId);
 		chorbi.setBanned(true);
@@ -149,6 +153,9 @@ public class ChorbiService {
 	}
 
 	public void unbanChorbi(final int chorbiId) {
+		final List<Authority> auths = new ArrayList<Authority>(this.actorService.findActorByPrincipal().getUserAccount().getAuthorities());
+		final Authority auth = auths.get(0);
+		Assert.isTrue(auth.getAuthority().equals("ADMINISTRATOR"), "chorbi.error.notadmin");
 		Chorbi chorbi;
 		chorbi = this.chorbiRepository.findOne(chorbiId);
 		chorbi.setBanned(false);

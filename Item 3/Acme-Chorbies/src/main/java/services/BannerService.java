@@ -68,6 +68,10 @@ public class BannerService {
 
 	}
 
+	public void flush() {
+		this.bannerRepository.flush();
+	}
+
 	// Other business methods-------------------------------------------------------------
 	public Banner reconstruct(final Banner banner, final BindingResult binding) {
 		final Banner result = this.create();
