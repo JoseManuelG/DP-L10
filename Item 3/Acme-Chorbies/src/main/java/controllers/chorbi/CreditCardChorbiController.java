@@ -56,7 +56,7 @@ public class CreditCardChorbiController extends AbstractController {
 		final ModelAndView result;
 		CreditCard creditCard;
 		creditCard = this.creditCardService.getCreditCardByChorbi();
-		result = new ModelAndView("creditCard/chorbi/view");
+		result = new ModelAndView("creditCard/chorbi/myCreditCard");
 		final Chorbi chorbi = this.chorbiService.findChorbiByPrincipal();
 		if (creditCard != null)
 			result.addObject("creditCard", creditCard);
@@ -81,13 +81,18 @@ public class CreditCardChorbiController extends AbstractController {
 	public @ResponseBody
 	ModelAndView save(@Valid final CreditCard creditCard, final BindingResult binding) {
 		ModelAndView result;
+		Chorbi chorbi;
+
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors());
 			result = this.createEditModelAndView(creditCard);
 		} else
 			try {
+				creditCard.setChorbi(chorbi);
 				this.creditCardService.save(creditCard);
-				result = new ModelAndView("redirect:../lessor/myCreditCard.do");
+				result = new ModelAndView("redirect:../chorbi/myCreditCard.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
 			}
@@ -105,7 +110,7 @@ public class CreditCardChorbiController extends AbstractController {
 		System.out.println(binding);
 		try {
 			this.creditCardService.delete(creditCard);
-			result = new ModelAndView("redirect:../lessor/myCreditCard.do");
+			result = new ModelAndView("redirect:../chorbi/myCreditCard.do");
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
 		}
@@ -125,9 +130,13 @@ public class CreditCardChorbiController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final CreditCard creditCard, final String message) {
 		ModelAndView result;
-		result = new ModelAndView("creditCard/lessor/edit");
+		Chorbi chorbi;
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+
+		result = new ModelAndView("creditCard/chorbi/edit");
 		result.addObject("creditCard", creditCard);
 		result.addObject("message", message);
+		result.addObject("chorbi", chorbi);
 		return result;
 	}
 

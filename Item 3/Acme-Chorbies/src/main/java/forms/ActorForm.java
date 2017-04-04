@@ -3,11 +3,12 @@ package forms;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import security.UserAccount;
 
 public class ActorForm {
 
-	private String		typeOfActor;
 	private String		confirmPassword;
 	private String		name;
 	private String		surname;
@@ -20,6 +21,10 @@ public class ActorForm {
 	private Date		birthDate;
 	private Boolean		acepted;
 	private UserAccount	userAccount;
+	private String		state;
+	private String		country;
+	private String		province;
+	private String		city;
 
 
 	//Constructor
@@ -27,14 +32,6 @@ public class ActorForm {
 		super();
 	}
 	//attributes------------
-
-	public String getTypeOfActor() {
-		return this.typeOfActor;
-	}
-
-	public void setTypeOfActor(final String typeOfActor) {
-		this.typeOfActor = typeOfActor;
-	}
 
 	public String getConfirmPassword() {
 		return this.confirmPassword;
@@ -111,7 +108,7 @@ public class ActorForm {
 	public void setDesiredRelationship(final String desiredRelationship) {
 		this.desiredRelationship = desiredRelationship;
 	}
-
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getBirthDate() {
 		return this.birthDate;
 	}
@@ -126,6 +123,38 @@ public class ActorForm {
 
 	public void setGenre(final String genre) {
 		this.genre = genre;
+	}
+
+	public String getState() {
+		return this.state;
+	}
+
+	public void setState(final String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return this.country;
+	}
+
+	public void setCountry(final String country) {
+		this.country = country;
+	}
+
+	public String getProvince() {
+		return this.province;
+	}
+
+	public void setProvince(final String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(final String city) {
+		this.city = city;
 	}
 
 }

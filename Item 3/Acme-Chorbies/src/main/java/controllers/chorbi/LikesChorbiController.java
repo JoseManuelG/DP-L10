@@ -45,24 +45,24 @@ public class LikesChorbiController extends AbstractController {
 	@RequestMapping(value = "/chorbi/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int chorbiId) {
 
-		final Chorbi recipient = this.chorbiService.findOne(chorbiId);
-		final Chorbi sender = this.chorbiService.findChorbiByPrincipal();
+		final Chorbi liked = this.chorbiService.findOne(chorbiId);
+		final Chorbi liker = this.chorbiService.findChorbiByPrincipal();
 		ModelAndView result;
 		Likes likes;
 		likes = this.likesService.create();
-		likes.setLiked(recipient);
-		likes.setLiker(sender);
+		likes.setLiked(liked);
+		likes.setLiker(liker);
 		final Date currentMoment = new Date(System.currentTimeMillis() - 10000);
 		likes.setMoment(currentMoment);
 		result = this.createEditModelAndView(likes);
 
-		if (sender.getId() == recipient.getId()) {
+		if (liker.getId() == liked.getId()) {
 			// Que salte una excepcion de que no puede tratar de darse like a si mismo
 		} else {
-			final Actor actor = this.actorService.findOne(recipient.getId());
+			final Actor actor = this.actorService.findOne(liked.getId());
 			final ArrayList<Authority> authorities = new ArrayList<Authority>();
 			authorities.addAll(actor.getUserAccount().getAuthorities());
-			final String requestURI = authorities.get(0).getAuthority().toLowerCase() + "/view.do?chorbiId=" + recipient.getId();
+			final String requestURI = authorities.get(0).getAuthority().toLowerCase() + "/view.do?chorbiId=" + liked.getId();
 			result.addObject("requestURI", requestURI);
 		}
 		return result;

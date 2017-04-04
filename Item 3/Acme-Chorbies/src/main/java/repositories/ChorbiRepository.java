@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Chorbi;
+import domain.Coordinates;
 
 @Repository
 public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
@@ -23,4 +24,6 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 		+ "and c.coordinates.city like concat('%', ?4, '%')  and c.coordinates.province like concat('%', ?5, '%') and c.coordinates.country like concat('%', ?6, '%') and c.coordinates.state like concat('%', ?7, '%') and c.coordinates.state like concat('%', ?7, '%') ")
 	Collection<Chorbi> searchChorbisWithoutAge(String desiredRelathionship, String genre, String keyword, String cityCoordinate, String provinceCoordinate, String countryCoordinate, String stateCoordinate);
 
+	@Query("select c.coordinates from Chorbi c where c.userAccount.id = ?1")
+	Coordinates findCoordinatesByUserAccountId(int id);
 }

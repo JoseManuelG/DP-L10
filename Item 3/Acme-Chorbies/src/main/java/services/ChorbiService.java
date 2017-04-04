@@ -21,6 +21,7 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountRepository;
 import domain.Chorbi;
+import domain.Coordinates;
 import forms.ActorForm;
 
 @Service
@@ -51,6 +52,9 @@ public class ChorbiService {
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private CoordinatesService		coordinatesService;
 
 
 	//Simple CRUD methods-------------------------------------------------------------------
@@ -106,6 +110,9 @@ public class ChorbiService {
 
 	public Chorbi reconstruct(final ActorForm actorForm, final BindingResult binding) {
 		final Chorbi result = this.create();
+		Coordinates coordinates, finalCoordinates;
+
+		coordinates = new Coordinates();
 
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		final UserAccount userAccount = new UserAccount();
@@ -121,6 +128,19 @@ public class ChorbiService {
 		result.setSurname(actorForm.getSurname());
 		result.setEmail(actorForm.getEmail());
 		result.setPhone(actorForm.getPhone());
+		result.setPicture(actorForm.getPicture());
+		result.setDescription(actorForm.getDescription());
+		result.setBirthDate(actorForm.getBirthDate());
+		result.setGenre(actorForm.getGenre());
+		result.setDesiredRelationship(actorForm.getDesiredRelationship());
+
+		coordinates.setCity(actorForm.getCity());
+		coordinates.setCountry(actorForm.getCountry());
+		coordinates.setProvince(actorForm.getProvince());
+		coordinates.setState(actorForm.getState());
+		finalCoordinates = this.coordinatesService.save(coordinates);
+
+		result.setCoordinates(finalCoordinates);
 
 		result.setUserAccount(userAccount);
 
@@ -133,9 +153,7 @@ public class ChorbiService {
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		Chorbi result;
 
-		result = new Chorbi();
-
-		this.actorService.reconstruct(result, chorbi, actorForm);
+		result = this.reconstruct(actorForm, binding);
 
 		this.validator.validate(result, binding);
 		result.getUserAccount().setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));

@@ -36,11 +36,35 @@
 	
 	<acme:textbox code="security.register.phone" path="phone"/>
 	
-	<acme:select items="${desiredRelationships}" itemLabel="desiredRelationship" code="security.register.desiredRelationship" path="desiredRelationship"/>
+		
+	<form:label path="desiredRelationship">
+		<spring:message code="security.register.desiredRelationship" />
+	</form:label>		
+	<form:select id="desiredRelationship" name="desiredRelationship" path="desiredRelationship">
+    	<form:option value="love"><spring:message code="security.register.love" /></form:option>
+    	<form:option value="activities"><spring:message code="security.register.activities" /></form:option>    	
+    	<form:option value="friendship"><spring:message code="security.register.friendship" /></form:option>
+    </form:select>
+    
+	<form:label path="genre">
+		<spring:message code="security.register.genre" />
+	</form:label>
+	<form:select id="genre" name="genre" path="genre">
+    	<form:option value="man"><spring:message code="security.register.man" /></form:option>
+    	<form:option value="woman"><spring:message code="security.register.woman" /></form:option>
+    </form:select>
+    
+	
+	
+	<acme:textbox code="security.register.birthDate" path="birthDate" placeholder="dd/mm/aaaa"/>
+	
+	<acme:textbox code="security.register.country" path="country"/>
+	
+	<acme:textbox code="security.register.province" path="province"/>
 
-	<acme:select items="${genre}" itemLabel="genre" code="security.register.genre" path="genre"/>
+	<acme:textbox code="security.register.state" path="state"/>
 
-	<acme:textbox code="security.register.birthDate" path="birthDate"/>
+	<acme:textbox code="security.register.city" path="city"/>
 	
 	<acme:submit code="security.register.save" name="save"/>
 	

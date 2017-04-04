@@ -50,7 +50,9 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
 		
-		<!-- Actor -->		
+		<!-- Actor -->	
+		<security:intercept-url pattern="/security/edit.do" access="isAuthenticated()" /> 
+			
 		
 <!-- 		<security:intercept-url pattern="" access="isAuthenticated()" /> -->
 

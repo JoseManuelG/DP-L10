@@ -20,12 +20,14 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="likes" requestURI="${requestURI}" id="row" excludedParams="*">
 
-	<acme:column sorteable="true" code="likes.liker" path="liker"/>
-	
-	<acme:column sorteable="true" code="likes.comment" path="senderName"/>
+	<acme:column sorteable="true" code="likes.liker.name" path="liker.name"/>
+	<acme:column sorteable="true" code="likes.liker.surname" path="liker.surname"/>
+
+	<acme:column sorteable="true" code="likes.comment" path="comment"/>
 	
 	
 	<display:column>
+	
 		<a href="likes/chorbi/view.do?likesId=${row.id}">
 			<spring:message code="likes.view"/>
 		</a>

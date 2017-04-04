@@ -48,10 +48,9 @@ public class SecurityController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(final ActorForm actorForm, final BindingResult binding) {
 		ModelAndView result;
-		Chorbi chorbi = null;
+		Chorbi chorbi = new Chorbi();
 
-		if (actorForm.getTypeOfActor().equals("CHORBI"))
-			chorbi = this.chorbiService.reconstruct(actorForm, binding);
+		chorbi = this.chorbiService.reconstruct(actorForm, binding);
 		if (binding.hasErrors())
 			result = this.createRegisterModelAndView(actorForm);
 		else if (!actorForm.getUserAccount().getPassword().equals(actorForm.getConfirmPassword()))
@@ -78,8 +77,10 @@ public class SecurityController extends AbstractController {
 		Actor actor;
 		Boolean isAdmin;
 		ActorForm actorForm;
+		Chorbi chorbi;
 
 		actor = this.actorService.findActorByPrincipal();
+
 		isAdmin = actor instanceof Administrator;
 
 		actorForm = new ActorForm();
@@ -88,6 +89,18 @@ public class SecurityController extends AbstractController {
 		actorForm.setEmail(actor.getEmail());
 		actorForm.setPhone(actor.getPhone());
 		actorForm.setUserAccount(actor.getUserAccount());
+		if (actor instanceof Chorbi) {
+			chorbi = this.chorbiService.findChorbiByPrincipal();
+			actorForm.setBirthDate(chorbi.getBirthDate());
+			actorForm.setPicture(chorbi.getPicture());
+			actorForm.setDesiredRelationship(chorbi.getDesiredRelationship());
+			actorForm.setGenre(chorbi.getGenre());
+			actorForm.setCountry(chorbi.getCoordinates().getCountry());
+			actorForm.setCity(chorbi.getCoordinates().getCity());
+			actorForm.setState(chorbi.getCoordinates().getState());
+			actorForm.setProvince(chorbi.getCoordinates().getProvince());
+
+		}
 
 		result = this.createEditModelAndView(actorForm, isAdmin);
 
@@ -100,11 +113,15 @@ public class SecurityController extends AbstractController {
 		Actor principal, actorResult;
 		Boolean isAdmin;
 		String actorString;
+		Chorbi chorbiResult;
+
+		chorbiResult = new Chorbi();
 
 		isAdmin = false;
 		principal = this.actorService.findActorByPrincipal();
+		actorResult = this.actorService.findActorByPrincipal();
 		if (principal instanceof Chorbi)
-			actorResult = this.chorbiService.reconstruct(actorForm, (Chorbi) principal, binding);
+			chorbiResult = this.chorbiService.reconstruct(actorForm, (Chorbi) principal, binding);
 		else {
 			isAdmin = true;
 			actorResult = this.administratorService.reconstruct(actorForm, (Administrator) principal, binding);
@@ -116,11 +133,14 @@ public class SecurityController extends AbstractController {
 			result = this.createEditModelAndView(actorForm, isAdmin, "security.password.error");
 		else
 			try {
-				this.actorService.save(actorResult);
+				if (principal instanceof Chorbi)
+					this.chorbiService.save(chorbiResult);
+				else
+					this.actorService.save(actorResult);
 				actorString = principal.getClass().getSimpleName().toLowerCase();
 				result = new ModelAndView("redirect:../" + actorString + "/myProfile.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(actorForm, isAdmin, "lessor.commit.error");
+				result = this.createEditModelAndView(actorForm, isAdmin, "chorbi.commit.error");
 			}
 
 		return result;
@@ -174,7 +194,6 @@ public class SecurityController extends AbstractController {
 
 		return result;
 	}
-
 	protected ModelAndView createEditModelAndView(final ActorForm actorForm, final Boolean isAdmin) {
 		ModelAndView result;
 
