@@ -5,16 +5,22 @@ A+ extra
 Revisar pagina en general con populate vacio
 
 SearchTemplate:
--cuando entras al search y la busqueda se hizo hace mas de 12 horas te muestra la antigua, no se vuelve a hacer
--Keyword solo busca en descripción, se deja asi?
--Deberia de poder salir el principal en la busqueda?
--Si pones edad negativas o letras se desconfigura la vista y no sale ningun error
--Cando pones edad 0 se guarda edad 0 pero te sale en el formulario como null y te sa hace como si la edad fuera null, ademas sigue funcionando pero sale un error en el eclipse a partir de que se hace esto
--Cambiar tabla de resultados (sale un link de a tenant book(?))
--Estaría bien quitar los metodos deprecated
+
+-Keyword solo busca en descripción, se deja asi?(No se especifica, teniendo el resto de campos especificamente no he creido necesario uqe busque en el resto)
+-Deberia de poder salir el principal en la busqueda?(Nada dice que no salga, hay gente que le gusta verse asi mismo para ver que la pagina funciona, lo puedo quitar si kereis vamos).
+-Si pones edad negativas o letras se desconfigura la vista y no sale ningun error(Ya no se desconfigura la vista, estoy trabajando en que salga el error)
+-Cando pones edad 0 se guarda edad 0 pero te sale en el formulario como null y te sa hace como si la edad fuera null, ademas sigue funcionando pero sale un error en el eclipse a partir de que se hace esto(No entiendo el problema que te salga el null, me parece estupido preguntar por una edad 0, ademas teniendo en cuenta que debes ser mayor de edad para estar registrado)
+
+-Cambiar tabla de resultados (sale un link de a tenant book(?))(estoy a la espera de tener un botón de perfil, si no se implementa al final pues lo quitare)
+
 
 ---------------COMPLETO---------------------
-
 Hacer un baner de cada acme, subirlos a una url y añadirlos a los dos populates
 Cambiar logo y favicon
 Revisar dashboard con populate vacio
+
+
+
+---------------ARREGLADO---------------
+-Estaría bien quitar los metodos deprecated(No Procede)(Sinceramente, el codigo funciona, y no creo que trabajemos en java 8, por 	lo que no creo que haya problema con ese codigo, si sobra tiempo pues lo cambio, pero hay otras cosas que hacer).
+-cuando entras al search y la busqueda se hizo hace mas de 12 horas te muestra la antigua, no se vuelve a hacer(ARREGLADO)

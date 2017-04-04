@@ -22,8 +22,18 @@
     <form:select id="desiredRelationship" name="desiredRelationship" path="desiredRelationship">
     	<form:options items="${relation}" />
     </form:select>
-		<acme:textbox code="searchTemplate.age" path="age"/>
+    
+    
+		<!--<acme:textbox code="searchTemplate.age" path="age"/>-->
 	<!--  	<acme:textbox code="searchTemplate.genre" path="genre"/>-->
+		<br/>
+		<form:label path="age">
+			<spring:message code="searchTemplate.age" />
+		</form:label>	
+		<form:input path="age"   />	
+		<form:errors path="age" cssClass="error" />
+		<br/>
+		
 		<form:label path="genre">
 		<spring:message code="searchTemplate.genre" />
 	</form:label>
@@ -53,8 +63,8 @@
 		<!-- Action links -->
 		<!-- TODO- No se Si abrá display de chorbi-->
 		<!--<display:column>
-			<a href="book/tenant/book.do?propertyId=${row.id}">
-			aaaa
+			<a href="">
+			esperando a tener vista de ver perfíl si no quitar
 			</a>
 		</display:column>
 		-->

@@ -49,7 +49,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 		search = this.searchTemplateService.findByPrincipal();
 		//revisa tiempo de cacheo
 		lastSearch = new Date(search.getCacheMoment().getTime());
-		timeOfCache = new Date(this.configurationService.findConfiguration().getCachedTime());
+		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
 
 		if (lastSearch.after(timeOfCache))
 			results = search.getChorbies();
@@ -91,6 +91,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 			result.addObject("search", search);
 			result.addObject("requestURI", "searchTemplate/chorbi/search.do");
 			result.addObject("results", results);
+
 		} else
 			try {
 				this.searchTemplateService.save(res);
@@ -103,11 +104,10 @@ public class SearchTemplateChorbiController extends AbstractController {
 				result.addObject("search", search);
 				result.addObject("requestURI", "searchTemplate/chorbi/search.do");
 				result.addObject("results", results);
-				result.addObject("genres", genres);
-				result.addObject("relation", relation);
 				result.addObject("message", "searchTemplate.commit.error");
 			}
-
+		result.addObject("genres", genres);
+		result.addObject("relation", relation);
 		return result;
 	}
 }
