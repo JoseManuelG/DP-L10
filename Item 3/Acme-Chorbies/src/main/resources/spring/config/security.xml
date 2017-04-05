@@ -67,6 +67,9 @@
 		<security:intercept-url pattern="/banner/administrator/create.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/banner/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/dashboard/administrator/dashboard.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/chorbi/administrator/list.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/chorbi/administrator/ban.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/chorbi/administrator/unban.do" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- Chorbi -->
 <!-- 		<security:intercept-url pattern="" access="hasRole('CHORBI')" /> -->

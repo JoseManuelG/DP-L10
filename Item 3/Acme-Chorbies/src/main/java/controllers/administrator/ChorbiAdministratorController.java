@@ -1,6 +1,8 @@
 
 package controllers.administrator;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,21 @@ public class ChorbiAdministratorController extends AbstractController {
 	private ChorbiService	chorbiService;
 
 
+	// List ---------------------------------------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Chorbi> chorbies;
+
+		chorbies = this.chorbiService.findAll();
+
+		result = new ModelAndView("chorbi/administrator/list");
+		result.addObject("chorbies", chorbies);
+		result.addObject("requestURI", "chorbi/administrator/list.do");
+
+		return result;
+	}
+
 	// Constructors -----------------------------------------------------------
 
 	public ChorbiAdministratorController() {
@@ -31,12 +48,16 @@ public class ChorbiAdministratorController extends AbstractController {
 	@RequestMapping(value = "/ban", method = RequestMethod.GET)
 	public ModelAndView ban(@RequestParam final int chorbiId) {
 		ModelAndView result;
-		Chorbi chorbi;
+		//volver a poner lo comentado cuando haya un view
+		//Chorbi chorbi;
 
-		chorbi = this.chorbiService.findOne(chorbiId);
+		//chorbi = this.chorbiService.findOne(chorbiId);
 
 		this.chorbiService.banChorbi(chorbiId);
-		result = new ModelAndView("redirect:/chorbi/view.do?chorbiId=" + chorbi.getId());
+
+		//result = new ModelAndView("redirect:/chorbi/view.do?chorbiId=" + chorbi.getId()); 
+		result = new ModelAndView("redirect:/chorbi/administrator/list.do");
+
 		return result;
 	}
 
@@ -45,12 +66,14 @@ public class ChorbiAdministratorController extends AbstractController {
 	@RequestMapping(value = "/unban", method = RequestMethod.GET)
 	public ModelAndView unban(@RequestParam final int chorbiId) {
 		ModelAndView result;
-		Chorbi chorbi;
+		//volver a poner lo comentado cuando haya un view
+		//Chorbi chorbi;
 
-		chorbi = this.chorbiService.findOne(chorbiId);
+		//chorbi = this.chorbiService.findOne(chorbiId);
 
 		this.chorbiService.unbanChorbi(chorbiId);
-		result = new ModelAndView("redirect:/chorbi/view.do?chorbiId=" + chorbi.getId());
+		//result = new ModelAndView("redirect:/chorbi/view.do?chorbiId=" + chorbi.getId());
+		result = new ModelAndView("redirect:/chorbi/administrator/list.do");
 		return result;
 	}
 

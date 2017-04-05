@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,6 +84,17 @@ public class BannerService {
 		this.validator.validate(result, binding);
 
 		return result;
+	}
 
+	public Banner randomBanner() {
+		Banner result = this.create();
+		final List<Banner> banners = this.bannerRepository.findAll();
+
+		if (!banners.isEmpty()) {
+			final Random randomIndex = new Random();
+			final Integer index = randomIndex.nextInt(banners.size());
+			result = banners.get(index);
+		}
+		return result;
 	}
 }
