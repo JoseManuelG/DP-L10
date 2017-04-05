@@ -94,7 +94,7 @@ public class LikesService {
 		Assert.isTrue(likes.getId() != 0, "El attachment debe estar antes en la base de datos");
 
 		this.likesRepository.exists(likes.getId());
-		Assert.isTrue(LoginService.getPrincipal().equals(likes.getLiked()) || LoginService.getPrincipal().equals(likes.getLiker()));
+		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(likes.getLiker()) || this.chorbiService.findChorbiByPrincipal().equals(likes.getLiked()));
 
 		this.likesRepository.delete(likes);
 

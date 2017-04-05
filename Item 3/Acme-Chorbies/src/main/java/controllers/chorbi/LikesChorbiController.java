@@ -117,14 +117,14 @@ public class LikesChorbiController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/chorbi/view", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam final int likesId) {
 		ModelAndView result;
 		Likes likes;
 
 		likes = this.likesService.findOne(likesId);
 
-		result = new ModelAndView("likes/view");
+		result = new ModelAndView("likes/chorbi/view");
 		result.addObject("likes", likes);
 
 		result.addObject("requestURI", "likes/chorbi/view.do?likesId=" + likesId);
