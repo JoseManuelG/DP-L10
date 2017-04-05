@@ -16,7 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-
+<fieldset>
 <spring:message code="chorbi.name"/>:
 <jstl:out value="${chorbi.name}"/><br/>
 
@@ -42,12 +42,26 @@
 <jstl:out value="${chorbi.desiredRelationship}"/><br/>
 
 
-<fieldset>
+
 	<legend><spring:message code="chorbi.description"/></legend>
 	<jstl:out value="${chorbi.description}"/>
 </fieldset><br/>
 
 <fieldset>
-	<legend><spring:message code="chorbi.description"/></legend>
-	<jstl:out value="${chorbi.description}"/>
+	<legend><spring:message code="chorbi.coordinates"/></legend>
+	<spring:message code="chorbi.coordinates.city"/>
+	<jstl:out value="${chorbi.coordinates.city}"/> <br/>
+	
+	<spring:message code="chorbi.coordinates.state"/>
+	<jstl:out value="${chorbi.coordinates.state}"/> <br/>
+	
+	<spring:message code="chorbi.coordinates.country"/>
+	<jstl:out value="${chorbi.coordinates.country}"/> <br/>
+	
+	
+	<spring:message code="chorbi.coordinates.province"/>
+	<jstl:out value="${chorbi.coordinates.province}"/> <br/>
+	
 </fieldset><br/>
+
+
