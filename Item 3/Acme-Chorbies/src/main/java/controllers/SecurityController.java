@@ -93,6 +93,7 @@ public class SecurityController extends AbstractController {
 			chorbi = this.chorbiService.findChorbiByPrincipal();
 			actorForm.setBirthDate(chorbi.getBirthDate());
 			actorForm.setPicture(chorbi.getPicture());
+			actorForm.setDescription(chorbi.getDescription());
 			actorForm.setDesiredRelationship(chorbi.getDesiredRelationship());
 			actorForm.setGenre(chorbi.getGenre());
 			actorForm.setCountry(chorbi.getCoordinates().getCountry());
@@ -108,7 +109,7 @@ public class SecurityController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(final ActorForm actorForm, final BindingResult binding) {
+	public ModelAndView edit(@Valid final ActorForm actorForm, final BindingResult binding) {
 		ModelAndView result;
 		Actor principal, actorResult;
 		Boolean isAdmin;

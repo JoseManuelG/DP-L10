@@ -166,7 +166,13 @@ public class ActorForm {
 
 	@AssertTrue
 	public boolean getValid() {
-		return (this.confirmPassword == null && this.userAccount.getPassword() == null) || this.confirmPassword.equals(this.userAccount.getPassword());
+		boolean result;
+		if (this.confirmPassword != null)
+			result = this.confirmPassword.equals(this.userAccount.getPassword());
+		else
+			result = this.userAccount.getPassword() == null;
+
+		return result;
 	}
 
 }
