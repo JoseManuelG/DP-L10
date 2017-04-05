@@ -137,11 +137,16 @@ public class LikesChorbiController extends AbstractController {
 	public ModelAndView delete(@RequestParam final int likesId) {
 		ModelAndView result;
 		Likes likes;
+		Collection<Likes> res;
+
 		likes = this.likesService.findOne(likesId);
 
 		this.likesService.delete(likes);
+		res = this.likesService.findSentLikesOfPrincipal();
 
-		result = new ModelAndView("redirect:/");
+		result = new ModelAndView("likes/list");
+		result.addObject("likes", res);
+		result.addObject("requestURI", "likes/chorbi/sent.do");
 
 		return result;
 	}
