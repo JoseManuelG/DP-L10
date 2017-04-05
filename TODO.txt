@@ -1,3 +1,6 @@
+Delete de cuentas
+Lista de likes en profile con link a quien lo ha hecho
+Administrator tiene que poder ver el perfil
 B+ tree
 Informe de costes 
 A+

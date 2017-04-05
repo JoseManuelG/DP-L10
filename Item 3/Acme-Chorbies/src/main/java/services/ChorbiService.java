@@ -145,9 +145,6 @@ public class ChorbiService {
 
 		result.setUserAccount(userAccount);
 
-//		if (actorForm.getAcepted() == null)
-//			actorForm.setAcepted(true);
-
 		this.validator.validate(result, binding);
 		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
@@ -156,8 +153,26 @@ public class ChorbiService {
 	public Chorbi reconstruct(final ActorForm actorForm, final Chorbi chorbi, final BindingResult binding) {
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		Chorbi result;
+		Coordinates coordinates, finalCoordinates;
 
-		result = this.reconstruct(actorForm, binding);
+		result = new Chorbi();
+		coordinates = new Coordinates();
+
+		this.actorService.reconstruct(result, chorbi, actorForm);
+
+		result.setPicture(actorForm.getPicture());
+		result.setDescription(actorForm.getDescription());
+		result.setBirthDate(actorForm.getBirthDate());
+		result.setGenre(actorForm.getGenre());
+		result.setDesiredRelationship(actorForm.getDesiredRelationship());
+
+		coordinates.setCity(actorForm.getCity());
+		coordinates.setCountry(actorForm.getCountry());
+		coordinates.setProvince(actorForm.getProvince());
+		coordinates.setState(actorForm.getState());
+		finalCoordinates = this.coordinatesService.save(coordinates);
+
+		result.setCoordinates(finalCoordinates);
 
 		this.validator.validate(result, binding);
 		result.getUserAccount().setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));

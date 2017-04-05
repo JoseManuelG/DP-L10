@@ -1,8 +1,6 @@
 
 package controllers;
 
-import java.util.ArrayList;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.Authority;
 import services.ActorService;
 import services.AdministratorService;
 import services.ChorbiService;
@@ -31,6 +28,7 @@ public class SecurityController extends AbstractController {
 
 	@Autowired
 	private ActorService			actorService;
+
 	@Autowired
 	private AdministratorService	administratorService;
 
@@ -113,7 +111,7 @@ public class SecurityController extends AbstractController {
 		ModelAndView result;
 		Actor principal, actorResult;
 		Boolean isAdmin;
-		String actorString;
+		final String actorString;
 		Chorbi chorbiResult;
 
 		chorbiResult = new Chorbi();
@@ -123,10 +121,6 @@ public class SecurityController extends AbstractController {
 		actorResult = this.actorService.findActorByPrincipal();
 		if (principal instanceof Chorbi)
 			chorbiResult = this.chorbiService.reconstruct(actorForm, (Chorbi) principal, binding);
-		else {
-			isAdmin = true;
-			actorResult = this.administratorService.reconstruct(actorForm, (Administrator) principal, binding);
-		}
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(actorForm, isAdmin);
@@ -134,12 +128,8 @@ public class SecurityController extends AbstractController {
 			result = this.createEditModelAndView(actorForm, isAdmin, "security.password.error");
 		else
 			try {
-				if (principal instanceof Chorbi)
-					this.chorbiService.save(chorbiResult);
-				else
-					this.actorService.save(actorResult);
-				actorString = principal.getClass().getSimpleName().toLowerCase();
-				result = new ModelAndView("redirect:../" + actorString + "/myProfile.do");
+				this.chorbiService.save(chorbiResult);
+				result = new ModelAndView("redirect:/chorbi/chorbi/myProfile.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(actorForm, isAdmin, "chorbi.commit.error");
 			}
@@ -152,26 +142,14 @@ public class SecurityController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final ActorForm actorForm) {
 		ModelAndView result;
-		final Actor actor = this.actorService.findActorByPrincipal();
-		Chorbi chorbi = null;
 
-		final ArrayList<Authority> authorities = new ArrayList<Authority>();
-		authorities.addAll(actor.getUserAccount().getAuthorities());
-		final String aux = authorities.get(0).getAuthority();
-
-		if (aux.equals(Authority.CHORBI))
-			chorbi = this.chorbiService.findChorbiByPrincipal();
 		try {
+			this.chorbiService.delete();
 
-			if (aux.equals("CHORBI")) {
-				//TODO AÑADIR TODO LO QUE SE BORRA CUANDO SE BORRA UN CHORBI
-				// JAVI: ESTO NO DEBE HACERSE EN CONTROLLER SI NO EN SERVICIO
-
-			}
 			result = new ModelAndView("redirect:/j_spring_security_logout");
 
 		} catch (final Exception e) {
-			result = this.createEditModelAndView(actorForm, false, "lessor.commit.error");
+			result = this.createEditModelAndView(actorForm, false, "commit.error");
 		}
 
 		return result;

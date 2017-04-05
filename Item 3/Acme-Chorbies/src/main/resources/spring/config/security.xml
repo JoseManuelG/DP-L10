@@ -49,8 +49,6 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
-		<security:intercept-url pattern="/chorbi/list.do" access="permitAll"  />
-		
 		
 		<!-- Actor -->	
 		<security:intercept-url pattern="/security/edit.do" access="isAuthenticated()" /> 
@@ -84,7 +82,8 @@
 		<security:intercept-url pattern="/chirp/chorbi/reply.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/chirp/chorbi/forward.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/chirp/chorbi/write.do" access="hasRole('CHORBI')"  /> 
-		<security:intercept-url pattern="/chirp/chorbi/received.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/chirp/chorbi/received.do" access="hasRole('CHORBI')"  />
+		<security:intercept-url pattern="/chorbi/list.do" access="hasRole('CHORBI')"  /> 
 		
 		<security:intercept-url pattern="/likes/chorbi/view.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/likes/chorbi/create.do" access="hasRole('CHORBI')"  /> 
