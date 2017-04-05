@@ -21,7 +21,7 @@
 		<put-attribute name="body" value="/views/likes/list.jsp" />
 	</definition>
 	
-	<definition name="likes/view" extends="master.page">	
+	<definition name="likes/chorbi/view" extends="master.page">	
 		<put-attribute name="title" value="Ver like" />
 		<put-attribute name="body" value="/views/likes/view.jsp" />
 	</definition>

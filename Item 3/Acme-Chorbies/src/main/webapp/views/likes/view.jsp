@@ -30,6 +30,6 @@
 	<jstl:out value="${likes.comment}"/>
 </fieldset><br/>
 
-<a href="likes/actor/delete.do?likesId=${likes.id}" onclick="return confirm('<spring:message code="confirm.delete" />')">
+<a href="likes/chorbi/delete.do?likesId=${likes.id}" onclick="return confirm('<spring:message code="confirm.delete" />')">
 	<spring:message code="likes.delete"/>
 </a>
