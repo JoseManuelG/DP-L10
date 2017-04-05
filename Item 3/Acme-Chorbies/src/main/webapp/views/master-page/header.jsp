@@ -40,6 +40,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<security:authorize access="hasRole('CHORBI')">
+					<li><a href="chorbi/chorbi/myProfile.do"><spring:message code="master.page.chorbi.my.profile" /></a></li>
 					
 					<li><a href="chirp/chorbi/received.do"><spring:message code="master.page.chirp.received" /></a></li>
 					<li><a href="chirp/chorbi/sent.do"><spring:message code="master.page.chirp.sent" /></a></li>
@@ -52,7 +53,6 @@
 					<li><a href="chorbi/administrator/list.do"><spring:message code="master.page.administrator.chorbies" /></a></li>
 					
 					</security:authorize>
-					<li><a href="actor/myProfile.do"><spring:message code="master.page.customer.my.profile" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>
 				</ul>
 			</li>

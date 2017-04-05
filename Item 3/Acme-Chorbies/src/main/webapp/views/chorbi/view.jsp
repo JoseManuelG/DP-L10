@@ -29,8 +29,8 @@
 <spring:message code="chorbi.phone"/>:
 <jstl:out value="${chorbi.phone}"/><br/>
 
-<spring:message code="chorbi.picture"/>:
-<jstl:out value="${chorbi.picture}"/><br/>
+<spring:message code="chorbi.picture"/>:<br/>
+<acme:image url="${chorbi.picture}"/><br/>
 
 <spring:message code="chorbi.birthDate"/>:
 <jstl:out value="${chorbi.birthDate}"/><br/>
@@ -42,9 +42,8 @@
 <jstl:out value="${chorbi.desiredRelationship}"/><br/>
 
 
-
-	<legend><spring:message code="chorbi.description"/></legend>
-	<jstl:out value="${chorbi.description}"/>
+<spring:message code="chorbi.description"/>:
+<jstl:out value="${chorbi.description}"/>
 </fieldset><br/>
 
 <fieldset>
@@ -69,4 +68,10 @@
 			      <spring:message  code="chorbi.likes" />
 		</a>
 </security:authorize>
+</jstl:if>
+
+<jstl:if test="${myPrincipal}">
+	<a href="security/edit.do?chorbiId=${chorbi.id}">
+			      <spring:message  code="chorbi.edit.profile" />
+		</a>
 </jstl:if>
