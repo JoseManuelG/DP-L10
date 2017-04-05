@@ -19,13 +19,15 @@
 
 <form:form action="${requestURI}" modelAttribute="actorForm">
 	
-	
+	<fieldset>
 	<acme:textbox code="security.register.username" path="userAccount.username"/>
 	
 	<acme:password code="security.password" path="userAccount.password"/>
 	
 	<acme:password code="security.confirm.password" path="confirmPassword"/>
+    </fieldset>
     
+	<fieldset>
     <acme:textbox code="security.register.name" path="name"/>
 	
 	<acme:textbox code="security.register.surname" path="surname"/>
@@ -35,7 +37,6 @@
 	<acme:textbox code="security.register.picture" path="picture"/>
 	
 	<acme:textbox code="security.register.phone" path="phone"/>
-	
 		
 	<form:label path="desiredRelationship">
 		<spring:message code="security.register.desiredRelationship" />
@@ -54,10 +55,10 @@
     	<form:option value="woman"><spring:message code="security.register.woman" /></form:option>
     </form:select>
     
-	
-	
 	<acme:textbox code="security.register.birthDate" path="birthDate" placeholder="dd/mm/aaaa"/>
-	
+    </fieldset>
+    
+	<fieldset>
 	<acme:textbox code="security.register.country" path="country"/>
 	
 	<acme:textbox code="security.register.province" path="province"/>
@@ -65,7 +66,8 @@
 	<acme:textbox code="security.register.state" path="state"/>
 
 	<acme:textbox code="security.register.city" path="city"/>
-	
+    </fieldset>
+    
 	<acme:submit code="security.register.save" name="save"/>
 	
 	<jstl:if test="${!isAdmin}">

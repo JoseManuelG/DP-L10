@@ -3,6 +3,9 @@ package forms;
 
 import java.util.Date;
 
+import javax.validation.constraints.AssertTrue;
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import security.UserAccount;
@@ -70,9 +73,11 @@ public class ActorForm {
 		this.phone = phone;
 	}
 
+	@AssertTrue
 	public Boolean getAcepted() {
 		return this.acepted;
 	}
+
 	public void setAcepted(final Boolean acepted) {
 		this.acepted = acepted;
 	}
@@ -108,6 +113,7 @@ public class ActorForm {
 	public void setDesiredRelationship(final String desiredRelationship) {
 		this.desiredRelationship = desiredRelationship;
 	}
+
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getBirthDate() {
 		return this.birthDate;
@@ -149,12 +155,18 @@ public class ActorForm {
 		this.province = province;
 	}
 
+	@NotBlank
 	public String getCity() {
 		return this.city;
 	}
 
 	public void setCity(final String city) {
 		this.city = city;
+	}
+
+	@AssertTrue
+	public boolean getValid() {
+		return (this.confirmPassword == null && this.userAccount.getPassword() == null) || this.confirmPassword.equals(this.userAccount.getPassword());
 	}
 
 }

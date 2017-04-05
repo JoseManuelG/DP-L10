@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.validation.Validator;
 
 import repositories.CoordinatesRepository;
 import domain.Coordinates;
@@ -22,13 +21,10 @@ public class CoordinatesService {
 	@Autowired
 	private CoordinatesRepository	coordinatesRepository;
 
-	@Autowired
-	private ChorbiService			chorbiService;
-
 	// Supporting Services --------------------------------------
 
 	@Autowired
-	private Validator				validator;
+	private ChorbiService			chorbiService;
 
 
 	//Simple CRUD methods-------------------------------------------------------------------
@@ -42,7 +38,10 @@ public class CoordinatesService {
 
 		Assert.notNull(coordinates, "coordinates.error.null");
 
+		//		Assert.isTrue(!coordinates.getCity().isEmpty(), "coordinates.error.empty.city");
+
 		result = this.coordinatesRepository.save(coordinates);
+
 		Assert.notNull(result, "coordinates.error.commit");
 
 		return result;
