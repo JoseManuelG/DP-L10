@@ -19,13 +19,21 @@
 
 <form:form action="${requestURI}" modelAttribute="actorForm">
 	
-
+	<fieldset>
 	<acme:textbox code="security.register.username" path="userAccount.username"/>
 	
 	<acme:password code="security.password" path="userAccount.password"/>
 	
-	<acme:password code="security.confirm.password" path="confirmPassword"/>
+	<div>
+		<form:label path="confirmPassword">
+			<spring:message code="security.confirm.password" />
+		</form:label>
+		<form:password path="confirmPassword"/>
+		<form:errors path="valid" cssClass="error" />
+	</div>
+    </fieldset>
     
+	<fieldset>
     <acme:textbox code="security.register.name" path="name"/>
 	
 	<acme:textbox code="security.register.surname" path="surname"/>
@@ -58,7 +66,9 @@
     </form:select>
     <br/>
 	<acme:textbox code="security.register.birthDate" path="birthDate" placeholder="dd/mm/aaaa"/>
-	
+    </fieldset>
+    
+	<fieldset>
 	<acme:textbox code="security.register.country" path="country"/>
 	
 	<acme:textbox code="security.register.province" path="province"/>
@@ -66,6 +76,7 @@
 	<acme:textbox code="security.register.state" path="state"/>
 
 	<acme:textbox code="security.register.city" path="city"/>
+    </fieldset>
 	
 	
 	<a target="_blank" href="law/terms-conditions.do">

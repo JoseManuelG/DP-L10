@@ -3,6 +3,8 @@ package controllers;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -46,7 +48,7 @@ public class SecurityController extends AbstractController {
 	// Save ---------------------------------------------------------------
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final ActorForm actorForm, final BindingResult binding) {
+	public ModelAndView save(@Valid final ActorForm actorForm, final BindingResult binding) {
 		ModelAndView result;
 		Chorbi chorbi = new Chorbi();
 
@@ -55,8 +57,6 @@ public class SecurityController extends AbstractController {
 			result = this.createRegisterModelAndView(actorForm);
 		else if (!actorForm.getUserAccount().getPassword().equals(actorForm.getConfirmPassword()))
 			result = this.createRegisterModelAndView(actorForm, "security.password.error");
-		else if (!((boolean) actorForm.getAcepted()))
-			result = this.createRegisterModelAndView(actorForm, "security.terms.error");
 		else
 			try {
 
@@ -164,6 +164,7 @@ public class SecurityController extends AbstractController {
 
 			if (aux.equals("CHORBI")) {
 				//TODO AÑADIR TODO LO QUE SE BORRA CUANDO SE BORRA UN CHORBI
+				// JAVI: ESTO NO DEBE HACERSE EN CONTROLLER SI NO EN SERVICIO
 
 			}
 			result = new ModelAndView("redirect:/j_spring_security_logout");
