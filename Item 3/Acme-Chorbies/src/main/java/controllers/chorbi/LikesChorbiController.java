@@ -121,11 +121,17 @@ public class LikesChorbiController extends AbstractController {
 	public ModelAndView view(@RequestParam final int likesId) {
 		ModelAndView result;
 		Likes likes;
+		Chorbi chorbi;
+		Boolean aux;
 
 		likes = this.likesService.findOne(likesId);
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+
+		aux = likes.getLiker().equals(chorbi);
 
 		result = new ModelAndView("likes/chorbi/view");
 		result.addObject("likes", likes);
+		result.addObject("aux", aux);
 
 		result.addObject("requestURI", "likes/chorbi/view.do?likesId=" + likesId);
 
