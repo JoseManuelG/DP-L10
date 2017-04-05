@@ -24,7 +24,13 @@
 	
 	<acme:password code="security.password" path="userAccount.password"/>
 	
-	<acme:password code="security.confirm.password" path="confirmPassword"/>
+	<div>
+		<form:label path="confirmPassword">
+			<spring:message code="security.confirm.password" />
+		</form:label>
+		<form:password path="confirmPassword"/>
+		<form:errors path="valid" cssClass="error" />
+	</div>
     </fieldset>
     
 	<fieldset>
@@ -34,10 +40,12 @@
 	
 	<acme:textbox code="security.register.email" path="email"/>
 	
+	<acme:textbox code="security.register.phone" path="phone"/>
+	
 	<acme:textbox code="security.register.picture" path="picture"/>
 	
-	<acme:textbox code="security.register.phone" path="phone"/>
-		
+	<acme:textbox code="security.register.description" path="description"/>
+	
 	<form:label path="desiredRelationship">
 		<spring:message code="security.register.desiredRelationship" />
 	</form:label>		

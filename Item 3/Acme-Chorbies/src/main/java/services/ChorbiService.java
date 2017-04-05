@@ -145,6 +145,9 @@ public class ChorbiService {
 
 		result.setUserAccount(userAccount);
 
+//		if (actorForm.getAcepted() == null)
+//			actorForm.setAcepted(true);
+
 		this.validator.validate(result, binding);
 		userAccount.setPassword(encoder.encodePassword(actorForm.getUserAccount().getPassword(), null));
 		return result;
