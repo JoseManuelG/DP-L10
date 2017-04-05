@@ -63,5 +63,10 @@
 	<jstl:out value="${chorbi.coordinates.province}"/> <br/>
 	
 </fieldset><br/>
-
-
+<jstl:if test="${aux}">
+<security:authorize access="hasRole('CHORBI')">
+		<a href="likes/chorbi/create.do?chorbiId=${chorbi.id}">
+			      <spring:message  code="chorbi.likes" />
+		</a>
+</security:authorize>
+</jstl:if>

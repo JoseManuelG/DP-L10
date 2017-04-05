@@ -53,12 +53,16 @@ public class ViewChorbiController extends AbstractController {
 	@RequestMapping(value = "/chorbi/view", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam final int chorbiId) {
 		ModelAndView result;
-		Chorbi chorbi;
+		Chorbi chorbi, principal;
+		Boolean aux;
 
-		chorbi = this.chorbiService.findChorbiByPrincipal();
+		principal = this.chorbiService.findChorbiByPrincipal();
+		chorbi = this.chorbiService.findOne(chorbiId);
+		aux = this.chorbiService.validLike(chorbi);
 
 		result = new ModelAndView("chorbi/chorbi/view");
 		result.addObject("chorbi", chorbi);
+		result.addObject("aux", aux);
 
 		result.addObject("requestURI", "chorbi/chorbi/view.do?chorbiId=" + chorbiId);
 

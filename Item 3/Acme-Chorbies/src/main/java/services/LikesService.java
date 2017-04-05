@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 
 import repositories.LikesRepository;
 import security.LoginService;
+import domain.Actor;
 import domain.Chorbi;
 import domain.Likes;
 
@@ -32,6 +33,9 @@ public class LikesService {
 
 	@Autowired
 	private ChorbiService	chorbiService;
+
+	@Autowired
+	private ActorService	actorService;
 
 
 	//Constructors------------------------------------
@@ -146,5 +150,17 @@ public class LikesService {
 		final List<Likes> result = this.likesRepository.findSentLikesOfChorbi(senderId);
 		return result;
 	}
+	public Boolean findUniqueLike(final int chorbiId) {
+		Boolean res;
+		final Likes likes;
+		Actor principal;
 
+		res = false;
+		principal = this.actorService.findActorByPrincipal();
+		likes = this.likesRepository.findUniqueLike(principal.getId(), chorbiId);
+		if (likes == null)
+			res = true;
+
+		return res;
+	}
 }

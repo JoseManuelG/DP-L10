@@ -20,6 +20,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountRepository;
+import domain.Actor;
 import domain.Chorbi;
 import domain.Coordinates;
 import forms.ActorForm;
@@ -202,6 +203,20 @@ public class ChorbiService {
 
 		coordinates = this.chorbiRepository.findCoordinatesByUserAccountId(chorbi.getId());
 		return coordinates;
+	}
+
+	public Boolean validLike(final Chorbi chorbi) {
+		Boolean res;
+		Actor principal;
+
+		res = true;
+		principal = this.actorService.findActorByPrincipal();
+
+		if (((Chorbi) principal).equals(chorbi))
+			res = false;
+		else
+			res = this.likesService.findUniqueLike(chorbi.getId());
+		return res;
 	}
 
 }

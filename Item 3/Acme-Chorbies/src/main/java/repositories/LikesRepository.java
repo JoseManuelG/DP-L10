@@ -25,4 +25,8 @@ public interface LikesRepository extends JpaRepository<Likes, Integer> {
 	@Query("select m from Likes m where m.liked.id=?1")
 	public List<Likes> findReceivedLikesOfChorbi(int recipientId);
 
+	//Find all the sended messages for a given chorbi
+	@Query("select m from Likes m where m.liker.id=?1 and m.liked.id=?2")
+	public Likes findUniqueLike(int likerId, int likedId);
+
 }
