@@ -3,9 +3,6 @@ package controllers.chorbi;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,27 +41,26 @@ public class LikesChorbiController extends AbstractController {
 	// Create --------------------------------------------------------------------
 	@RequestMapping(value = "/chorbi/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int chorbiId) {
-		Chorbi liked, liker;
-
-		liked = this.chorbiService.findOne(chorbiId);
-		liker = this.chorbiService.findChorbiByPrincipal();
+		Chorbi liked;
 		ModelAndView result;
 		Likes likes;
-		likes = this.likesService.create();
-		likes.setLiked(liked);
-		likes.setLiker(liker);
-		final Date currentMoment = new Date(System.currentTimeMillis() - 10000);
-		likes.setMoment(currentMoment);
+
+		liked = this.chorbiService.findOne(chorbiId);
+
+		likes = this.likesService.create(liked);
+
 		result = this.createEditModelAndView(likes);
 
-		if (liker.getId() == liked.getId()) {
-			// Que salte una excepcion de que no puede tratar de darse like a si mismo
-		} else {
+		if (likes.getLiker().getId() == liked.getId())
+			result = this.createEditModelAndView(likes, "likes.commit.error");
+		else {
 			final Actor actor = this.actorService.findOne(liked.getId());
 			final ArrayList<Authority> authorities = new ArrayList<Authority>();
 			authorities.addAll(actor.getUserAccount().getAuthorities());
-			final String requestURI = authorities.get(0).getAuthority().toLowerCase() + "/view.do?chorbiId=" + liked.getId();
+			final String requestURI = authorities.get(0).getAuthority().toLowerCase() + "/view.do?likesId=" + likes.getId();
+
 			result.addObject("requestURI", requestURI);
+			result.addObject("likes", likes);
 		}
 		return result;
 
@@ -73,7 +69,7 @@ public class LikesChorbiController extends AbstractController {
 	// Save ---------------------------------------------------------------
 	@RequestMapping(value = "/chorbi/create", method = RequestMethod.POST, params = "save")
 	public @ResponseBody
-	ModelAndView save(@Valid final Likes likes, final BindingResult binding) {
+	ModelAndView save(final Likes likes, final BindingResult binding) {
 		ModelAndView result;
 		final String aux = null;
 		final Likes likes2 = this.likesService.reconstruct(likes, binding);
@@ -81,8 +77,9 @@ public class LikesChorbiController extends AbstractController {
 			result = this.createEditModelAndView(likes);
 		else
 			try {
+
 				this.likesService.save(likes2);
-				result = new ModelAndView("redirect:../view.do?likesId=" + likes2.getId());
+				result = new ModelAndView("redirect:sent.do");
 
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(likes, "likes.commit.error");

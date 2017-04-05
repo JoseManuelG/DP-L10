@@ -31,6 +31,12 @@
 		<bean class="converters.AttachmentToStringConverter" />
 		<bean class="converters.StringToAttachmentConverter" />
 		
+		<bean class="converters.LikesToStringConverter" />
+		<bean class="converters.StringToLikesConverter" />
+		
+		<bean class="converters.ChorbiToStringConverter" />
+		<bean class="converters.StringToChorbiConverter" />
+		
 	</util:list>
 	
 </beans>

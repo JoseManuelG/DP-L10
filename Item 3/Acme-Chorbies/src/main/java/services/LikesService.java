@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,15 @@ public class LikesService {
 
 	//Simple CRUD methods----------------------------
 
-	public Likes create() {
+	public Likes create(final Chorbi chorbi) {
 		Likes result;
+		Chorbi principal;
+
+		principal = this.chorbiService.findChorbiByPrincipal();
 
 		result = new Likes();
+		result.setLiked(chorbi);
+		result.setLiker(principal);
 
 		return result;
 	}
@@ -69,8 +75,11 @@ public class LikesService {
 
 	@SuppressWarnings("static-access")
 	public Likes save(final Likes likes) {
+		final Date currentMoment = new Date(System.currentTimeMillis() - 10000);
+
 		Assert.notNull(likes, "El like no puede ser nulo");
 		Assert.isTrue(likes.getId() == 0, "No se pueden modificar likes");
+		likes.setMoment(currentMoment);
 
 		Assert.isTrue(likes.getLiker().getUserAccount().equals(this.loginService.getPrincipal()), "Solo el propietario puede realizar operaciones");
 		Likes result;

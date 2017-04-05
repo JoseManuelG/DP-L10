@@ -31,4 +31,14 @@
 		<put-attribute name="body" value="/views/likes/create.jsp" />
 	</definition>
 	
+	<definition name="likes/chorbi/sent" extends="master.page">	
+		<put-attribute name="title" value="Write like" />
+		<put-attribute name="body" value="/views/likes/list.jsp" />
+	</definition>
+	
+	<definition name="likes/chorbi/received" extends="master.page">	
+		<put-attribute name="title" value="Write like" />
+		<put-attribute name="body" value="/views/likes/list.jsp" />
+	</definition>
+	
 </tiles-definitions>
