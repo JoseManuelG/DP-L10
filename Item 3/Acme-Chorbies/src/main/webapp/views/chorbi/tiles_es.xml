@@ -21,7 +21,7 @@
 		<put-attribute name="body" value="/views/chorbi/list.jsp" />
 	</definition>
 	
-	<definition name="chorbi/view" extends="master.page">	
+	<definition name="chorbi/chorbi/view" extends="master.page">	
 		<put-attribute name="title" value="Vista de chorbies" />
 		<put-attribute name="body" value="/views/chorbi/view.jsp" />
 	</definition>

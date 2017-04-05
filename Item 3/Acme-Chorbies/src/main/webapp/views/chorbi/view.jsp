@@ -23,15 +23,29 @@
 <spring:message code="chorbi.surname"/>:
 <jstl:out value="${chorbi.surname}"/><br/>
 
+<spring:message code="chorbi.email"/>:
+<jstl:out value="${chorbi.email}"/><br/>
+
+<spring:message code="chorbi.phone"/>:
+<jstl:out value="${chorbi.phone}"/><br/>
+
 <spring:message code="chorbi.picture"/>:
 <jstl:out value="${chorbi.picture}"/><br/>
 
 <spring:message code="chorbi.birthDate"/>:
 <jstl:out value="${chorbi.birthDate}"/><br/>
 
+<spring:message code="chorbi.genre"/>:
+<jstl:out value="${chorbi.genre}"/><br/>
+
 <spring:message code="chorbi.desiredRelationship"/>:
 <jstl:out value="${chorbi.desiredRelationship}"/><br/>
 
+
+<fieldset>
+	<legend><spring:message code="chorbi.description"/></legend>
+	<jstl:out value="${chorbi.description}"/>
+</fieldset><br/>
 
 <fieldset>
 	<legend><spring:message code="chorbi.description"/></legend>

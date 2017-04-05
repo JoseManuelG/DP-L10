@@ -49,6 +49,8 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
+		<security:intercept-url pattern="/chorbi/list.do" access="permitAll"  />
+		
 		
 		<!-- Actor -->	
 		<security:intercept-url pattern="/security/edit.do" access="isAuthenticated()" /> 
@@ -95,7 +97,7 @@
 		<security:intercept-url pattern="/creditCard/chorbi/myCreditCard.do" access="hasRole('CHORBI')"  /> 
 		<security:intercept-url pattern="/creditCard/chorbi/edit.do" access="hasRole('CHORBI')"  /> 	
 		
-		<security:intercept-url pattern="/chorbi/chorbi/list.do" access="hasRole('CHORBI')"  /> 
+		<security:intercept-url pattern="/chorbi/chorbi/view.do" access="hasRole('CHORBI')"  /> 
 
 		
 		<!--NONE -->

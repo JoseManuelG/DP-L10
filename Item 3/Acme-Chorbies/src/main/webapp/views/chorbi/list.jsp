@@ -22,7 +22,7 @@
 	
 		
 	<display:column>
-		<a href="chorbi/view.do?chorbiId=${row.id}">
+		<a href="chorbi/chorbi/view.do?chorbiId=${row.id}">
 			<spring:message code="chorbi.view"/>
 		</a>
 	</display:column>
