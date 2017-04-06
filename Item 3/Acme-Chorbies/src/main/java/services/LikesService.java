@@ -176,7 +176,7 @@ public class LikesService {
 		likes.addAll(this.findReceivedLikesOfChorbi(chorbi.getId()));
 		likes.addAll(this.findSentLikesOfChorbi(chorbi.getId()));
 
-		this.likesRepository.deleteAll();
+		this.likesRepository.delete(likes);
 
 	}
 }

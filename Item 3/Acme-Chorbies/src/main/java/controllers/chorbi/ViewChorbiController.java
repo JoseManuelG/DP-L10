@@ -17,6 +17,7 @@ import services.LikesService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Chorbi;
+import domain.Likes;
 
 @Controller
 @RequestMapping("/chorbi")
@@ -57,22 +58,24 @@ public class ViewChorbiController extends AbstractController {
 		Chorbi chorbi;
 		Actor principal;
 		Boolean aux, myPrincipal;
+		Collection<Likes> likes;
 
 		principal = this.actorService.findActorByPrincipal();
 		chorbi = this.chorbiService.findOne(chorbiId);
 		aux = this.chorbiService.validLike(chorbi);
 		myPrincipal = chorbi.equals(principal);
+		likes = this.likesService.findSentLikesOfChorbi(chorbiId);
 
 		result = new ModelAndView("chorbi/chorbi/view");
 		result.addObject("chorbi", chorbi);
 		result.addObject("aux", aux);
 		result.addObject("myPrincipal", myPrincipal);
+		result.addObject("likes", likes);
 
 		result.addObject("requestURI", "chorbi/chorbi/view.do?chorbiId=" + chorbiId);
 
 		return result;
 	}
-
 	@RequestMapping(value = "/chorbi/myProfile", method = RequestMethod.GET)
 	public ModelAndView myProfile() {
 		ModelAndView result;

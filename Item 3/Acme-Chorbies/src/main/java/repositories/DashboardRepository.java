@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import domain.Administrator;
 import domain.Chorbi;
+import domain.DomainEntity;
 
 @Repository
-public interface DashboardRepository extends JpaRepository<Administrator, Integer> {
+public interface DashboardRepository extends JpaRepository<DomainEntity, Integer> {
 
 	// Dashboard - 01
 	@Query("select count(c), c.coordinates.country from Chorbi c group by c.coordinates.country")

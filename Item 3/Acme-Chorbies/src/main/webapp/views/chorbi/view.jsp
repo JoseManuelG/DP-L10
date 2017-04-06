@@ -33,7 +33,7 @@
 <acme:image url="${chorbi.picture}"/><br/>
 
 <spring:message code="chorbi.birthDate"/>:
-<acme:mask text="${chorbi.birthDate}"/><br/>
+<acme:mask text="${chorbi.birthDate}"/> (<acme:mask text="${chorbi.age}"/> <spring:message code="chorbi.age"/>)<br/>
 
 <spring:message code="chorbi.genre"/>:
 <acme:mask text="${chorbi.genre}"/><br/>
@@ -70,8 +70,21 @@
 </security:authorize>
 </jstl:if>
 
+<h3><spring:message code="chorbi.likes.title"/></h3>
+<display:table pagesize="5" class="displaytag" keepStatus="false"
+	name="likes" requestURI="${requestURI}" id="row" excludedParams="*">
+	
+	<display:column>
+		<a href="chorbi/chorbi/view.do?chorbiId=${row.liked.id}">
+			<spring:message code="chorbi.view"/>
+		</a>
+	</display:column>
+	<acme:maskedColumn sorteable="false" code="chorbi.likes.moment" text="${row.moment}"/>
+	<acme:maskedColumn sorteable="false" code="chorbi.likes.comment" text="${row.comment}"/>
+	
+</display:table>
 <jstl:if test="${myPrincipal}">
 	<a href="security/edit.do?chorbiId=${chorbi.id}">
-			      <spring:message  code="chorbi.edit.profile" />
-		</a>
+		      <spring:message  code="chorbi.edit.profile" />
+	</a>
 </jstl:if>

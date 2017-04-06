@@ -144,14 +144,20 @@ public class SearchTemplateService {
 
 	public void deleteFromChorbi(final Chorbi chorbi) {
 		SearchTemplate searchTemplate;
+		Collection<SearchTemplate> searchTemplates;
 
 		searchTemplate = this.findByChorbi(chorbi.getId());
 
 		this.coordinatesService.delete(searchTemplate.getCoordinates());
 
 		this.searchTemplateRepository.delete(searchTemplate);
-	}
 
+		searchTemplates = this.searchTemplateRepository.findAllWithChorbi(chorbi.getId());
+		for (final SearchTemplate template : searchTemplates)
+			template.getChorbies().remove(chorbi);
+
+		this.searchTemplateRepository.save(searchTemplates);
+	}
 	// Other business methods --------------------------------------
 
 	public SearchTemplate findByPrincipal() {
