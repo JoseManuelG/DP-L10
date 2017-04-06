@@ -20,9 +20,11 @@
 		<spring:message code="searchTemplate.desiredRelationship" />
 	</form:label>
     <form:select id="desiredRelationship" name="desiredRelationship" path="desiredRelationship">
-    	<form:options items="${relation}" />
+    	<form:option value="all"	><spring:message code="searchTemplate.all" /></form:option>
+    	<form:option value="love"><spring:message code="searchTemplate.relation.love" /></form:option>
+    	<form:option value="activities"><spring:message code="searchTemplate.relation.activities" /></form:option>    	
+    	<form:option value="friendship"><spring:message code="searchTemplate.relation.friendship" /></form:option>
     </form:select>
-    
     
 		<!--<acme:textbox code="searchTemplate.age" path="age"/>-->
 	<!--  	<acme:textbox code="searchTemplate.genre" path="genre"/>-->
@@ -30,7 +32,7 @@
 		<form:label path="age">
 			<spring:message code="searchTemplate.age" />
 		</form:label>	
-		<form:input path="age"   />	
+		<form:input path="age"  type="number" />	
 		<form:errors path="age" cssClass="error" />
 		<br/>
 		
@@ -38,7 +40,9 @@
 		<spring:message code="searchTemplate.genre" />
 	</form:label>
 	<form:select id="genre" name="genre" path="genre">
-    	<form:options items="${genres}" />
+	<form:option value="all"	><spring:message code="searchTemplate.all" /></form:option>
+    	<form:option value="man"><spring:message code="security.register.man" /></form:option>
+    	<form:option value="woman"><spring:message code="security.register.woman" /></form:option>
     </form:select>
     
 		<acme:textbox code="searchTemplate.keyword" path="keyword"/>
@@ -58,28 +62,34 @@
 <br/>
 
 <jstl:if test="${!results.isEmpty()}">
-	<display:table excludedParams="*" pagesize="5" class="displaytag" name="results" requestURI="${requestURI}" id="row">
+
+<display:table pagesize="5" class="displaytag" keepStatus="false"
+	name="results" requestURI="${requestURI}" id="row" excludedParams="*">
+	
 		
-		<!-- Action links -->
-		<!-- TODO- No se Si abrá display de chorbi-->
-		<!--<display:column>
-			<a href="">
-			esperando a tener vista de ver perfíl si no quitar
-			</a>
-		</display:column>
-		-->
-		<!-- Attributes -->
-		
-		<acme:column sorteable="false" code="searchTemplate.chorbi.name" path="name"/>
-		
-		<acme:column sorteable="true" code="searchTemplate.chorbi.surname" path="surname"/>
-		
-		<acme:column sorteable="true" code="searchTemplate.genre" path="genre"/>
-		
-		<acme:column sorteable="true" code="searchTemplate.chorbi.birthDate" path="birthDate"/>
-		
-		<acme:column sorteable="true" code="searchTemplate.desiredRelationship" path="desiredRelationship"/>
-		
-		
-	</display:table>
+	<display:column>
+		<a href="chorbi/chorbi/view.do?chorbiId=${row.id}">
+			<spring:message code="chorbi.view"/>
+		</a>
+	</display:column>
+	
+	
+	
+
+	<acme:column sorteable="true" code="chorbi.name" path="name" highlight="${row.banned}" />
+	
+	<acme:column sorteable="true" code="chorbi.surname" path="surname" highlight="${row.banned}" />
+	
+	<acme:column sorteable="true" code="chorbi.description" path="description" highlight="${row.banned}" />
+
+	<acme:column sorteable="true" code="chorbi.desiredRelationship" path="desiredRelationship" highlight="${row.banned}" />
+
+	<acme:column sorteable="true" code="chorbi.birthDate" path="birthDate" highlight="${row.banned}" />
+
+	<acme:column sorteable="true" code="chorbi.genre" path="genre" highlight="${row.banned}" />
+
+
+
+</display:table>
+
 </jstl:if>

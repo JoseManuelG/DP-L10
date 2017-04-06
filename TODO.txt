@@ -6,6 +6,9 @@ Informe de costes
 A+
 A+ extra
 Revisar pagina en general con populate vacio
+Que se mire que el chorbie tiene CreditCard la buscar.
+
+
 
 SearchTemplate:
 
