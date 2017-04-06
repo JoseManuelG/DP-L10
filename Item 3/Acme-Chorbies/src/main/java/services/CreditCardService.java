@@ -62,6 +62,12 @@ public class CreditCardService {
 		return result;
 	}
 
+	public void delete(final CreditCard creditCard) {
+
+		this.creditCardRepository.delete(creditCard);
+		Assert.isTrue(!this.creditCardRepository.exists(creditCard.getId()));
+	}
+
 	public void deleteFromChorbi(final Chorbi chorbi) {
 		CreditCard creditCard;
 
@@ -75,10 +81,8 @@ public class CreditCardService {
 	public CreditCard getCreditCardByChorbi() {
 		CreditCard creditCard;
 		Chorbi chorbi;
-
 		chorbi = this.chorbiService.findChorbiByPrincipal();
-		creditCard = this.getCreditCardByChorbi(chorbi);
-
+		creditCard = this.creditCardRepository.findCreditCardByChorbiId(chorbi.getId());
 		return creditCard;
 	}
 
