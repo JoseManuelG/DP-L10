@@ -8,16 +8,29 @@
 
 package usecases;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
+import security.Authority;
+import security.UserAccount;
+import services.BannerService;
 import services.ChorbiService;
+import services.LikesService;
 import utilities.AbstractTest;
+import domain.Chorbi;
+import domain.Likes;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -30,6 +43,12 @@ public class ChorbiTest extends AbstractTest {
 
 	@Autowired
 	private ChorbiService	chorbiService;
+
+	@Autowired
+	private BannerService	bannerService;
+
+	@Autowired
+	private LikesService	likesService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -78,6 +97,127 @@ public class ChorbiTest extends AbstractTest {
 		this.templateUnbanChorbi("admin", 288, NullPointerException.class);
 	}
 
+	// See a welcome page with a banner that advertises Acme projects, including Acme Pad-Thai
+	//	, Acme BnB,	and Acme Car'n go! The banners must be selected randomly.
+
+	@Test
+	public void BannerPositiveTest() {
+		final String banner = this.bannerService.randomBanner().getImage();
+		Assert.notNull(banner);
+	}
+
+	//  Register as a chorbi
+
+	@Test
+	public void RegisterPositiveTest() {
+
+		// Registro completo sin errores
+
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", null);
+	}
+
+	@Test
+	public void RegisterNegativeTest2() {
+
+		// Registro sin username
+		this.template("", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+
+	}
+
+	@Test
+	public void RegisterNegativeTest3() {
+
+		// Registro sin password
+		this.template("username", "", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void RegisterNegativeTest4() {
+
+		// Registro sin email
+
+		this.template("username", "password", "", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void RegisterNegativeTest5() {
+
+		// Registro sin nombre
+
+		this.template("username", "password", "email@acme.com", "", "surname", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void RegisterNegativeTest6() {
+
+		// Registro sin apellidos
+
+		this.template("username", "password", "email@acme.com", "name", "", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void RegisterNegativeTest7() {
+
+		// Registro sin telefono
+
+		this.template("username", "password", "email@acme.com", "name", "surname", "", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void RegisterNegativeTest8() {
+
+		// Registro sin descripción
+
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "", "love", "25/03/1994", "man", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void RegisterNegativeTest9() {
+
+		// Registro sin relacion deseada
+
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "", "25/03/1994", "man", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void RegisterNegativeTest10() {
+
+		// Registro sin fecha de nacimiento
+
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "", "man", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void RegisterNegativeTest11() {
+
+		// Registro sin genero
+
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "", ConstraintViolationException.class);
+	}
+
+	@Test
+	public void LikePositiveTest1() {
+
+		// Crear un like
+
+		this.template("chorbi1", 1096, null, "test", true, null);
+	}
+
+	@Test
+	public void LikePositiveTest2() {
+
+		// Borrar un like
+
+		this.template("chorbi1", null, 1103, "test", false, null);
+	}
+	@Test
+	public void LikeNegativeTest1() {
+
+		// Crear un like con comentario null
+
+		this.template("chorbi1", 1096, null, null, true, ConstraintViolationException.class);
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected void templateBanChorbi(final String username, final int chorbiId, final Class<?> expected) {
@@ -112,4 +252,58 @@ public class ChorbiTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
+	protected void template(final String userName, final String password, final String email, final String name, final String surname, final String phone, final String description, final String desiredRelationship, final String birthDateString,
+		final String genre, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			Date birthDate = null;
+			final Chorbi chorbi = this.chorbiService.create();
+			if (birthDateString != "")
+				birthDate = new SimpleDateFormat("dd/MM/yyyy").parse(birthDateString);
+			chorbi.setBirthDate(birthDate);
+			final UserAccount userAccount = new UserAccount();
+			final Collection<Authority> authorities = new ArrayList<Authority>();
+			final Authority authority = new Authority();
+			authority.setAuthority("CHORBI");
+			authorities.add(authority);
+			userAccount.setAuthorities(authorities);
+			chorbi.setUserAccount(userAccount);
+			chorbi.getUserAccount().setUsername(userName);
+			chorbi.getUserAccount().setPassword(password);
+			chorbi.setEmail(email);
+			chorbi.setName(name);
+			chorbi.setSurname(surname);
+			chorbi.setPhone(phone);
+			chorbi.setDescription(description);
+			chorbi.setGenre(genre);
+			chorbi.setDesiredRelationship(desiredRelationship);
+			this.chorbiService.save(chorbi);
+			this.chorbiService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	protected void template(final String liker, final Integer likedId, final Integer likesId, final String comment, final boolean whatToDo, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+		try {
+			this.authenticate(liker);
+			if (whatToDo) {
+				final Likes likes = this.likesService.create(this.chorbiService.findOne(likedId));
+				likes.setComment(comment);
+				this.likesService.save(likes);
+			} else
+				this.likesService.delete(this.likesService.findOne(likesId));
+
+			this.chorbiService.flush();
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
 }
