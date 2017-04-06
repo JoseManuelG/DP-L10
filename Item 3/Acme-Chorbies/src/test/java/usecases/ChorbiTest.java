@@ -8,10 +8,8 @@
 
 package usecases;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
@@ -27,9 +25,11 @@ import security.Authority;
 import security.UserAccount;
 import services.BannerService;
 import services.ChorbiService;
+import services.CoordinatesService;
 import services.LikesService;
 import utilities.AbstractTest;
 import domain.Chorbi;
+import domain.Coordinates;
 import domain.Likes;
 
 @ContextConfiguration(locations = {
@@ -42,13 +42,16 @@ public class ChorbiTest extends AbstractTest {
 	// System under test ------------------------------------------------------
 
 	@Autowired
-	private ChorbiService	chorbiService;
+	private ChorbiService		chorbiService;
 
 	@Autowired
-	private BannerService	bannerService;
+	private BannerService		bannerService;
 
 	@Autowired
-	private LikesService	likesService;
+	private LikesService		likesService;
+
+	@Autowired
+	private CoordinatesService	coordinatesService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -113,14 +116,14 @@ public class ChorbiTest extends AbstractTest {
 
 		// Registro completo sin errores
 
-		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", null);
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", "http://www.test.com", null);
 	}
 
 	@Test
 	public void RegisterNegativeTest2() {
 
 		// Registro sin username
-		this.template("", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+		this.template("", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", "http://www.test.com", ConstraintViolationException.class);
 
 	}
 
@@ -128,7 +131,7 @@ public class ChorbiTest extends AbstractTest {
 	public void RegisterNegativeTest3() {
 
 		// Registro sin password
-		this.template("username", "", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+		this.template("username", "", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", "http://www.test.com", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -136,7 +139,7 @@ public class ChorbiTest extends AbstractTest {
 
 		// Registro sin email
 
-		this.template("username", "password", "", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+		this.template("username", "password", "", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", "http://www.test.com", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -144,7 +147,7 @@ public class ChorbiTest extends AbstractTest {
 
 		// Registro sin nombre
 
-		this.template("username", "password", "email@acme.com", "", "surname", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+		this.template("username", "password", "email@acme.com", "", "surname", "12345678", "description", "love", "25/03/1994", "man", "http://www.test.com", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -152,7 +155,7 @@ public class ChorbiTest extends AbstractTest {
 
 		// Registro sin apellidos
 
-		this.template("username", "password", "email@acme.com", "name", "", "12345678", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+		this.template("username", "password", "email@acme.com", "name", "", "12345678", "description", "love", "25/03/1994", "man", "http://www.test.com", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -160,7 +163,7 @@ public class ChorbiTest extends AbstractTest {
 
 		// Registro sin telefono
 
-		this.template("username", "password", "email@acme.com", "name", "surname", "", "description", "love", "25/03/1994", "man", ConstraintViolationException.class);
+		this.template("username", "password", "email@acme.com", "name", "surname", "", "description", "love", "25/03/1994", "man", "http://www.test.com", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -168,7 +171,7 @@ public class ChorbiTest extends AbstractTest {
 
 		// Registro sin descripción
 
-		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "", "love", "25/03/1994", "man", ConstraintViolationException.class);
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "", "love", "25/03/1994", "man", "http://www.test.com", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -176,15 +179,15 @@ public class ChorbiTest extends AbstractTest {
 
 		// Registro sin relacion deseada
 
-		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "", "25/03/1994", "man", ConstraintViolationException.class);
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "", "25/03/1994", "man", "http://www.test.com", ConstraintViolationException.class);
 	}
 
 	@Test
 	public void RegisterNegativeTest10() {
 
-		// Registro sin fecha de nacimiento
+		// Registro sin genero
 
-		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "", "man", ConstraintViolationException.class);
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "", "http://www.test.com", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -192,7 +195,7 @@ public class ChorbiTest extends AbstractTest {
 
 		// Registro sin genero
 
-		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "", ConstraintViolationException.class);
+		this.template("username", "password", "email@acme.com", "name", "surname", "12345678", "description", "love", "25/03/1994", "man", "", ConstraintViolationException.class);
 	}
 
 	@Test
@@ -253,19 +256,23 @@ public class ChorbiTest extends AbstractTest {
 	}
 
 	protected void template(final String userName, final String password, final String email, final String name, final String surname, final String phone, final String description, final String desiredRelationship, final String birthDateString,
-		final String genre, final Class<?> expected) {
+		final String genre, final String picture, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
-			Date birthDate = null;
+
 			final Chorbi chorbi = this.chorbiService.create();
-			if (birthDateString != "")
-				birthDate = new SimpleDateFormat("dd/MM/yyyy").parse(birthDateString);
-			chorbi.setBirthDate(birthDate);
+			chorbi.setBirthDate(this.chorbiService.findOne(1096).getBirthDate());
 			final UserAccount userAccount = new UserAccount();
 			final Collection<Authority> authorities = new ArrayList<Authority>();
 			final Authority authority = new Authority();
+			Coordinates coordinates = this.coordinatesService.create();
+			coordinates.setCity("test");
+			coordinates.setCountry("test");
+			coordinates.setProvince("test");
+			coordinates.setState("test");
+			coordinates = this.coordinatesService.save(coordinates);
 			authority.setAuthority("CHORBI");
 			authorities.add(authority);
 			userAccount.setAuthorities(authorities);
@@ -279,6 +286,9 @@ public class ChorbiTest extends AbstractTest {
 			chorbi.setDescription(description);
 			chorbi.setGenre(genre);
 			chorbi.setDesiredRelationship(desiredRelationship);
+			chorbi.setPicture(picture);
+			chorbi.setBanned(true);
+			chorbi.setCoordinates(coordinates);
 			this.chorbiService.save(chorbi);
 			this.chorbiService.flush();
 		} catch (final Throwable oops) {
