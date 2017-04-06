@@ -60,7 +60,7 @@ public class ChirpChorbiController extends AbstractController {
 
 		res = this.chirpService.findReceivedChirpOfPrincipal();
 
-		result = new ModelAndView("chirp/list");
+		result = new ModelAndView("chirp/list/received");
 		result.addObject("chirps", res);
 		result.addObject("requestURI", "chirp/chorbi/received.do");
 
@@ -74,7 +74,7 @@ public class ChirpChorbiController extends AbstractController {
 
 		res = this.chirpService.findSentChirpOfPrincipal();
 
-		result = new ModelAndView("chirp/list");
+		result = new ModelAndView("chirp/list/sent");
 		result.addObject("chirps", res);
 		result.addObject("requestURI", "chirp/chorbi/sent.do");
 

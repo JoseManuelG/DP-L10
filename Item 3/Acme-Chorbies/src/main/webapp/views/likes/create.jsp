@@ -12,10 +12,6 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <form:form action="likes/chorbi/create.do" modelAttribute="likes">
 
-		<form:hidden path="id" />
-		<form:hidden path="version" />
-		<form:hidden path="moment" />
-		<form:hidden path="liker" />
 		<form:hidden path="liked" />
 
 	

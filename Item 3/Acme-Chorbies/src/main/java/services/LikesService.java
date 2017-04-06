@@ -116,12 +116,14 @@ public class LikesService {
 
 	public Likes reconstruct(final Likes likes, final BindingResult binding) {
 		Likes result;
+		Chorbi chorbi;
 		result = new Likes();
 
+		chorbi = this.chorbiService.findChorbiByPrincipal();
 		// Setear lo que viene del formulario:
 		result.setComment(likes.getComment());
 		result.setLiked(likes.getLiked());
-		result.setLiker(likes.getLiker());
+		result.setLiker(chorbi);
 
 		// Setear lo que no viene del formulario:
 		result.setMoment(likes.getMoment());

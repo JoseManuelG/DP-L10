@@ -5,6 +5,8 @@ A+ extra
 Revisar pagina en general con populate vacio
 Que se mire que el chorbie tiene CreditCard la buscar.
 Preguntar a corchuelo si con ciudad obligatorio solo vale.
+En la dashboard estaría bien que en "Churris ordenados por número de me gusta" saliera el número también. (facil con list<Object[]>)
+En la dashboard estaría bien que saliera 0.32 en vez de .32
 
 
 SearchTemplate:

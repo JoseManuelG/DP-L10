@@ -57,7 +57,7 @@ public class LikesChorbiController extends AbstractController {
 			final Actor actor = this.actorService.findOne(liked.getId());
 			final ArrayList<Authority> authorities = new ArrayList<Authority>();
 			authorities.addAll(actor.getUserAccount().getAuthorities());
-			final String requestURI = authorities.get(0).getAuthority().toLowerCase() + "/view.do?likesId=" + likes.getId();
+			final String requestURI = "chorbi/chorbi/view.do?chorbiId=" + likes.getLiked().getId();
 
 			result.addObject("requestURI", requestURI);
 			result.addObject("likes", likes);

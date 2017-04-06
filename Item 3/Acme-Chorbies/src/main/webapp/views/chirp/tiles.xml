@@ -16,8 +16,13 @@
        
 <tiles-definitions>
 
-	<definition name="chirp/list" extends="master.page">	
-		<put-attribute name="title" value="Chirp list" />
+	<definition name="chirp/list/sent" extends="master.page">	
+		<put-attribute name="title" value="Sent chirps list" />
+		<put-attribute name="body" value="/views/chirp/list.jsp" />
+	</definition>
+
+	<definition name="chirp/list/received" extends="master.page">	
+		<put-attribute name="title" value="Received chirps list" />
 		<put-attribute name="body" value="/views/chirp/list.jsp" />
 	</definition>
 	

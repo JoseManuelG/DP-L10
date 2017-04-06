@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="chorbi/administrator/list" extends="master.page">	
-		<put-attribute name="title" value="Listado de chorbies" />
+		<put-attribute name="title" value="Listado de churris" />
 		<put-attribute name="body" value="/views/chorbi/list.jsp" />
 	</definition>
 	
