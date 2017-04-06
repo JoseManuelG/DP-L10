@@ -74,8 +74,9 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="likes" requestURI="${requestURI}" id="row" excludedParams="*">
 	
-	<display:column>
-		<a href="chorbi/chorbi/view.do?chorbiId=${row.liked.id}">
+	<spring:message code="likes.liker" var="likerTitle"/>
+	<display:column title="${likerTitle}">
+		<a href="chorbi/chorbi/view.do?chorbiId=${row.liker.id}">
 			<spring:message code="chorbi.view"/>
 		</a>
 	</display:column>

@@ -53,8 +53,6 @@ public class SecurityController extends AbstractController {
 		chorbi = this.chorbiService.reconstruct(actorForm, binding);
 		if (binding.hasErrors())
 			result = this.createRegisterModelAndView(actorForm);
-		else if (!actorForm.getUserAccount().getPassword().equals(actorForm.getConfirmPassword()))
-			result = this.createRegisterModelAndView(actorForm, "security.password.error");
 		else
 			try {
 
@@ -62,7 +60,7 @@ public class SecurityController extends AbstractController {
 
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {
-				result = this.createRegisterModelAndView(actorForm, "chorbi.commit.error");
+				result = this.createRegisterModelAndView(actorForm, oops.getMessage());
 			}
 
 		return result;
@@ -124,14 +122,12 @@ public class SecurityController extends AbstractController {
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(actorForm, isAdmin);
-		else if (!actorForm.getUserAccount().getPassword().equals(actorForm.getConfirmPassword()))
-			result = this.createEditModelAndView(actorForm, isAdmin, "security.password.error");
 		else
 			try {
 				this.chorbiService.save(chorbiResult);
 				result = new ModelAndView("redirect:/chorbi/chorbi/myProfile.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(actorForm, isAdmin, "chorbi.commit.error");
+				result = this.createEditModelAndView(actorForm, isAdmin, oops.getMessage());
 			}
 
 		return result;

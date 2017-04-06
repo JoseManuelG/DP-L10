@@ -20,8 +20,13 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="likes" requestURI="${requestURI}" id="row" excludedParams="*">
 
-	<acme:maskedColumn sorteable="true" code="likes.liker.name" text="${row.liker.name}"/>
-	<acme:maskedColumn sorteable="true" code="likes.liker.surname" text="${row.liker.surname}"/>
+
+	<spring:message code="likes.liked" var="likedTitle"/>
+	<display:column title="${likedTitle}">
+		<a href="chorbi/chorbi/view.do?chorbiId=${row.liked.id}">
+			<acme:mask text="${row.liked.name} ${row.liked.surname}"/>
+		</a>
+	</display:column>
 
 	<acme:maskedColumn sorteable="true" code="likes.comment" text="${row.comment}"/>
 	

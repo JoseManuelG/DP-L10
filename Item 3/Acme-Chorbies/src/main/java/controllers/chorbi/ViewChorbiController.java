@@ -64,7 +64,7 @@ public class ViewChorbiController extends AbstractController {
 		chorbi = this.chorbiService.findOne(chorbiId);
 		aux = this.chorbiService.validLike(chorbi);
 		myPrincipal = chorbi.equals(principal);
-		likes = this.likesService.findSentLikesOfChorbi(chorbiId);
+		likes = this.likesService.findReceivedLikesOfChorbi(chorbiId);
 
 		result = new ModelAndView("chorbi/chorbi/view");
 		result.addObject("chorbi", chorbi);

@@ -71,6 +71,7 @@ public class ChorbiService {
 		Chorbi result;
 
 		Assert.notNull(chorbi, "chorbi.error.null");
+		Assert.isTrue(chorbi.getAge() >= 18, "chorbi.underage.error");
 		chorbi.setUserAccount(this.userAccountRepository.save(chorbi.getUserAccount()));
 		result = this.chorbiRepository.save(chorbi);
 		Assert.notNull(result, "chorbi.error.commit");

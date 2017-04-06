@@ -1,11 +1,10 @@
-Lista de likes en profile con link a quien lo ha hecho
 B+ tree
 Informe de costes 
 A+
 A+ extra
 Revisar pagina en general con populate vacio
 Que se mire que el chorbie tiene CreditCard la buscar.
-
+Preguntar a corchuelo si con ciudad obligatorio solo vale.
 
 
 SearchTemplate:
@@ -19,6 +18,7 @@ SearchTemplate:
 
 
 ---------------COMPLETO---------------------
+Lista de likes en profile con link a quien lo ha hecho
 Delete de cuentas
 Administrator tiene que poder ver el perfil
 Hacer un baner de cada acme, subirlos a una url y añadirlos a los dos populates

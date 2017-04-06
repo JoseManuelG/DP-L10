@@ -18,8 +18,14 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <spring:message code="likes.from"/>:
-<acme:mask text="${likes.liker}"/><br/>
+<a href="chorbi/chorbi/view.do?chorbiId=${likes.liker.id}">
+       	<acme:mask text="${likes.liker.name} ${likes.liker.surname}"/><br/>
+</a>
 
+<spring:message code="likes.for"/>:
+<a href="chorbi/chorbi/view.do?chorbiId=${likes.liked.id}">
+       	<acme:mask text="${likes.liked.name} ${likes.liked.surname}"/><br/>
+</a>
 
 <spring:message code="likes.sendingMoment"/>:
 <acme:mask text="${likes.moment}"/><br/>
