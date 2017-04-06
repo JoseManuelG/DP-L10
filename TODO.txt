@@ -1,6 +1,4 @@
-Delete de cuentas
 Lista de likes en profile con link a quien lo ha hecho
-Administrator tiene que poder ver el perfil
 B+ tree
 Informe de costes 
 A+
@@ -21,6 +19,8 @@ SearchTemplate:
 
 
 ---------------COMPLETO---------------------
+Delete de cuentas
+Administrator tiene que poder ver el perfil
 Hacer un baner de cada acme, subirlos a una url y añadirlos a los dos populates
 Cambiar logo y favicon
 Revisar dashboard con populate vacio
