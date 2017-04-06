@@ -20,11 +20,11 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="chirps" requestURI="${requestURI}" id="row" excludedParams="*">
 
-	<acme:column sorteable="true" code="chirp.subject" path="subject"/>
+	<acme:maskedColumn sorteable="true" code="chirp.subject" text="${row.subject}"/>
 	
-	<acme:column sorteable="true" code="chirp.from" path="senderName"/>
+	<acme:maskedColumn sorteable="true" code="chirp.from" text="${ row.senderName}"/>
 	
-	<acme:column sorteable="true" code="chirp.for" path="recipientName"/>
+	<acme:maskedColumn  sorteable="true" code="chirp.for" text="${row.recipientName}"/>
 	
 	<display:column>
 		<a href="chirp/chorbi/view.do?chirpId=${row.id}">

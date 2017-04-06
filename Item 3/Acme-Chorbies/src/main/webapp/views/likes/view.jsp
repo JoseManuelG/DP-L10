@@ -18,16 +18,16 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <spring:message code="likes.from"/>:
-<jstl:out value="${likes.liker}"/><br/>
+<acme:mask text="${likes.liker}"/><br/>
 
 
 <spring:message code="likes.sendingMoment"/>:
-<jstl:out value="${likes.moment}"/><br/>
+<acme:mask text="${likes.moment}"/><br/>
 
 
 <fieldset>
 	<legend><spring:message code="likes.comment"/></legend>
-	<jstl:out value="${likes.comment}"/>
+	<acme:mask text="${likes.comment}"/>
 </fieldset><br/>
 <jstl:if test="${aux}">
 <a href="likes/chorbi/delete.do?likesId=${likes.id}" onclick="return confirm('<spring:message code="confirm.delete" />')">

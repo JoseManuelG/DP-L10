@@ -20,10 +20,10 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="likes" requestURI="${requestURI}" id="row" excludedParams="*">
 
-	<acme:column sorteable="true" code="likes.liker.name" path="liker.name"/>
-	<acme:column sorteable="true" code="likes.liker.surname" path="liker.surname"/>
+	<acme:maskedColumn sorteable="true" code="likes.liker.name" text="${row.liker.name}"/>
+	<acme:maskedColumn sorteable="true" code="likes.liker.surname" text="${row.liker.surname}"/>
 
-	<acme:column sorteable="true" code="likes.comment" path="comment"/>
+	<acme:maskedColumn sorteable="true" code="likes.comment" text="${row.comment}"/>
 	
 	
 	<display:column>

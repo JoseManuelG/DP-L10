@@ -18,32 +18,32 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <fieldset>
 <spring:message code="chorbi.name"/>:
-<jstl:out value="${chorbi.name}"/><br/>
+<acme:mask text="${chorbi.name}"/><br/>
 
 <spring:message code="chorbi.surname"/>:
-<jstl:out value="${chorbi.surname}"/><br/>
+<acme:mask text="${chorbi.surname}"/><br/>
 
 <spring:message code="chorbi.email"/>:
-<jstl:out value="${chorbi.email}"/><br/>
+<acme:mask text="${chorbi.email}"/><br/>
 
 <spring:message code="chorbi.phone"/>:
-<jstl:out value="${chorbi.phone}"/><br/>
+<acme:mask text="${chorbi.phone}"/><br/>
 
 <spring:message code="chorbi.picture"/>:<br/>
 <acme:image url="${chorbi.picture}"/><br/>
 
 <spring:message code="chorbi.birthDate"/>:
-<jstl:out value="${chorbi.birthDate}"/><br/>
+<acme:mask text="${chorbi.birthDate}"/><br/>
 
 <spring:message code="chorbi.genre"/>:
-<jstl:out value="${chorbi.genre}"/><br/>
+<acme:mask text="${chorbi.genre}"/><br/>
 
 <spring:message code="chorbi.desiredRelationship"/>:
-<jstl:out value="${chorbi.desiredRelationship}"/><br/>
+<acme:mask text="${chorbi.desiredRelationship}"/><br/>
 
 
 <spring:message code="chorbi.description"/>:
-<jstl:out value="${chorbi.description}"/>
+<acme:mask text="${chorbi.description}"/>
 </fieldset><br/>
 
 <fieldset>

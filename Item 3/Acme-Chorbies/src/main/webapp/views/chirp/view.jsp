@@ -18,20 +18,20 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <spring:message code="chirp.from"/>:
-<jstl:out value="${res.senderName}"/><br/>
+<acme:mask text="${res.senderName}"/><br/>
 
 <spring:message code="chirp.for"/>:
-<jstl:out value="${res.recipientName}"/><br/>
+<acme:mask text="${res.recipientName}"/><br/>
 
 <spring:message code="chirp.sendingMoment"/>:
-<jstl:out value="${res.sendingMoment}"/><br/>
+<acme:mask text="${res.sendingMoment}"/><br/>
 
 <spring:message code="chirp.subject"/>:
-<jstl:out value="${res.subject}"/><br/>
+<acme:mask text="${res.subject}"/><br/>
 
 <fieldset>
 	<legend><spring:message code="chirp.text"/></legend>
-	<jstl:out value="${res.text}"/>
+	<acme:mask text="${res.text}"/>
 </fieldset><br/>
 
 <jstl:if test="${attachments.size()!=0}">
@@ -46,7 +46,7 @@
 						${row.url}
 					</jstl:when>
 					<jstl:otherwise>
-						${row.name}
+						<acme:mask text="${row.name}"/>
 					</jstl:otherwise>
 				</jstl:choose>
 			</a>
