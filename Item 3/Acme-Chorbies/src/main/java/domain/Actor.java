@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
@@ -47,9 +46,8 @@ public abstract class Actor extends DomainEntity {
 		this.surname = surname;
 	}
 
-	@Email
-	@NotBlank
 	@SafeHtml
+	@Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$")
 	public String getEmail() {
 		return this.email;
 	}
@@ -58,7 +56,7 @@ public abstract class Actor extends DomainEntity {
 		this.email = email;
 	}
 
-	@Pattern(regexp = "^(\\+([0-9][0-9][0-9]))?([0-9A-Za-z])+$")
+	@Pattern(regexp = "^(?:\\+?\\d{2}\\s*)?\\s*([0-9](\\s|-)*){9,20}$")
 	public String getPhone() {
 		return this.phone;
 	}
