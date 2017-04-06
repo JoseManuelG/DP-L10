@@ -15,6 +15,7 @@ import services.ChirpService;
 import services.ChorbiService;
 import services.LikesService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Chorbi;
 
 @Controller
@@ -53,10 +54,11 @@ public class ViewChorbiController extends AbstractController {
 	@RequestMapping(value = "/chorbi/view", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam final int chorbiId) {
 		ModelAndView result;
-		Chorbi chorbi, principal;
+		Chorbi chorbi;
+		Actor principal;
 		Boolean aux, myPrincipal;
 
-		principal = this.chorbiService.findChorbiByPrincipal();
+		principal = this.actorService.findActorByPrincipal();
 		chorbi = this.chorbiService.findOne(chorbiId);
 		aux = this.chorbiService.validLike(chorbi);
 		myPrincipal = chorbi.equals(principal);

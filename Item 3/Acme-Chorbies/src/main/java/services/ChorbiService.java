@@ -52,6 +52,9 @@ public class ChorbiService {
 	private CreditCardService		creditCardService;
 
 	@Autowired
+	private SearchTemplateService	searchTemplateService;
+
+	@Autowired
 	private ActorService			actorService;
 
 	@Autowired
@@ -92,8 +95,12 @@ public class ChorbiService {
 	}
 
 	public void delete() {
-		final Chorbi chorbi = this.findChorbiByPrincipal();
-
+		Chorbi chorbi;
+		chorbi = this.findChorbiByPrincipal();
+		this.creditCardService.deleteFromChorbi(chorbi);
+		this.searchTemplateService.deleteFromChorbi(chorbi);
+		this.likesService.deleteFromChorbi(chorbi);
+		this.chirpService.deleteFromChorbi(chorbi);
 		this.chorbiRepository.delete(chorbi);
 		this.userAccountRepository.delete(chorbi.getUserAccount().getId());
 
@@ -227,13 +234,9 @@ public class ChorbiService {
 		Boolean res;
 		Actor principal;
 
-		res = true;
 		principal = this.actorService.findActorByPrincipal();
+		res = !principal.equals(chorbi) && this.likesService.findUniqueLike(chorbi.getId());
 
-		if (((Chorbi) principal).equals(chorbi))
-			res = false;
-		else
-			res = this.likesService.findUniqueLike(chorbi.getId());
 		return res;
 	}
 

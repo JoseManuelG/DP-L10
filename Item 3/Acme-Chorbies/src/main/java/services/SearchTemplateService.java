@@ -32,6 +32,8 @@ public class SearchTemplateService {
 	private ChorbiService				chorbiService;
 	@Autowired
 	private ConfigurationService		configurationService;
+	@Autowired
+	private CoordinatesService			coordinatesService;
 
 	@Autowired
 	private Validator					validator;
@@ -140,14 +142,33 @@ public class SearchTemplateService {
 		this.searchTemplateRepository.delete(searchTemplate);
 	}
 
+	public void deleteFromChorbi(final Chorbi chorbi) {
+		SearchTemplate searchTemplate;
+
+		searchTemplate = this.findByChorbi(chorbi.getId());
+
+		this.coordinatesService.delete(searchTemplate.getCoordinates());
+
+		this.searchTemplateRepository.delete(searchTemplate);
+	}
+
 	// Other business methods --------------------------------------
 
 	public SearchTemplate findByPrincipal() {
 		final SearchTemplate result;
 		final int actorId = this.actorService.findActorByPrincipal().getId();
-		result = this.searchTemplateRepository.findByChrobi(actorId);
+		result = this.findByChorbi(actorId);
 		return result;
 	}
+
+	public SearchTemplate findByChorbi(final int chorbiId) {
+		final SearchTemplate result;
+
+		result = this.searchTemplateRepository.findByChrobi(chorbiId);
+
+		return result;
+	}
+
 	public SearchTemplate reconstruct(final SearchTemplate searchTemplate, final BindingResult binding) {
 		SearchTemplate res, old;
 		Integer auxAge;

@@ -149,7 +149,7 @@ public class SecurityController extends AbstractController {
 			result = new ModelAndView("redirect:/j_spring_security_logout");
 
 		} catch (final Exception e) {
-			result = this.createEditModelAndView(actorForm, false, "commit.error");
+			result = this.createEditModelAndView(actorForm, false, "chorbi.commit.error");
 		}
 
 		return result;

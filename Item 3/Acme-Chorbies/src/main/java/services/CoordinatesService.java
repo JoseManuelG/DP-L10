@@ -68,6 +68,13 @@ public class CoordinatesService {
 
 		this.coordinatesRepository.delete(coordinates);
 	}
+
+	public void delete(final Coordinates coordinates) {
+
+		this.coordinatesRepository.delete(coordinates);
+
+	}
+
 	public void flush() {
 		this.coordinatesRepository.flush();
 	}

@@ -1,9 +1,7 @@
 
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
 
@@ -25,9 +23,6 @@ public class CreditCardService {
 	private CreditCardRepository	creditCardRepository;
 
 	// Supporting Services ------------------------------------------------------------
-
-	@Autowired
-	private SearchTemplateService	searchTemplateService;
 
 	@Autowired
 	private ChorbiService			chorbiService;
@@ -67,56 +62,31 @@ public class CreditCardService {
 		return result;
 	}
 
-	public void delete(final CreditCard creditCard) {
-		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
-		final Chorbi chorbi = this.chorbiService.findChorbiByPrincipal();
-		//Tengo q ver como meter las restricciones sin navegabilidad
-		//Assert.isTrue(chorbi.getCreditCard().getId() == creditCard.getId(), "La tarjeta de crédito debe pertenecer al chorbi");
-		//	chorbi.setCreditCard(null);
-		//chorbiService.save(chorbi);
+	public void deleteFromChorbi(final Chorbi chorbi) {
+		CreditCard creditCard;
+
+		creditCard = this.getCreditCardByChorbi();
+
 		this.creditCardRepository.delete(creditCard);
 	}
 
 	// Other Bussiness Methods --------------------------------------------------------
 
-	public void checkCreditCard(final CreditCard creditCard) {
-		long today, cardDate, sevenDays;
-		Calendar calendar;
-
-		Assert.notNull(creditCard, "creditCard.null.error");
-		sevenDays = 7 * 24 * 60 * 60 * 100;
-		today = System.currentTimeMillis();
-		calendar = new GregorianCalendar(creditCard.getExpirationYear(), creditCard.getExpirationMonth(), 1);
-		cardDate = calendar.getTimeInMillis();
-
-		Assert.isTrue(cardDate > today + sevenDays, "creditCard.expired.error");
-	}
-
-	public String getMaskedCreditCardAsString(final CreditCard creditCard) {
-		String number, mask;
-
-		number = creditCard.getNumber();
-		mask = "";
-		if (number.length() <= 4)
-			mask = number;
-		else {
-			for (int i = 0; i < number.length() - 4; i++)
-				mask += "*";
-			mask += number.substring(number.length() - 4);
-		}
-
-		return mask;
-	}
-
-	public void maskCreditCard(final CreditCard creditCard) {
-		creditCard.setNumber(this.getMaskedCreditCardAsString(creditCard));
-	}
-
 	public CreditCard getCreditCardByChorbi() {
 		CreditCard creditCard;
 		Chorbi chorbi;
+
 		chorbi = this.chorbiService.findChorbiByPrincipal();
+		creditCard = this.getCreditCardByChorbi(chorbi);
+
+		return creditCard;
+	}
+
+	public CreditCard getCreditCardByChorbi(final Chorbi chorbi) {
+		CreditCard creditCard;
+
 		creditCard = this.creditCardRepository.findCreditCardByChorbiId(chorbi.getId());
+
 		return creditCard;
 	}
 

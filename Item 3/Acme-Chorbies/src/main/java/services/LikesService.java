@@ -1,9 +1,9 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,13 +106,6 @@ public class LikesService {
 
 	//Other bussiness methods------------------------
 
-	public Collection<Likes> findAllLikessOfAChorbi(final Chorbi chorbi) {
-		Collection<Likes> likes;
-		this.likesRepository.findAll();
-		likes = this.likesRepository.findLikessByChorbiID(chorbi.getId());
-		return likes;
-	}
-
 	public boolean validAutoLikes(final Likes like) {
 		boolean result = false;
 		if (like.getLiker().equals(like.getLiked()))
@@ -141,15 +134,27 @@ public class LikesService {
 
 	public Collection<Likes> findReceivedLikesOfPrincipal() {
 		final int recipientId = this.chorbiService.findChorbiByPrincipal().getId();
-		final List<Likes> result = this.likesRepository.findReceivedLikesOfChorbi(recipientId);
+		final Collection<Likes> result = this.findReceivedLikesOfChorbi(recipientId);
+		return result;
+	}
+
+	public Collection<Likes> findReceivedLikesOfChorbi(final int chorbiId) {
+
+		final Collection<Likes> result = this.likesRepository.findReceivedLikesOfChorbi(chorbiId);
 		return result;
 	}
 
 	public Collection<Likes> findSentLikesOfPrincipal() {
 		final int senderId = this.chorbiService.findChorbiByPrincipal().getId();
-		final List<Likes> result = this.likesRepository.findSentLikesOfChorbi(senderId);
+		final Collection<Likes> result = this.findSentLikesOfChorbi(senderId);
 		return result;
 	}
+
+	public Collection<Likes> findSentLikesOfChorbi(final int chorbiId) {
+		final Collection<Likes> result = this.likesRepository.findSentLikesOfChorbi(chorbiId);
+		return result;
+	}
+
 	public Boolean findUniqueLike(final int chorbiId) {
 		Boolean res;
 		final Likes likes;
@@ -162,5 +167,16 @@ public class LikesService {
 			res = true;
 
 		return res;
+	}
+
+	public void deleteFromChorbi(final Chorbi chorbi) {
+		Collection<Likes> likes;
+
+		likes = new ArrayList<Likes>();
+		likes.addAll(this.findReceivedLikesOfChorbi(chorbi.getId()));
+		likes.addAll(this.findSentLikesOfChorbi(chorbi.getId()));
+
+		this.likesRepository.deleteAll();
+
 	}
 }

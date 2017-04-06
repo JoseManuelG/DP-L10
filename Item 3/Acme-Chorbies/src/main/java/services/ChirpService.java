@@ -287,11 +287,15 @@ public class ChirpService {
 		return result;
 	}
 
-	public void deleteChorbi(final Chorbi chorbi) {
-		final Collection<Chirp> chirps = new ArrayList<Chirp>();
-		final Collection<Chirp> chirps2 = new ArrayList<Chirp>();
+	public void deleteFromChorbi(final Chorbi chorbi) {
+		final Collection<Chirp> chirps;
+		Collection<Chirp> chirps2;
+
+		chirps = new ArrayList<Chirp>();
+		chirps2 = new ArrayList<Chirp>();
 		chirps.addAll(this.chirpRepository.findSentChirpOfChorbi(chorbi.getId()));
 		chirps.addAll(this.chirpRepository.findReceivedChirpOfChorbi(chorbi.getId()));
+
 		this.attachmentService.deleteChorbi(chorbi);
 		this.chirpRepository.delete(chirps);
 		chirps.clear();
