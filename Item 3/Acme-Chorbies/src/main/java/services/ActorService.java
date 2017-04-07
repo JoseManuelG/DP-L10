@@ -80,6 +80,7 @@ public class ActorService {
 		userAccount.setId(origin.getUserAccount().getId());
 		userAccount.setVersion(origin.getUserAccount().getVersion());
 		userAccount.setAuthorities(origin.getUserAccount().getAuthorities());
+		userAccount.setEnabled(origin.getUserAccount().isEnabled());
 
 		result.setId(origin.getId());
 		result.setVersion(origin.getVersion());
