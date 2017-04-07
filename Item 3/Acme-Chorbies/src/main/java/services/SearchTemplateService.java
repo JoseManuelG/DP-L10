@@ -34,7 +34,8 @@ public class SearchTemplateService {
 	private ConfigurationService		configurationService;
 	@Autowired
 	private CoordinatesService			coordinatesService;
-
+	@Autowired
+	private CreditCardService			creditCardService;
 	@Autowired
 	private Validator					validator;
 
@@ -74,6 +75,7 @@ public class SearchTemplateService {
 
 		//Revisar que el search guardado sea del Principal
 		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
+		Assert.notNull(this.creditCardService.getCreditCardByChorbi(), "search.notCreditCard");
 		//Fechas para comprobar el tiempo de caché
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
 		lastSearch = new Date(searchTemplate.getCacheMoment().getTime());

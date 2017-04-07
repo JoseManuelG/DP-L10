@@ -76,14 +76,14 @@ public class SearchTemplateChorbiController extends AbstractController {
 				this.searchTemplateService.save(res);
 				result = this.search();
 
-			} catch (final Throwable oops) {
+			} catch (final IllegalArgumentException e) {
 				results = new ArrayList<Chorbi>();
 
 				result = new ModelAndView("searchTemplate/chorbi/search.do");
 				result.addObject("search", search);
 				result.addObject("requestURI", "searchTemplate/chorbi/search.do");
 				result.addObject("results", results);
-				result.addObject("message", "searchTemplate.commit.error");
+				result.addObject("message", e.getMessage());
 			}
 		return result;
 	}
