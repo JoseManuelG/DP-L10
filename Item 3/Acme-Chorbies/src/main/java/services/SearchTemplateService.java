@@ -43,11 +43,17 @@ public class SearchTemplateService {
 	// Simple CRUD methods --------------------------------------
 	public SearchTemplate create() {
 		SearchTemplate result;
+		Coordinates coordinates;
 
 		result = new SearchTemplate();
 		result.setAge(0);
 		result.setCacheMoment(new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime()));
 		result.setChorbies(new ArrayList<Chorbi>());
+		result.setDesiredRelationship("");
+		result.setGenre("");
+		result.setKeyword("");
+		coordinates = this.coordinatesService.create();
+		result.setCoordinates(coordinates);
 
 		return result;
 	}
@@ -242,5 +248,12 @@ public class SearchTemplateService {
 		this.validator.validate(res, binding);
 
 		return res;
+	}
+
+	public void createForChorbi(final Chorbi result) {
+		SearchTemplate searchTemplate;
+		searchTemplate = this.create();
+		searchTemplate.setChorbi(result);
+		this.searchTemplateRepository.save(searchTemplate);
 	}
 }

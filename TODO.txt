@@ -3,10 +3,10 @@ Informe de costes
 A+
 A+ extra
 Revisar pagina en general con populate vacio
-Que se mire que el chorbie tiene CreditCard la buscar.
+Cambiar cadena de credit card (pone algo de reservas).
 Preguntar a corchuelo si con ciudad obligatorio solo vale.
-En la dashboard estaría bien que en "Churris ordenados por número de me gusta" saliera el número también. (facil con list<Object[]>)
-En la dashboard estaría bien que saliera 0.32 en vez de .32
+Country es obligatorio.
+Documentar las cosas al final.
 
 
 SearchTemplate:
@@ -20,6 +20,8 @@ SearchTemplate:
 
 
 ---------------COMPLETO---------------------
+En la dashboard estaría bien que en "Churris ordenados por número de me gusta" saliera el número también. (facil con list<Object[]>)
+En la dashboard estaría bien que saliera 0.32 en vez de .32
 Lista de likes en profile con link a quien lo ha hecho
 Delete de cuentas
 Administrator tiene que poder ver el perfil

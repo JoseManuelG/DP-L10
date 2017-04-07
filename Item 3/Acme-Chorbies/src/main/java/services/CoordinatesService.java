@@ -30,6 +30,10 @@ public class CoordinatesService {
 	//Simple CRUD methods-------------------------------------------------------------------
 	public Coordinates create() {
 		final Coordinates result = new Coordinates();
+		result.setCity("");
+		result.setCountry("");
+		result.setProvince("");
+		result.setState("");
 		return result;
 	}
 

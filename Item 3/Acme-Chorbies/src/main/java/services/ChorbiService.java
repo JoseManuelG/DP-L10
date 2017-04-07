@@ -75,6 +75,8 @@ public class ChorbiService {
 		chorbi.setUserAccount(this.userAccountRepository.save(chorbi.getUserAccount()));
 		result = this.chorbiRepository.save(chorbi);
 		Assert.notNull(result, "chorbi.error.commit");
+		if (chorbi.getId() == 0)
+			this.searchTemplateService.createForChorbi(result);
 
 		return result;
 
