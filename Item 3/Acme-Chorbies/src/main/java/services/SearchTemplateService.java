@@ -86,18 +86,34 @@ public class SearchTemplateService {
 			result.setCacheMoment(new Date(System.currentTimeMillis() - 1000));
 
 			//Busqueda en base de Datos
-			if (!searchTemplate.getAge().equals(0))
+			if (!searchTemplate.getAge().equals(0) && !searchTemplate.getGenre().isEmpty())
+
 				chorbies = this.chorbiService.searchChorbis(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(),
 
 				searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
 
 				searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState(), searchTemplate.getAge());
-			else
+
+			else if (searchTemplate.getAge().equals(0) && !searchTemplate.getGenre().isEmpty())
+
 				chorbies = this.chorbiService.searchChorbisWithoutAge(searchTemplate.getDesiredRelationship(), searchTemplate.getGenre(),
 
 				searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
 
 				searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState());
+
+			else if (!searchTemplate.getAge().equals(0) && searchTemplate.getGenre().isEmpty())
+
+				chorbies = this.chorbiService.searchChorbisWithOutGenre(searchTemplate.getDesiredRelationship(), searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
+
+				searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState(), searchTemplate.getAge());
+			else
+				chorbies = this.chorbiService.searchChorbisWithoutAgeAndGenre(searchTemplate.getDesiredRelationship(),
+
+				searchTemplate.getKeyword(), searchTemplate.getCoordinates().getCity(), searchTemplate.getCoordinates().getProvince(),
+
+				searchTemplate.getCoordinates().getCountry(), searchTemplate.getCoordinates().getState());
+
 			result.setChorbies(chorbies);
 
 			result = this.searchTemplateRepository.save(result);
@@ -107,7 +123,6 @@ public class SearchTemplateService {
 
 		return result;
 	}
-
 	//Comprueba si ha sido modificado el searchTemplate
 	private boolean searchTemplateHasBeenModified(final SearchTemplate searchTemplate) {
 		SearchTemplate old;

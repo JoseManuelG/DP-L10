@@ -225,7 +225,21 @@ public class ChorbiService {
 		final Collection<Chorbi> res = this.chorbiRepository.searchChorbisWithoutAge(desiredRelathionship, genre, keyword, cityCoordinate, provinceCoordinate, countryCoordinate, stateCoordinate);
 		return res;
 	}
+	Collection<Chorbi> searchChorbisWithoutAgeAndGenre(final String desiredRelathionship, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate) {
+		Collection<Chorbi> result;
+		result = this.chorbiRepository.searchChorbisWithoutAgeAndGenre(desiredRelathionship, keyword, cityCoordinate, provinceCoordinate, countryCoordinate, stateCoordinate);
+		return result;
+	}
+	Collection<Chorbi> searchChorbisWithOutGenre(final String desiredRelathionship, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate, final Integer age) {
+		final Date aux = new Date(System.currentTimeMillis());
+		Collection<Chorbi> result;
+		final Date aux2 = new Date(aux.getYear() - age, aux.getMonth(), aux.getDay());
+		final Date firstDate = new Date(aux2.getYear() - 5, aux.getMonth(), aux.getDay());
+		final Date secondDate = new Date(aux2.getYear() + 5, aux.getMonth(), aux.getDay());
 
+		result = this.chorbiRepository.searchChorbisWithOutGenre(desiredRelathionship, keyword, cityCoordinate, provinceCoordinate, countryCoordinate, stateCoordinate, firstDate, secondDate);
+		return result;
+	}
 	Coordinates findCoordinatesByUserAccount() {
 		final Chorbi chorbi = this.findChorbiByPrincipal();
 		Coordinates coordinates;

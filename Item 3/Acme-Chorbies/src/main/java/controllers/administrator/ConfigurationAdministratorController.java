@@ -3,6 +3,8 @@ package controllers.administrator;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -52,8 +54,26 @@ public class ConfigurationAdministratorController extends AbstractController {
 	// Edit -----------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
-		final ConfigurationForm configurationForm = new ConfigurationForm();
-		final ModelAndView result = this.createEditModelAndView(configurationForm);
+		ModelAndView result;
+		Configuration conf;
+		ConfigurationForm configurationForm;
+		int hours, minutes, seconds;
+		long millis;
+
+		conf = this.configurationService.findConfiguration();
+		millis = conf.getCachedTime();
+
+		hours = (int) (TimeUnit.MILLISECONDS.toHours(millis));
+		minutes = (int) (TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)));
+		seconds = (int) (TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+
+		configurationForm = new ConfigurationForm();
+		configurationForm.setHours(hours);
+		configurationForm.setMinutes(minutes);
+		configurationForm.setSeconds(seconds);
+
+		result = this.createEditModelAndView(configurationForm);
+
 		return result;
 
 	}
@@ -61,7 +81,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 	// Save ---------------------------------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final ConfigurationForm configurationForm, final BindingResult binding) {
+	public ModelAndView save(@Valid final ConfigurationForm configurationForm, final BindingResult binding) {
 		ModelAndView result;
 		Configuration configuration;
 
