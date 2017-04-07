@@ -26,7 +26,7 @@ public class DashboardAdministratorController extends AbstractController {
 	}
 
 
-	private static DecimalFormat	df2	= new DecimalFormat(".##");
+	private static DecimalFormat	df2	= new DecimalFormat("0.##");
 
 
 	// List --------------------------------------------------------------------
