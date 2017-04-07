@@ -17,28 +17,19 @@
 <tiles-definitions>
 
 	<definition name="likes/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de likes" />
+		<put-attribute name="title" value="Lista gustos" />
 		<put-attribute name="body" value="/views/likes/list.jsp" />
 	</definition>
 	
 	<definition name="likes/chorbi/view" extends="master.page">	
-		<put-attribute name="title" value="Ver like" />
+		<put-attribute name="title" value="Ver gusto" />
 		<put-attribute name="body" value="/views/likes/view.jsp" />
 	</definition>
 	
-	<definition name="likes/write" extends="master.page">	
-		<put-attribute name="title" value="Escribir like" />
-		<put-attribute name="body" value="/views/likes/write.jsp" />
+	<definition name="likes/chorbi/create" extends="master.page">	
+		<put-attribute name="title" value="Nuevo gusto" />
+		<put-attribute name="body" value="/views/likes/create.jsp" />
 	</definition>
 	
-	<definition name="likes/chorbi/sent" extends="master.page">	
-		<put-attribute name="title" value="Write like" />
-		<put-attribute name="body" value="/views/likes/list.jsp" />
-	</definition>
-	
-	<definition name="likes/chorbi/received" extends="master.page">	
-		<put-attribute name="title" value="Write like" />
-		<put-attribute name="body" value="/views/likes/list.jsp" />
-	</definition>
 	
 </tiles-definitions>

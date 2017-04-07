@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
 import repositories.LikesRepository;
-import security.LoginService;
 import domain.Actor;
 import domain.Chorbi;
 import domain.Likes;
@@ -27,9 +26,6 @@ public class LikesService {
 	private LikesRepository	likesRepository;
 
 	//Supporting services-----------------------------
-
-	@Autowired
-	private LoginService	loginService;
 
 	@Autowired
 	private ChorbiService	chorbiService;
@@ -77,18 +73,22 @@ public class LikesService {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	public Likes save(final Likes likes) {
-		final Date currentMoment = new Date(System.currentTimeMillis() - 10000);
-
-		Assert.notNull(likes, "El like no puede ser nulo");
-		Assert.isTrue(likes.getId() == 0, "No se pueden modificar likes");
-		likes.setMoment(currentMoment);
-
-		Assert.isTrue(likes.getLiker().getUserAccount().equals(this.loginService.getPrincipal()), "Solo el propietario puede realizar operaciones");
+		Date currentMoment;
 		Likes result;
 
+		Assert.notNull(likes, "likes.null.error");
+		Assert.isTrue(likes.getId() == 0, "likes.edit.error");
+		Assert.isTrue(likes.getLiker().equals(this.chorbiService.findChorbiByPrincipal()), "likes.principal.error");
+		Assert.isTrue(!likes.getLiked().equals(likes.getLiker()), "likes.self.error");
+		Assert.isTrue(this.findUniqueLike(likes.getLiked().getId()), "likes.unique.error");
+
+		currentMoment = new Date(System.currentTimeMillis() - 10000);
+		likes.setMoment(currentMoment);
+
 		result = this.likesRepository.save(likes);
+
+		Assert.notNull(result, "likes.commit.error");
 
 		return result;
 	}
@@ -105,14 +105,6 @@ public class LikesService {
 	}
 
 	//Other bussiness methods------------------------
-
-	public boolean validAutoLikes(final Likes like) {
-		boolean result = false;
-		if (like.getLiker().equals(like.getLiked()))
-			result = true;
-		return result;
-
-	}
 
 	public Likes reconstruct(final Likes likes, final BindingResult binding) {
 		Likes result;
@@ -162,15 +154,12 @@ public class LikesService {
 		final Likes likes;
 		Actor principal;
 
-		res = false;
 		principal = this.actorService.findActorByPrincipal();
 		likes = this.likesRepository.findUniqueLike(principal.getId(), chorbiId);
-		if (likes == null)
-			res = true;
+		res = likes == null;
 
 		return res;
 	}
-
 	public void deleteFromChorbi(final Chorbi chorbi) {
 		Collection<Likes> likes;
 
