@@ -71,9 +71,9 @@ public class CreditCardService {
 	public void deleteFromChorbi(final Chorbi chorbi) {
 		CreditCard creditCard;
 
-		creditCard = this.getCreditCardByChorbi();
-
-		this.creditCardRepository.delete(creditCard);
+		creditCard = this.getCreditCardByChorbi(chorbi);
+		if (creditCard != null)
+			this.creditCardRepository.delete(creditCard);
 	}
 
 	// Other Bussiness Methods --------------------------------------------------------
