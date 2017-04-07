@@ -131,6 +131,7 @@ public class ChorbiService {
 		final Authority authority = new Authority();
 		authority.setAuthority("CHORBI");
 		authorities.add(authority);
+		userAccount.setEnabled(true);
 		userAccount.setAuthorities(authorities);
 
 		result.setName(actorForm.getName());
@@ -193,11 +194,9 @@ public class ChorbiService {
 		Assert.isTrue(auth.getAuthority().equals("ADMINISTRATOR"), "chorbi.error.notadmin");
 		Chorbi chorbi;
 		chorbi = this.chorbiRepository.findOne(chorbiId);
-		chorbi.setBanned(true);
 		final UserAccount ua = chorbi.getUserAccount();
 		ua.setEnabled(false);
 		this.userAccountRepository.save(ua);
-		this.chorbiRepository.save(chorbi);
 	}
 
 	public void unbanChorbi(final int chorbiId) {
@@ -206,11 +205,9 @@ public class ChorbiService {
 		Assert.isTrue(auth.getAuthority().equals("ADMINISTRATOR"), "chorbi.error.notadmin");
 		Chorbi chorbi;
 		chorbi = this.chorbiRepository.findOne(chorbiId);
-		chorbi.setBanned(false);
 		final UserAccount ua = chorbi.getUserAccount();
 		ua.setEnabled(true);
 		this.userAccountRepository.save(ua);
-		this.chorbiRepository.save(chorbi);
 	}
 	public Collection<Chorbi> searchChorbis(final String desiredRelathionship, final String genre, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate,
 		final Integer age) {

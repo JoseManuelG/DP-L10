@@ -86,6 +86,7 @@
 	<bean id="userAccountChorbi5" class="security.UserAccount">
 		<property name="username" value="chorbi5" />
 		<property name="password" value="7e062f6f2a4c0f7ec5abacef2917e033" />
+		<property name="enabled" value="false" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -98,6 +99,7 @@
 	<bean id="userAccountChorbi6" class="security.UserAccount">
 		<property name="username" value="chorbi6" />
 		<property name="password" value="0b41c51bd4b755c5b639498f55058fd3" />
+		<property name="enabled" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -110,6 +112,7 @@
 	<bean id="userAccountChorbi7" class="security.UserAccount">
 		<property name="username" value="chorbi7" />
 		<property name="password" value="cd33d975ad65688dc4d54b67ed48fd1a" />
+		<property name="enabled" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -122,6 +125,7 @@
 	<bean id="userAccountChorbi8" class="security.UserAccount">
 		<property name="username" value="chorbi8" />
 		<property name="password" value="cf0216b73314f84c64fd88f5adf4dfb2" />
+		<property name="enabled" value="false" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -155,8 +159,7 @@
 		<property name="description" value="description chorbi1" />
 		<property name="desiredRelationship" value="love" />
 		<property name="birthDate" value="06/20/1990" />
-		<property name="genre" value="man" />
-		<property name="banned" value="false" />	
+		<property name="genre" value="man" />	
 		<property name="coordinates" ref="coordinatesChorbi1" />		
 	</bean>
 	
@@ -170,8 +173,7 @@
 		<property name="description" value="description chorbi2" />
 		<property name="desiredRelationship" value="friendship" />
 		<property name="birthDate" value="06/20/1970" />
-		<property name="genre" value="man" />
-		<property name="banned" value="false" />	
+		<property name="genre" value="man" />	
 		<property name="coordinates" ref="coordinatesChorbi2" />	
 	</bean>
 	
@@ -186,7 +188,6 @@
 		<property name="desiredRelationship" value="activities" />
 		<property name="birthDate" value="06/20/1988" />
 		<property name="genre" value="man" />
-		<property name="banned" value="false" />	
 		<property name="coordinates" ref="coordinatesChorbi3" />	
 	</bean>
 	
@@ -201,7 +202,6 @@
 		<property name="desiredRelationship" value="love" />
 		<property name="birthDate" value="06/20/1979" />
 		<property name="genre" value="woman" />
-		<property name="banned" value="false" />	
 		<property name="coordinates" ref="coordinatesChorbi4" />	
 	</bean>
 	
@@ -215,8 +215,7 @@
 		<property name="description" value="description chorbi5, add me chorbi5@acme.com" />
 		<property name="desiredRelationship" value="love" />
 		<property name="birthDate" value="06/20/1995" />
-		<property name="genre" value="woman" />
-		<property name="banned" value="false" />	
+		<property name="genre" value="woman" />	
 		<property name="coordinates" ref="coordinatesChorbi5" />	
 	</bean>
 	
@@ -231,7 +230,6 @@
 		<property name="desiredRelationship" value="friendship" />
 		<property name="birthDate" value="04/21/1980" />
 		<property name="genre" value="woman" />
-		<property name="banned" value="true" />	
 		<property name="coordinates" ref="coordinatesChorbi6" />	
 	</bean>
 	
@@ -246,7 +244,6 @@
 		<property name="desiredRelationship" value="friendship" />
 		<property name="birthDate" value="04/21/1980" />
 		<property name="genre" value="woman" />
-		<property name="banned" value="true" />	
 		<property name="coordinates" ref="coordinatesChorbi7" />	
 	</bean>
 	
@@ -261,7 +258,6 @@
 		<property name="desiredRelationship" value="friendship" />
 		<property name="birthDate" value="04/21/1980" />
 		<property name="genre" value="woman" />
-		<property name="banned" value="true" />
 		<property name="coordinates" ref="coordinatesChorbi8" />	
 	</bean>
 

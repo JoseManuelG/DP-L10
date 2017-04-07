@@ -287,7 +287,7 @@ public class ChorbiTest extends AbstractTest {
 			chorbi.setGenre(genre);
 			chorbi.setDesiredRelationship(desiredRelationship);
 			chorbi.setPicture(picture);
-			chorbi.setBanned(true);
+			chorbi.getUserAccount().setEnabled(true);
 			chorbi.setCoordinates(coordinates);
 			this.chorbiService.save(chorbi);
 			this.chorbiService.flush();

@@ -23,8 +23,11 @@
 	<acme:textbox code="banner.link" path="link"/>
 	<acme:textbox code="banner.image" path="image"/>
 	<br>
-	<acme:submit code="banner.delete" name="delete" />
+
 	<acme:submit code="banner.save" name="save" />
+	<jstl:if test="${banner.id != 0}">
+		<acme:submit name="delete" code="banner.delete"/>
+	</jstl:if>
 	<acme:cancel code="banner.cancel" url="/banner/administrator/list.do" />
 	
 </form:form>

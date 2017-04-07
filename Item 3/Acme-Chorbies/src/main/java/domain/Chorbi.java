@@ -89,13 +89,9 @@ public class Chorbi extends Actor {
 	public void setGenre(final String genre) {
 		this.genre = genre;
 	}
-
+	@Transient
 	public boolean getBanned() {
-		return this.banned;
-	}
-
-	public void setBanned(final boolean banned) {
-		this.banned = banned;
+		return !this.getUserAccount().isEnabled();
 	}
 
 	@Transient
