@@ -46,7 +46,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 		else
 			results = new ArrayList<Chorbi>();
 
-		if (search.getAge().equals(0))
+		if (search.getAge() != null && search.getAge().equals(0))
 			search.setAge(null);
 
 		result = new ModelAndView("searchTemplate/chorbi/search.do");
