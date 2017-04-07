@@ -34,6 +34,7 @@ public class Chorbi extends Actor {
 	private String	desiredRelationship;
 	private Date	birthDate;
 	private String	genre;
+	@SuppressWarnings("unused")
 	private boolean	banned;
 	@SuppressWarnings("unused")
 	private int		age;

@@ -192,9 +192,7 @@ public class ChorbiService {
 		final List<Authority> auths = new ArrayList<Authority>(this.actorService.findActorByPrincipal().getUserAccount().getAuthorities());
 		final Authority auth = auths.get(0);
 		Assert.isTrue(auth.getAuthority().equals("ADMINISTRATOR"), "chorbi.error.notadmin");
-		Chorbi chorbi;
-		chorbi = this.chorbiRepository.findOne(chorbiId);
-		final UserAccount ua = chorbi.getUserAccount();
+		final UserAccount ua = this.chorbiRepository.findOne(chorbiId).getUserAccount();
 		ua.setEnabled(false);
 		this.userAccountRepository.save(ua);
 	}
@@ -203,9 +201,7 @@ public class ChorbiService {
 		final List<Authority> auths = new ArrayList<Authority>(this.actorService.findActorByPrincipal().getUserAccount().getAuthorities());
 		final Authority auth = auths.get(0);
 		Assert.isTrue(auth.getAuthority().equals("ADMINISTRATOR"), "chorbi.error.notadmin");
-		Chorbi chorbi;
-		chorbi = this.chorbiRepository.findOne(chorbiId);
-		final UserAccount ua = chorbi.getUserAccount();
+		final UserAccount ua = this.chorbiRepository.findOne(chorbiId).getUserAccount();
 		ua.setEnabled(true);
 		this.userAccountRepository.save(ua);
 	}
