@@ -639,7 +639,7 @@
 			</list>
 		</property>
 		<property name="desiredRelationship" value="" />
-		<property name="age" value="" />
+		<property name="age" value="0" />
 		<property name="genre" value="" />
 		<property name="keyword" value="chorbi3" />
 		<property name="cacheMoment" value="10/10/2016 22:22" />
@@ -653,7 +653,7 @@
 			</list>
 		</property>
 		<property name="desiredRelationship" value="friendship" />
-		<property name="age" value="" />
+		<property name="age" value="0" />
 		<property name="genre" value="" />
 		<property name="keyword" value="" />
 		<property name="cacheMoment" value="10/10/2016 22:22" />
@@ -667,7 +667,7 @@
 			</list>
 		</property>
 		<property name="desiredRelationship" value="" />
-		<property name="age" value="" />
+		<property name="age" value="0" />
 		<property name="genre" value="woman" />
 		<property name="keyword" value="" />
 		<property name="cacheMoment" value="10/10/2016 22:22" />
@@ -695,7 +695,7 @@
 			</list>
 		</property>
 		<property name="desiredRelationship" value="" />
-		<property name="age" value="" />
+		<property name="age" value="0" />
 		<property name="genre" value="" />
 		<property name="keyword" value="" />
 		<property name="cacheMoment" value="10/10/2016 22:22" />
@@ -709,7 +709,7 @@
 			</list>
 		</property>
 		<property name="desiredRelationship" value="" />
-		<property name="age" value="" />
+		<property name="age" value="0" />
 		<property name="genre" value="" />
 		<property name="keyword" value="" />
 		<property name="cacheMoment" value="10/10/2016 22:22" />
@@ -723,7 +723,7 @@
 			</list>
 		</property>
 		<property name="desiredRelationship" value="" />
-		<property name="age" value="" />
+		<property name="age" value="0" />
 		<property name="genre" value="" />
 		<property name="keyword" value="" />
 		<property name="cacheMoment" value="10/10/2016 22:22" />

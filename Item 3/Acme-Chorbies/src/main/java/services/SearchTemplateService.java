@@ -44,6 +44,7 @@ public class SearchTemplateService {
 		SearchTemplate result;
 
 		result = new SearchTemplate();
+		result.setAge(0);
 		result.setCacheMoment(new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime()));
 		result.setChorbies(new ArrayList<Chorbi>());
 
