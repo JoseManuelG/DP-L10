@@ -27,7 +27,7 @@ public class ConfigurationForm {
 		this.hours = hours;
 	}
 
-	@Range(min = 0, max = 60)
+	@Range(min = 0, max = 59)
 	public int getMinutes() {
 		return this.minutes;
 	}
@@ -36,7 +36,7 @@ public class ConfigurationForm {
 		this.minutes = minutes;
 	}
 
-	@Range(min = 0, max = 60)
+	@Range(min = 0, max = 59)
 	public int getSeconds() {
 		return this.seconds;
 	}
