@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
-import services.ChirpService;
 import services.ChorbiService;
 import services.LikesService;
 import controllers.AbstractController;
@@ -25,9 +24,6 @@ public class ViewChorbiController extends AbstractController {
 
 	@Autowired
 	private LikesService	likesService;
-
-	@Autowired
-	private ChirpService	chirpService;
 
 	@Autowired
 	private ChorbiService	chorbiService;

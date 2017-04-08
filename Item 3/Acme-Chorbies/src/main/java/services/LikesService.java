@@ -55,15 +55,6 @@ public class LikesService {
 		return result;
 	}
 
-	public Collection<Likes> findAll() {
-		Collection<Likes> result;
-
-		result = this.likesRepository.findAll();
-		Assert.notNull(result);
-
-		return result;
-	}
-
 	public Likes findOne(final int likeId) {
 		Likes result;
 
@@ -123,12 +114,6 @@ public class LikesService {
 		result.setId(likes.getId());
 		result.setVersion(likes.getVersion());
 
-		return result;
-	}
-
-	public Collection<Likes> findReceivedLikesOfPrincipal() {
-		final int recipientId = this.chorbiService.findChorbiByPrincipal().getId();
-		final Collection<Likes> result = this.findReceivedLikesOfChorbi(recipientId);
 		return result;
 	}
 

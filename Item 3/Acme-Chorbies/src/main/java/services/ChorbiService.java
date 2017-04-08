@@ -19,7 +19,6 @@ import repositories.ChorbiRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import security.UserAccountRepository;
 import domain.Actor;
 import domain.Chorbi;
 import domain.Coordinates;
@@ -34,10 +33,10 @@ public class ChorbiService {
 	@Autowired
 	private ChorbiRepository		chorbiRepository;
 
-	@Autowired
-	private UserAccountRepository	userAccountRepository;
-
 	// Supporting Services --------------------------------------
+
+	@Autowired
+	private UserAccountService		userAccountService;
 
 	@Autowired
 	private Validator				validator;
@@ -72,7 +71,7 @@ public class ChorbiService {
 
 		Assert.notNull(chorbi, "chorbi.error.null");
 		Assert.isTrue(chorbi.getAge() >= 18, "chorbi.underage.error");
-		chorbi.setUserAccount(this.userAccountRepository.save(chorbi.getUserAccount()));
+		chorbi.setUserAccount(this.userAccountService.save(chorbi.getUserAccount()));
 		result = this.chorbiRepository.save(chorbi);
 		Assert.notNull(result, "chorbi.error.commit");
 		if (chorbi.getId() == 0)
@@ -105,7 +104,7 @@ public class ChorbiService {
 		this.likesService.deleteFromChorbi(chorbi);
 		this.chirpService.deleteFromChorbi(chorbi);
 		this.chorbiRepository.delete(chorbi);
-		this.userAccountRepository.delete(chorbi.getUserAccount().getId());
+		this.userAccountService.delete(chorbi.getUserAccount().getId());
 
 	}
 	public void flush() {
@@ -196,7 +195,7 @@ public class ChorbiService {
 		Assert.isTrue(auth.getAuthority().equals("ADMINISTRATOR"), "chorbi.error.notadmin");
 		final UserAccount ua = this.chorbiRepository.findOne(chorbiId).getUserAccount();
 		ua.setEnabled(false);
-		this.userAccountRepository.save(ua);
+		this.userAccountService.save(ua);
 	}
 
 	public void unbanChorbi(final int chorbiId) {
@@ -205,8 +204,10 @@ public class ChorbiService {
 		Assert.isTrue(auth.getAuthority().equals("ADMINISTRATOR"), "chorbi.error.notadmin");
 		final UserAccount ua = this.chorbiRepository.findOne(chorbiId).getUserAccount();
 		ua.setEnabled(true);
-		this.userAccountRepository.save(ua);
+		this.userAccountService.save(ua);
 	}
+
+	@SuppressWarnings("deprecation")
 	public Collection<Chorbi> searchChorbis(final String desiredRelathionship, final String genre, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate,
 		final Integer age) {
 
@@ -223,12 +224,14 @@ public class ChorbiService {
 		final Collection<Chorbi> res = this.chorbiRepository.searchChorbisWithoutAge(desiredRelathionship, genre, keyword, cityCoordinate, provinceCoordinate, countryCoordinate, stateCoordinate);
 		return res;
 	}
-	Collection<Chorbi> searchChorbisWithoutAgeAndGenre(final String desiredRelathionship, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate) {
+	public Collection<Chorbi> searchChorbisWithoutAgeAndGenre(final String desiredRelathionship, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate) {
 		Collection<Chorbi> result;
 		result = this.chorbiRepository.searchChorbisWithoutAgeAndGenre(desiredRelathionship, keyword, cityCoordinate, provinceCoordinate, countryCoordinate, stateCoordinate);
 		return result;
 	}
-	Collection<Chorbi> searchChorbisWithOutGenre(final String desiredRelathionship, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate, final Integer age) {
+
+	@SuppressWarnings("deprecation")
+	public Collection<Chorbi> searchChorbisWithOutGenre(final String desiredRelathionship, final String keyword, final String cityCoordinate, final String provinceCoordinate, final String countryCoordinate, final String stateCoordinate, final Integer age) {
 		final Date aux = new Date(System.currentTimeMillis());
 		Collection<Chorbi> result;
 		final Date aux2 = new Date(aux.getYear() - age, aux.getMonth(), aux.getDay());
@@ -238,7 +241,7 @@ public class ChorbiService {
 		result = this.chorbiRepository.searchChorbisWithOutGenre(desiredRelathionship, keyword, cityCoordinate, provinceCoordinate, countryCoordinate, stateCoordinate, firstDate, secondDate);
 		return result;
 	}
-	Coordinates findCoordinatesByUserAccount() {
+	public Coordinates findCoordinatesByUserAccount() {
 		final Chorbi chorbi = this.findChorbiByPrincipal();
 		Coordinates coordinates;
 

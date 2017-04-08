@@ -1,8 +1,6 @@
 
 package services;
 
-import java.util.Collection;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +19,11 @@ public class CoordinatesService {
 	@Autowired
 	private CoordinatesRepository	coordinatesRepository;
 
+
 	// Supporting Services --------------------------------------
 
-	@Autowired
-	private ChorbiService			chorbiService;
-
-
 	//Simple CRUD methods-------------------------------------------------------------------
+
 	public Coordinates create() {
 		final Coordinates result = new Coordinates();
 		result.setCity("");
@@ -51,27 +47,6 @@ public class CoordinatesService {
 		return result;
 
 	}
-	public Coordinates findOne(final int id) {
-		Coordinates result;
-		result = this.coordinatesRepository.findOne(id);
-		return result;
-	}
-
-	public Collection<Coordinates> findAll() {
-		Collection<Coordinates> result;
-		result = this.coordinatesRepository.findAll();
-		return result;
-	}
-
-	public Long count() {
-		return this.coordinatesRepository.count();
-	}
-
-	public void delete() {
-		final Coordinates coordinates = this.chorbiService.findCoordinatesByUserAccount();
-
-		this.coordinatesRepository.delete(coordinates);
-	}
 
 	public void delete(final Coordinates coordinates) {
 
@@ -79,9 +54,6 @@ public class CoordinatesService {
 
 	}
 
-	public void flush() {
-		this.coordinatesRepository.flush();
-	}
 	//Other Business methods-------------------------------------------------------------------
 
 }

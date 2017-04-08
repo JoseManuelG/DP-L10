@@ -169,9 +169,6 @@ public class ChirpService {
 
 	}
 
-	public List<Chirp> findAllChirpOfChorbi(final int ChorbiId) {
-		return this.chirpRepository.findAllChirpOfChorbi(ChorbiId);
-	}
 	//Basicamente te hace el ChirpForm relleno del mensaje que has pasado, luego en la vista seleccionarias a quien mandarselo 
 	//y despues pasarias el mensaje al save
 	public ChirpForm forwardChirp(final int chirpId) {
@@ -197,93 +194,6 @@ public class ChirpService {
 		Assert.notNull(chirp.getSender());
 		final Chorbi recipient = this.chorbiService.findOne(chirp.getSender().getId());
 		result.setRecipient(recipient);
-		return result;
-	}
-
-	//09 - The average of chirps sent per chorbi.
-
-	public Double avgChirpsSentPerChorbi() {
-		Double result;
-		result = this.chirpRepository.avgChirpsSentPerChorbi();
-		return result;
-	}
-
-	//09 - The min of chirps sent per chorbi. 
-
-	public Long minChirpsSentPerChorbi() {
-		List<Long> chirps;
-		Long result = 0L;
-		chirps = this.chirpRepository.minChirpsSentPerChorbi();
-		if (!chirps.isEmpty())
-			result = chirps.iterator().next();
-		return result;
-	}
-
-	//09 - The maximum number of chirps sent per chorbi
-	public Long maxChirpsSentPerChorbi() {
-		List<Long> chirps;
-		Long result;
-		chirps = this.chirpRepository.maxChirpsSentPerChorbi();
-		if (!chirps.isEmpty())
-			result = chirps.iterator().next();
-		else
-			result = (long) 0;
-		return result;
-	}
-
-	//10 - The average of chirps received per chorbi.
-
-	public Double avgChirpsReceivedPerChorbi() {
-		Double result;
-		result = this.chirpRepository.avgChirpsReceivedPerChorbi();
-		return result;
-	}
-
-	//10 - The minimum of chirps received per chorbi.
-	public Long minChirpsReceivedPerChorbi() {
-		List<Long> chirps;
-		final Long result;
-		chirps = this.chirpRepository.minChirpsReceivedPerChorbi();
-		if (!chirps.isEmpty())
-			result = chirps.iterator().next();
-		else
-			result = (long) 0;
-
-		return result;
-	}
-	//10 - The maximum number of chirps received per chorbi. Part2
-	public Long maxChirpsReceivedPerChorbi() {
-		List<Long> chirps;
-		final Long result;
-		chirps = this.chirpRepository.maxChirpsReceivedPerChorbi();
-		if (!chirps.isEmpty())
-			result = chirps.iterator().next();
-		else
-			result = (long) 0;
-		return result;
-	}
-
-	//11 - The chorbis who have sent more chirps.
-	public Chorbi chorbiSentMoreChirps() {
-		List<Chorbi> chorbis;
-		final Chorbi result;
-		chorbis = this.chirpRepository.chorbiSentMoreChirps();
-		if (!chorbis.isEmpty())
-			result = chorbis.iterator().next();
-		else
-			result = null;
-		return result;
-	}
-
-	//12 - The chorbis who have received more chirps.
-	public Chorbi chorbiReceivedMoreChirps() {
-		List<Chorbi> chorbis;
-		final Chorbi result;
-		chorbis = this.chirpRepository.chorbiSentMoreChirps();
-		if (!chorbis.isEmpty())
-			result = chorbis.iterator().next();
-		else
-			result = null;
 		return result;
 	}
 

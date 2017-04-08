@@ -57,14 +57,6 @@ public class SearchTemplateService {
 
 		return result;
 	}
-	public Collection<SearchTemplate> findAll() {
-		Collection<SearchTemplate> result;
-
-		result = this.searchTemplateRepository.findAll();
-		Assert.notNull(result);
-
-		return result;
-	}
 
 	public SearchTemplate findOne(final int searchTemplateId) {
 		SearchTemplate result;
@@ -155,15 +147,6 @@ public class SearchTemplateService {
 
 		return result;
 
-	}
-	public void delete(final SearchTemplate searchTemplate) {
-		Assert.notNull(searchTemplate, "searchTemplate.error.null");
-		//Revisa que el search guardado sea del Principal
-		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
-		//Revisa que exista el SearchTemplate
-		Assert.isTrue(this.searchTemplateRepository.exists(searchTemplate.getId()), "searchTemplate.error.exists");
-
-		this.searchTemplateRepository.delete(searchTemplate);
 	}
 
 	public void deleteFromChorbi(final Chorbi chorbi) {

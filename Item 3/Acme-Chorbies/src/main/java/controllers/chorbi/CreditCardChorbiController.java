@@ -55,9 +55,10 @@ public class CreditCardChorbiController extends AbstractController {
 	public ModelAndView view() {
 		final ModelAndView result;
 		CreditCard creditCard;
+
 		creditCard = this.creditCardService.getCreditCardByChorbi();
 		result = new ModelAndView("creditCard/chorbi/myCreditCard");
-		final Chorbi chorbi = this.chorbiService.findChorbiByPrincipal();
+
 		if (creditCard != null)
 			result.addObject("creditCard", creditCard);
 		else

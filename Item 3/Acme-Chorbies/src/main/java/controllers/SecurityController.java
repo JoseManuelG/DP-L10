@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
-import services.AdministratorService;
 import services.ChorbiService;
 import domain.Actor;
 import domain.Administrator;
@@ -24,13 +23,10 @@ public class SecurityController extends AbstractController {
 
 	//Services------------------------------------------------------------
 	@Autowired
-	private ChorbiService			chorbiService;
+	private ChorbiService	chorbiService;
 
 	@Autowired
-	private ActorService			actorService;
-
-	@Autowired
-	private AdministratorService	administratorService;
+	private ActorService	actorService;
 
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -107,16 +103,14 @@ public class SecurityController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@Valid final ActorForm actorForm, final BindingResult binding) {
 		ModelAndView result;
-		Actor principal, actorResult;
+		Actor principal;
 		Boolean isAdmin;
-		final String actorString;
 		Chorbi chorbiResult;
 
 		chorbiResult = new Chorbi();
 
 		isAdmin = false;
 		principal = this.actorService.findActorByPrincipal();
-		actorResult = this.actorService.findActorByPrincipal();
 		if (principal instanceof Chorbi)
 			chorbiResult = this.chorbiService.reconstruct(actorForm, (Chorbi) principal, binding);
 

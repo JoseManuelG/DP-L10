@@ -13,9 +13,9 @@ import domain.SearchTemplate;
 public interface SearchTemplateRepository extends JpaRepository<SearchTemplate, Integer> {
 
 	@Query("select s from SearchTemplate s where s.chorbi.id=?1")
-	SearchTemplate findByChrobi(int chorbiId);
+	public SearchTemplate findByChrobi(int chorbiId);
 
 	@Query("select s from SearchTemplate s where ?1 member of s.chorbies")
-	Collection<SearchTemplate> findAllWithChorbi(int id);
+	public Collection<SearchTemplate> findAllWithChorbi(int id);
 
 }

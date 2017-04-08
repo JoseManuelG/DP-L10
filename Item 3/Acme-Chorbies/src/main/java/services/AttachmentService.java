@@ -33,16 +33,6 @@ public class AttachmentService {
 		return result;
 	}
 
-	public Attachment findOne(final Integer AttachmentId) {
-		final Attachment result = this.attachmentRepository.findOne(AttachmentId);
-		return result;
-	}
-
-	public Collection<Attachment> findAll() {
-		final Collection<Attachment> result = this.attachmentRepository.findAll();
-		return result;
-	}
-
 	public Attachment save(final Attachment attachment) {
 		Attachment result;
 		result = this.attachmentRepository.save(attachment);

@@ -1,8 +1,6 @@
 
 package services;
 
-import java.util.Collection;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,19 +37,6 @@ public class CreditCardService {
 	public CreditCard create() {
 		CreditCard result;
 		result = new CreditCard();
-		return result;
-	}
-
-	public Collection<CreditCard> findAll() {
-		Collection<CreditCard> result;
-		result = this.creditCardRepository.findAll();
-		Assert.notNull(result);
-		return result;
-	}
-
-	public CreditCard findOne(final int creditCardId) {
-		CreditCard result;
-		result = this.creditCardRepository.findOne(creditCardId);
 		return result;
 	}
 

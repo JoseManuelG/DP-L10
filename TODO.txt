@@ -1,10 +1,8 @@
 B+ tree
 Informe de costes 
 A+
-A+ extra
 Revisar pagina en general con populate vacio
-Cambiar cadena de credit card (pone algo de reservas).
-Preguntar a corchuelo si con ciudad obligatorio solo vale.
+La restriccion de creditCard esta mal. 
 Country es obligatorio.
 Documentar las cosas al final.
 
@@ -20,6 +18,9 @@ SearchTemplate:
 
 
 ---------------COMPLETO---------------------
+A+ extra
+Preguntar a corchuelo si con ciudad obligatorio solo vale.
+Cambiar cadena de credit card (pone algo de reservas).
 En la dashboard estaría bien que en "Churris ordenados por número de me gusta" saliera el número también. (facil con list<Object[]>)
 En la dashboard estaría bien que saliera 0.32 en vez de .32
 Lista de likes en profile con link a quien lo ha hecho

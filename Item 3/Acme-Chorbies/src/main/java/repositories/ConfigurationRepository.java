@@ -11,6 +11,6 @@ import domain.Configuration;
 public interface ConfigurationRepository extends JpaRepository<Configuration, Integer> {
 
 	@Query("select c from Configuration c")
-	Configuration findConfiguration();
+	public Configuration findConfiguration();
 
 }

@@ -11,9 +11,6 @@ import domain.Actor;
 public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	@Query("select a from Actor a where a.userAccount.id = ?1")
-	Actor findByUserAccountId(int id);
+	public Actor findByUserAccountId(int id);
 
-	//06 - Average number of comments per actor, offer, or request. Part2
-	@Query("select count(a) from Actor a")
-	Double countAllActors();
 }
