@@ -4,10 +4,15 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+	@Index(columnList = "city"), @Index(columnList = "province"), @Index(columnList = "country"), @Index(columnList = "state")
+})
 public class Coordinates extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------

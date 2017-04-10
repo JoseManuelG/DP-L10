@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,11 +62,17 @@ public class DashboardService {
 	public Double ratioChorbiesWithoutValidCreditCard() {
 		Long chorbies;
 		Double res;
+		LocalDate now, lastDayOfMonth;
+		Boolean isLastDay;
 
 		chorbies = this.chorbiRepository.count();
 
+		now = new LocalDate();
+		lastDayOfMonth = now.dayOfMonth().withMaximumValue();
+		isLastDay = now.equals(lastDayOfMonth);
+
 		if (chorbies > 0)
-			res = this.dashboardRepository.countValidCreditCard() / chorbies;
+			res = this.dashboardRepository.countValidCreditCard(isLastDay) / chorbies;
 		else
 			res = 0.;
 

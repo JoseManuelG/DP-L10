@@ -3,6 +3,9 @@ package services;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -36,10 +39,14 @@ public class CreditCardService {
 
 	public CreditCard create() {
 		CreditCard result;
+		Chorbi chorbi;
+
 		result = new CreditCard();
+		chorbi = this.chorbiService.findChorbiByPrincipal();
+		result.setChorbi(chorbi);
+
 		return result;
 	}
-
 	public CreditCard save(final CreditCard creditCard) {
 		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
 		CreditCard result;
@@ -49,6 +56,7 @@ public class CreditCardService {
 
 	public void delete(final CreditCard creditCard) {
 
+		Assert.notNull(creditCard);
 		this.creditCardRepository.delete(creditCard);
 		Assert.isTrue(!this.creditCardRepository.exists(creditCard.getId()));
 	}
@@ -77,6 +85,22 @@ public class CreditCardService {
 		creditCard = this.creditCardRepository.findCreditCardByChorbiId(chorbi.getId());
 
 		return creditCard;
+	}
+
+	public boolean checkCreditCardByChorbi() {
+		CreditCard creditCard;
+		LocalDate expireTime, now;
+		Period period;
+		Boolean result;
+
+		creditCard = this.getCreditCardByChorbi();
+		expireTime = new LocalDate(creditCard.getExpirationYear(), creditCard.getExpirationMonth() + 1, 1);
+		now = new LocalDate();
+		period = new Period(now, expireTime, PeriodType.yearMonthDay());
+
+		result = period.getDays() > 1;
+
+		return result;
 	}
 
 }

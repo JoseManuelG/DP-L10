@@ -143,6 +143,7 @@ public class ActorForm {
 		return this.country;
 	}
 
+	@NotBlank
 	public void setCountry(final String country) {
 		this.country = country;
 	}

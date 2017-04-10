@@ -5,7 +5,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,10 +41,11 @@ public class CreditCardChorbiController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		final CreditCard creditCard = this.creditCardService.create();
-		final Chorbi chorbi = this.chorbiService.findChorbiByPrincipal();
-		creditCard.setChorbi(chorbi);
+		CreditCard creditCard;
+
+		creditCard = this.creditCardService.create();
 		result = this.createEditModelAndView(creditCard);
+
 		return result;
 
 	}
@@ -71,8 +71,10 @@ public class CreditCardChorbiController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result;
 		CreditCard creditCard;
+
 		creditCard = this.creditCardService.getCreditCardByChorbi();
 		result = this.createEditModelAndView(creditCard);
+
 		return result;
 	}
 
@@ -107,7 +109,6 @@ public class CreditCardChorbiController extends AbstractController {
 	public ModelAndView delete(@Valid final CreditCard creditCard, final BindingResult binding) {
 		ModelAndView result;
 
-		Assert.notNull(creditCard);
 		System.out.println(binding);
 		try {
 			this.creditCardService.delete(creditCard);

@@ -74,6 +74,7 @@ public class SearchTemplateService {
 		//Revisar que el search guardado sea del Principal
 		Assert.isTrue(this.chorbiService.findChorbiByPrincipal().equals(searchTemplate.getChorbi()));
 		Assert.notNull(this.creditCardService.getCreditCardByChorbi(), "search.notCreditCard");
+		Assert.isTrue(this.creditCardService.checkCreditCardByChorbi(), "search.not.valid.credit.card");
 		//Fechas para comprobar el tiempo de caché
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
 		lastSearch = new Date(searchTemplate.getCacheMoment().getTime());
@@ -238,5 +239,32 @@ public class SearchTemplateService {
 		searchTemplate = this.create();
 		searchTemplate.setChorbi(result);
 		this.searchTemplateRepository.save(searchTemplate);
+	}
+
+	public SearchTemplate findByPrincipalToShow() {
+		SearchTemplate search;
+
+		search = this.findByPrincipal();
+
+		if (search.getAge().equals(0))
+			search.setAge(null);
+
+		return search;
+	}
+
+	public Collection<Chorbi> getValidResults(final SearchTemplate search) {
+		Date timeOfCache, lastSearch;
+		Collection<Chorbi> results;
+
+		//revisa tiempo de cacheo
+		lastSearch = new Date(search.getCacheMoment().getTime());
+		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
+
+		if (lastSearch.after(timeOfCache))
+			results = search.getChorbies();
+		else
+			results = new ArrayList<Chorbi>();
+
+		return results;
 	}
 }

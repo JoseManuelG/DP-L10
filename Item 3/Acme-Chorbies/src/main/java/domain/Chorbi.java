@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -25,6 +27,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+	@Index(columnList = "desiredRelationship"), @Index(columnList = "genre"), @Index(columnList = "description"), @Index(columnList = "birthDate")
+})
 public class Chorbi extends Actor {
 
 	// Attributes -------------------------------------------------------------

@@ -34,8 +34,8 @@ public interface DashboardRepository extends JpaRepository<DomainEntity, Integer
 	public Double averageAgeOfChorbies();
 
 	// Dashboard - 03
-	@Query("select count(c) from CreditCard c where c.expirationYear > YEAR(CURRENT_DATE) and c.expirationMonth >= MONTH(CURRENT_DATE)")
-	public Double countValidCreditCard();
+	@Query("select count(c) from CreditCard c where c.expirationYear > YEAR(CURRENT_DATE) and (c.expirationMonth >= MONTH(CURRENT_DATE) and not (c.expirationMonth = MONTH(CURRENT_DATE) and ?1 = TRUE))")
+	public Double countValidCreditCard(boolean lastDayOfMonth);
 
 	// Dashboard - 04
 	@Query("select count(c) from Chorbi c where c.desiredRelationship='activities'")

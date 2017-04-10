@@ -3,7 +3,6 @@ package controllers.chorbi;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ConfigurationService;
 import services.SearchTemplateService;
 import controllers.AbstractController;
 import domain.Chorbi;
@@ -24,8 +22,6 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 	@Autowired
 	private SearchTemplateService	searchTemplateService;
-	@Autowired
-	private ConfigurationService	configurationService;
 
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -34,20 +30,9 @@ public class SearchTemplateChorbiController extends AbstractController {
 		ModelAndView result;
 		Collection<Chorbi> results;
 		SearchTemplate search;
-		Date timeOfCache, lastSearch;
 
-		search = this.searchTemplateService.findByPrincipal();
-		//revisa tiempo de cacheo
-		lastSearch = new Date(search.getCacheMoment().getTime());
-		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
-
-		if (lastSearch.after(timeOfCache))
-			results = search.getChorbies();
-		else
-			results = new ArrayList<Chorbi>();
-
-		if (search.getAge().equals(0))
-			search.setAge(null);
+		search = this.searchTemplateService.findByPrincipalToShow();
+		results = this.searchTemplateService.getValidResults(search);
 
 		result = new ModelAndView("searchTemplate/chorbi/search.do");
 		result.addObject("results", results);
