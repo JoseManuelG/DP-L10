@@ -28,11 +28,14 @@ public class SearchTemplateChorbiController extends AbstractController {
 	public ModelAndView search() {
 
 		ModelAndView result;
-		Collection<Chorbi> results;
+		final Collection<Chorbi> results;
 		SearchTemplate search;
+		final SearchTemplate searchTemplate;
 
-		search = this.searchTemplateService.findByPrincipalToShow();
-		results = this.searchTemplateService.getValidResults(search);
+		results = this.searchTemplateService.getValidResultsByPrincipal();
+		search = this.searchTemplateService.findByPrincipal();
+		if (search.getAge().equals(0))
+			search.setAge(null);
 
 		result = new ModelAndView("searchTemplate/chorbi/search.do");
 		result.addObject("results", results);

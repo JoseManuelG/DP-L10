@@ -244,19 +244,21 @@ public class SearchTemplateService {
 
 	public SearchTemplate findByPrincipalToShow() {
 		SearchTemplate search;
+		final Date timeOfCache, lastSearch;
 
 		search = this.findByPrincipal();
 
-		if (search.getAge().equals(0))
-			search.setAge(null);
+		//	if (search.getAge().equals(0))
+		//	search.setAge(null);
 
 		return search;
 	}
 
-	public Collection<Chorbi> getValidResults(final SearchTemplate search) {
+	public Collection<Chorbi> getValidResultsByPrincipal() {
 		Date timeOfCache, lastSearch;
 		Collection<Chorbi> results;
-
+		SearchTemplate search;
+		search = this.findByPrincipal();
 		//revisa tiempo de cacheo
 		lastSearch = new Date(search.getCacheMoment().getTime());
 		timeOfCache = new Date(System.currentTimeMillis() - this.configurationService.findConfiguration().getCachedTime());
