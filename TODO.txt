@@ -1,12 +1,17 @@
-B+ tree
-Informe de costes 
-A+
+GAVIRA - Test de rendimiento de su parte
+ARTURO - Test funcionales de chorbi y revision de todos (comprobar que no falta ninguno)
+ACHA - Informe de costes 
+ROLDAN - Realizar informe de test de rendimiento
+JAVI - Revisar A+
+
+Revisar documento de evaluacion.
 Revisar pagina en general con populate vacio
-La restriccion de creditCard esta mal. 
-Country es obligatorio.
 Documentar las cosas al final.
 
 
+
+
+---------------COMPLETO---------------------
 SearchTemplate:
 
 -Keyword solo busca en descripción, se deja asi?(No se especifica, teniendo el resto de campos especificamente no he creido necesario uqe busque en el resto)
@@ -16,8 +21,10 @@ SearchTemplate:
 
 -Cambiar tabla de resultados (sale un link de a tenant book(?))(estoy a la espera de tener un botón de perfil, si no se implementa al final pues lo quitare)
 
-
----------------COMPLETO---------------------
+La restriccion de creditCard esta mal. 
+B+ tree
+A+
+Country es obligatorio.
 A+ extra
 Preguntar a corchuelo si con ciudad obligatorio solo vale.
 Cambiar cadena de credit card (pone algo de reservas).
