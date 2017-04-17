@@ -94,7 +94,11 @@ public class CreditCardService {
 		Boolean result;
 
 		creditCard = this.getCreditCardByChorbi();
-		expireTime = new LocalDate(creditCard.getExpirationYear(), creditCard.getExpirationMonth() + 1, 1);
+		//Añadido el bloque if por Roldan, porque si tenia una tarjeta de credito que caducaba el mes 12,  fallaba
+		if (creditCard.getExpirationMonth() < 12)
+			expireTime = new LocalDate(creditCard.getExpirationYear(), creditCard.getExpirationMonth() + 1, 1);
+		else
+			expireTime = new LocalDate(creditCard.getExpirationYear() + 1, 1, 1);
 		now = new LocalDate();
 		period = new Period(now, expireTime, PeriodType.yearMonthDay());
 
