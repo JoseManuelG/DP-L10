@@ -17,7 +17,6 @@
 \setlength{\voffset}{-1in}
 \setlength{\textheight}{680px}
 \setlength{\headsep}{30px}
-\pagenumbering{gobble}
 \maketitle
 
 \section{Objetivo}
@@ -26,48 +25,53 @@ Como explica el enunciado de este A+, jMeter usa siempre los mismos datos para t
 
 \section{Configuración}
 
-La configuración de jmeter es muy simple. Por un lado, necesitmamos un archivo CSV, en el que vamos a poner varias filas de datos. Cada hilo tomará los datos de una fila diferente. Además, en cada fila se deben recoger todos los parámetros necesarios para el caso de prueba en cuestión. Si queremos por ejemplo que, como en el ejemplo anterior, cada hilo entre con un usuario diferente y borre un mensaje de su cuenta, necesitariamos poner usuario, contraseña y id del mensaje a borrar separados por coma en cada fila. Al tener en nuestro caso mismo usuario y contraseña nos bastaría con dos parametros en total por fila. 
-
-\begin{figure}[h!]
-\includegraphics[width=\linewidth]{Data}.
-  \caption{Archivo CSV.}
-
+\begin{figure}
+\caption{Archivo CSV.}
+\includegraphics[width=\linewidth]{Data}
+\label{fig:Data}
 \end{figure}
 
-Después necesitaríamos configurar jMeter para que lea este fichero. Para ello agregamos en nuestro \textit{test plan} el elemento de configuración \textit{CSV Data set config}.
+La configuración de jmeter es muy simple. Por un lado, necesitmamos un archivo CSV, en el que vamos a poner varias filas de datos. Cada hilo tomará los datos de una fila diferente. Además, en cada fila se deben recoger todos los parámetros necesarios para el caso de prueba en cuestión. Si queremos por ejemplo que, como en el ejemplo anterior, cada hilo entre con un usuario diferente y borre un mensaje de su cuenta, necesitariamos poner usuario, contraseña e id del mensaje a borrar separados por coma en cada fila. Al tener en nuestro caso mismo usuario y contraseña nos bastaría con dos parametros en total por fila. En la figura~\ref{fig:Data} podemos ver el CSV usado en nuestro ejemplo.
 
-\begin{figure}[h!]
-\includegraphics[width=\linewidth]{menu_csv}.
-  \caption{Menu para añadir el elemento.}
+\begin{figure}
+\caption{Menu para añadir el elemento.}
+\includegraphics[width=\linewidth]{menu_csv}
+\label{fig:menu_csv}
 \end{figure}
 
-Tenemos que configurar en el elemento añadido cuales van a ser las variables a las que se les asignen los distintos valores del csv y cuales en que ruta esta dicho csv. Hay otra opciones que se explican con más detalle en la documentación que se proporciona en el primer link de la bibliografía. Por ejemplo. \textit{Recycle on EOF} puesto a \textit{true} provocará que una vez terminado el fichero, se vuelva al principio de este, mientras que a \textit{false} el comportamiento dependera del valor de \textit{Stop thread on EOF}, asignando un valor por defecto o parando al hilo al llegar al final del documento.
+Después necesitaríamos configurar jMeter para que lea este fichero. Para ello agregamos en nuestro \textit{test plan} el elemento de configuración \textit{CSV Data set config}, como podemos ver en la figura~\ref{fig:menu_csv}.
 
-\begin{figure}[h!]
-\includegraphics[width=\linewidth]{Config1}.
-  \caption{Configuración del elemento.}
+\begin{figure}
+\caption{Configuración del elemento.}
+\includegraphics[width=\linewidth]{Config1}
+\label{fig:Config1}
 \end{figure}
 
-Ahora debemos grabar un caso de uso con normalidad, y una vez que lo tengamos, tenemos que editar el login y el borrado para añadir nuestros parámetros en vez de lo que se ha grabado. En nuestro caso tenemos que modificar el \textit{/j\_spring\_security\_check}, el \textit{/chirp/chorbi/view.do} y el \textit{/chirp/chorbi/delete.do}. En cada caso, tenemos que modificar los \textit{values} por los parametros, con el formato \$\{nombre\_del\_parámetro\}
+Tenemos que configurar en el elemento añadido cuales van a ser las variables a las que se les asignen los distintos valores del CSV y en que ruta esta dicho CSV, tal y como aparece en la figura~\ref{fig:Config1}. Hay otras opciones que se explican con más detalle en la documentación que se proporciona en el primer enlace de la bibliografía. Por ejemplo, \textit{Recycle on EOF} puesto a \textit{true} provocará que una vez terminado el fichero, se vuelva al principio de este, mientras que a \textit{false} el comportamiento dependera del valor de \textit{Stop thread on EOF}, asignando un valor por defecto o parando al hilo al llegar al final del documento.
 
-\begin{figure}[h!]
-\includegraphics[width=\linewidth]{Config2}.
-  \caption{j\_spring\_security\_check}
+\begin{figure}
+\caption{j\_spring\_security\_check}
+\includegraphics[width=\linewidth]{Config2}
+\label{fig:Config2}
 \end{figure}
 
-\begin{figure}[h!]
-\includegraphics[width=\linewidth]{Config3}.
-  \caption{chirp/chorbi/view.do}
+\begin{figure}
+\caption{chirp/chorbi/view.do}
+\includegraphics[width=\linewidth]{Config3}
+\label{fig:Config3}
 \end{figure}
 
-\begin{figure}[h!]
-\includegraphics[width=\linewidth]{Config4}.
-  \caption{chirp/chorbi/delete.do}
+\begin{figure}
+\caption{chirp/chorbi/delete.do}
+\includegraphics[width=\linewidth]{Config4}
+\label{fig:Config4}
 \end{figure}
+
+Ahora debemos grabar un caso de uso con normalidad, y una vez que lo tengamos, tenemos que editar el login y el borrado para añadir nuestros parámetros en vez de lo que se ha grabado. En nuestro caso tenemos que modificar el \textit{/j\_spring\_security\_check}, el \textit{/chirp/chorbi/view.do} y el \textit{/chirp/chorbi/delete.do}. En cada caso, tenemos que modificar los \textit{values} por los parametros, con el formato \$\{nombre\_del\_parámetro\}, como podemos ver en las figuras~\ref{fig:Config2}, \ref{fig:Config3} y \ref{fig:Config4}.
 
 \section{Problemas y posibles mejoras}
 
-Tal y como esta planteado, la interacción del test depende por completo de los datos que ya existen. No podemos, por ejemplo, crear un nuevo objeto y eliminarlo, ya que la eliminación dependerá del ID del objeto creado, y no podemos saber de antemano que ID se eligirá al crear el objeto. Como nos pasaba, la primera vez se borrará, y el resto intentará borrar un objeto que ya no existe (o incluso que no pertenece al usuario que lo esta intentando, si hemos parametrizado varios usuarios). Para conseguir que los test sean dinámicos necesitariamos guardar en una variable la ID del objeto nuevo y usar esa variable para el borrado. Conseguir capturar esta ID y utilizarla como parámetro puede ser un A+ aun más interesante que el abordado.
+Tal y como esta planteado, la interacción del test depende por completo de los datos que ya existen. No podemos, por ejemplo, crear un nuevo objeto y eliminarlo, ya que la eliminación dependerá del ID del objeto creado, y no podemos saber de antemano que ID se eligirá al crear el objeto. Como nos pasaba, la primera vez se borrará, y el resto intentará borrar un objeto que ya no existe (o incluso que no pertenece al usuario que lo esta intentando, si hemos parametrizado varios usuarios). Para conseguir que los test sean dinámicos necesitariamos guardar en una variable la ID del objeto nuevo y usar esa variable para el borrado. Conseguir capturar esta ID y utilizarla como parámetro puede ser un A+ aun más interesante que el abordado en este documento.
 
 \section{Bibliografía}
 \url{http://jmeter.apache.org/usermanual/component_reference.html#CSV_Data_Set_Config}
