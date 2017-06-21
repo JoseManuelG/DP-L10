@@ -139,11 +139,11 @@ public class ActorForm {
 		this.state = state;
 	}
 
+	@NotBlank
 	public String getCountry() {
 		return this.country;
 	}
 
-	@NotBlank
 	public void setCountry(final String country) {
 		this.country = country;
 	}
