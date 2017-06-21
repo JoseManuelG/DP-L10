@@ -78,10 +78,13 @@
     
 	<acme:submit code="security.register.save" name="save"/>
 	
+
 	<jstl:if test="${!isAdmin}">
 		<acme:submit code="security.register.delete" name="delete"/>
+		<acme:cancel url="chorbi/chorbi/myProfile.do" code="security.register.cancel"/>
 	</jstl:if>
-	
-	<acme:cancel url="" code="security.register.cancel"/>
+	<jstl:if test="${isAdmin}">
+		<acme:cancel url="admin/admin/myProfile.do" code="security.register.cancel"/>
+	</jstl:if>
 	
 </form:form>
