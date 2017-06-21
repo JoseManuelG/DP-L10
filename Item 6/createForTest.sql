@@ -1,3 +1,20 @@
+start transaction;
+
+create database `Acme-Chorbies`;
+
+use `Acme-Chorbies`;
+
+create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
+
+create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
+
+grant select, insert, update, delete 
+on `Acme-Chorbies`.* to 'acme-user'@'%';
+
+grant select, insert, update, delete, create, drop, references, index, alter, 
+create temporary tables, lock tables, create view, create routine,
+ alter routine, execute, trigger, show view 
+on `Acme-Chorbies`.* to 'acme-manager'@'%';
 -- MySQL dump 10.13  Distrib 5.5.29, for Win64 (x86)
 --
 -- Host: localhost    Database: Acme-Chorbies
@@ -18,6 +35,8 @@
 --
 -- Table structure for table `administrator`
 --
+
+
 
 DROP TABLE IF EXISTS `administrator`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -449,3 +468,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2017-06-21 16:31:51
+commit;
