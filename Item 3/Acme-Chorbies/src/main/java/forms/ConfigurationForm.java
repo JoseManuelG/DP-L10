@@ -1,8 +1,6 @@
 
 package forms;
 
-import javax.validation.constraints.Min;
-
 import org.hibernate.validator.constraints.Range;
 
 public class ConfigurationForm {
@@ -18,7 +16,7 @@ public class ConfigurationForm {
 	}
 	// Attributes--------------------------------------
 
-	@Min(0)
+	@Range(min = 0, max = 250)
 	public int getHours() {
 		return this.hours;
 	}
