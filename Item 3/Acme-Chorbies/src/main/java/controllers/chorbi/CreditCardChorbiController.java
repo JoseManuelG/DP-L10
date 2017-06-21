@@ -97,7 +97,7 @@ public class CreditCardChorbiController extends AbstractController {
 				this.creditCardService.save(creditCard);
 				result = new ModelAndView("redirect:../chorbi/myCreditCard.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
+				result = this.createEditModelAndView(creditCard, oops.getMessage());
 			}
 
 		return result;
