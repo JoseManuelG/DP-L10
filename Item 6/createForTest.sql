@@ -1,21 +1,3 @@
-start transaction;
-
-create database `Acme-Chorbies`;
-
-use `Acme-Chorbies`;
-
-create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
-
-create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
-
-grant select, insert, update, delete 
-on `Acme-Chorbies`.* to 'acme-user'@'%';
-
-grant select, insert, update, delete, create, drop, references, index, alter, 
-create temporary tables, lock tables, create view, create routine,
- alter routine, execute, trigger, show view 
-on `Acme-Chorbies`.* to 'acme-manager'@'%';
-
 -- MySQL dump 10.13  Distrib 5.5.29, for Win64 (x86)
 --
 -- Host: localhost    Database: Acme-Chorbies
@@ -115,7 +97,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (1088,0,'http://i.imgur.com/HfkbICf.png','http://www.Acme-Chorbies.com'),(1089,0,'http://i.imgur.com/pA52wSC.png','http://www.acme-bnb.com'),(1090,0,'http://i.imgur.com/GgsILAX.png','http://www.acme-cng.com'),(1091,0,'http://i.imgur.com/HfkbICf.png','http://www.Acme-Chorbies.com'),(1092,0,'http://i.imgur.com/pA52wSC.png','http://www.acme-bnb.com'),(1093,0,'http://i.imgur.com/GgsILAX.png','http://www.acme-cng.com');
+INSERT INTO `banner` VALUES (1088,0,'http://i.imgur.com/HfkbICf.png','http://www.acme-pad-thai.com'),(1089,0,'http://i.imgur.com/pA52wSC.png','http://www.acme-bnb.com'),(1090,0,'http://i.imgur.com/GgsILAX.png','http://www.acme-cng.com'),(1091,0,'http://i.imgur.com/HfkbICf.png','http://www.acme-pad-thai.com'),(1092,0,'http://i.imgur.com/pA52wSC.png','http://www.acme-bnb.com'),(1093,0,'http://i.imgur.com/GgsILAX.png','http://www.acme-cng.com');
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,6 +158,10 @@ CREATE TABLE `chorbi` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_hjmrn8vvm3631n2jvyojlilsj` (`coordinates_id`),
   UNIQUE KEY `UK_qrvmwkp25xc5exr6m3jgaxu4x` (`userAccount_id`),
+  KEY `UK_9hoj3pv0gojtme0f9n5etw6k3` (`desiredRelationship`),
+  KEY `UK_hdlfsw7lxgcbclq2iom6me4h8` (`genre`),
+  KEY `UK_5wdj0ha7n2mjpiojoe3gy0qh9` (`description`),
+  KEY `UK_ovkyoevssjuf41lisig22x0b8` (`birthDate`),
   CONSTRAINT `FK_qrvmwkp25xc5exr6m3jgaxu4x` FOREIGN KEY (`userAccount_id`) REFERENCES `useraccount` (`id`),
   CONSTRAINT `FK_hjmrn8vvm3631n2jvyojlilsj` FOREIGN KEY (`coordinates_id`) REFERENCES `coordinates` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -230,7 +216,11 @@ CREATE TABLE `coordinates` (
   `country` varchar(255) DEFAULT NULL,
   `province` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `UK_pvt53kmofix4yr038656p7lsu` (`city`),
+  KEY `UK_9pfiy0hcosbd9ksl8u9b7q06o` (`province`),
+  KEY `UK_euu6v4as8xmbdohwle87755dd` (`country`),
+  KEY `UK_d70etifmvemmrunavcayuh821` (`state`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -240,7 +230,7 @@ CREATE TABLE `coordinates` (
 
 LOCK TABLES `coordinates` WRITE;
 /*!40000 ALTER TABLE `coordinates` DISABLE KEYS */;
-INSERT INTO `coordinates` VALUES (1072,0,'Seville','Spain','Seville',''),(1073,0,'Seville','','',''),(1074,0,'Madrid','','',''),(1075,0,'','','',''),(1076,0,'Austin','','','Texas'),(1077,0,'','','',''),(1078,0,'Paris','France','',''),(1079,0,'','','',''),(1080,0,'Seville','','',''),(1081,0,'','','',''),(1082,0,'Seville','','',''),(1083,0,'','','',''),(1084,0,'Seville','','',''),(1085,0,'','','',''),(1086,0,'Seville','','',''),(1087,0,'','','','');
+INSERT INTO `coordinates` VALUES (1072,0,'Seville','Spain','Seville',''),(1073,0,'Seville','','',''),(1074,0,'Madrid','Spain','',''),(1075,0,'','','',''),(1076,0,'Austin','United States','','Texas'),(1077,0,'','','',''),(1078,0,'Paris','France','',''),(1079,0,'','','',''),(1080,0,'Seville','Spain','',''),(1081,0,'','','',''),(1082,0,'Seville','Spain','',''),(1083,0,'','','',''),(1084,0,'Seville','Spain','',''),(1085,0,'','','',''),(1086,0,'Seville','Spain','',''),(1087,0,'','','','');
 /*!40000 ALTER TABLE `coordinates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,6 +253,8 @@ CREATE TABLE `creditcard` (
   `chorbi_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_584svqyk53nkaci4v621ae3kk` (`chorbi_id`),
+  KEY `UK_12talwm2jns3cits0lnbbckl8` (`expirationYear`),
+  KEY `UK_evhfhpjdhcmyygxjo8sa6opcy` (`expirationMonth`),
   CONSTRAINT `FK_584svqyk53nkaci4v621ae3kk` FOREIGN KEY (`chorbi_id`) REFERENCES `chorbi` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -456,6 +448,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-10 13:58:22
-
-commit;
+-- Dump completed on 2017-06-21 16:31:51
