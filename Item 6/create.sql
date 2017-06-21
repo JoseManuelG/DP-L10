@@ -1,21 +1,3 @@
-start transaction;
-
-create database `Acme-Chorbies`;
-
-use `Acme-Chorbies`;
-
-create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
-
-create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
-
-grant select, insert, update, delete 
-on `Acme-Chorbies`.* to 'acme-user'@'%';
-
-grant select, insert, update, delete, create, drop, references, index, alter, 
-create temporary tables, lock tables, create view, create routine,
- alter routine, execute, trigger, show view 
-on `Acme-Chorbies`.* to 'acme-manager'@'%';
-
 -- MySQL dump 10.13  Distrib 5.5.29, for Win64 (x86)
 --
 -- Host: localhost    Database: Acme-Chorbies
@@ -420,7 +402,7 @@ CREATE TABLE `useraccount` (
 
 LOCK TABLES `useraccount` WRITE;
 /*!40000 ALTER TABLE `useraccount` DISABLE KEYS */;
-INSERT INTO `useraccount` VALUES (7,0,'\0','21232f297a57a5a743894a0e4a801fc3','admin');
+INSERT INTO `useraccount` VALUES (7,0,'','21232f297a57a5a743894a0e4a801fc3','admin');
 /*!40000 ALTER TABLE `useraccount` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -458,6 +440,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-10 14:01:00
-
-commit;
+-- Dump completed on 2017-06-21 16:07:19
