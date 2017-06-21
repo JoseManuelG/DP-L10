@@ -48,7 +48,8 @@ public class CreditCardService {
 		return result;
 	}
 	public CreditCard save(final CreditCard creditCard) {
-		Assert.notNull(creditCard, "La tarjeta de crédito no puede ser nula");
+		Assert.notNull(creditCard, "creditCard.null.error");
+		Assert.isTrue(this.checkCreditCardByChorbi(creditCard), "creditCard.expired.error");
 		CreditCard result;
 		result = this.creditCardRepository.save(creditCard);
 		return result;
@@ -94,6 +95,23 @@ public class CreditCardService {
 		Boolean result;
 
 		creditCard = this.getCreditCardByChorbi();
+		//Añadido el bloque if por Roldan, porque si tenia una tarjeta de credito que caducaba el mes 12,  fallaba
+		if (creditCard.getExpirationMonth() < 12)
+			expireTime = new LocalDate(creditCard.getExpirationYear(), creditCard.getExpirationMonth() + 1, 1);
+		else
+			expireTime = new LocalDate(creditCard.getExpirationYear() + 1, 1, 1);
+		now = new LocalDate();
+		period = new Period(now, expireTime, PeriodType.yearMonthDay());
+
+		result = period.getDays() > 1;
+
+		return result;
+	}
+	public boolean checkCreditCardByChorbi(final CreditCard creditCard) {
+		LocalDate expireTime, now;
+		Period period;
+		Boolean result;
+
 		//Añadido el bloque if por Roldan, porque si tenia una tarjeta de credito que caducaba el mes 12,  fallaba
 		if (creditCard.getExpirationMonth() < 12)
 			expireTime = new LocalDate(creditCard.getExpirationYear(), creditCard.getExpirationMonth() + 1, 1);

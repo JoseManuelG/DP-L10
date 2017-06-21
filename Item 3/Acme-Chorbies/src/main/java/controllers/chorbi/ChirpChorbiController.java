@@ -101,14 +101,16 @@ public class ChirpChorbiController extends AbstractController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int chirpId) {
 		ModelAndView result;
-
+		Chirp chirp;
+		chirp = this.chirpService.findOne(chirpId);
 		this.chirpService.delete(chirpId);
-
-		result = new ModelAndView("redirect:/");
+		if (chirp.getIsSender())
+			result = this.sent();
+		else
+			result = this.received();
 
 		return result;
 	}
-
 	@RequestMapping(value = "/reply", method = RequestMethod.GET)
 	public ModelAndView reply(@RequestParam final int chirpId) {
 		ModelAndView result;
