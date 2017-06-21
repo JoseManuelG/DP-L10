@@ -49,7 +49,7 @@ public class CreditCardService {
 	}
 	public CreditCard save(final CreditCard creditCard) {
 		Assert.notNull(creditCard, "creditCard.null.error");
-		Assert.isTrue(this.checkCreditCardByChorbi(creditCard), "creditCard.expired.error");
+		Assert.isTrue(this.checkCreditCardByChorbi(creditCard), "creditCard.notYour");
 		if (creditCard.getId() != 0) {
 			final CreditCard aux = this.creditCardRepository.findOne(creditCard.getId());
 			final Chorbi principal = this.chorbiService.findChorbiByPrincipal();
@@ -63,6 +63,8 @@ public class CreditCardService {
 	public void delete(final CreditCard creditCard) {
 
 		Assert.notNull(creditCard);
+		Assert.isTrue(this.checkCreditCardByChorbi(creditCard), "creditCard.notYour");
+
 		this.creditCardRepository.delete(creditCard);
 		Assert.isTrue(!this.creditCardRepository.exists(creditCard.getId()));
 	}
