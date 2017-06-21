@@ -49,17 +49,17 @@
 <fieldset>
 	<legend><spring:message code="chorbi.coordinates"/></legend>
 	<spring:message code="chorbi.coordinates.city"/>
-	<jstl:out value="${chorbi.coordinates.city}"/> <br/>
+	<acme:mask text="${chorbi.coordinates.city}"/> <br/>
 	
 	<spring:message code="chorbi.coordinates.state"/>
-	<jstl:out value="${chorbi.coordinates.state}"/> <br/>
+	<acme:mask text="${chorbi.coordinates.state}"/> <br/>
 	
 	<spring:message code="chorbi.coordinates.country"/>
-	<jstl:out value="${chorbi.coordinates.country}"/> <br/>
+	<acme:mask text="${chorbi.coordinates.country}"/> <br/>
 	
 	
 	<spring:message code="chorbi.coordinates.province"/>
-	<jstl:out value="${chorbi.coordinates.province}"/> <br/>
+	<acme:mask text="${chorbi.coordinates.province}"/> <br/>
 	
 </fieldset><br/>
 <jstl:if test="${aux}">

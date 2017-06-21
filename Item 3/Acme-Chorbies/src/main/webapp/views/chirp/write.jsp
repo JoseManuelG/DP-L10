@@ -34,14 +34,14 @@
 		<form:hidden path="subject" />
 		<form:hidden path="text" />
 		<spring:message code="chirp.subject" />:
-	<jstl:out value="${chirpForm.subject}" />
+	<acme:mask text="${chirpForm.subject}" />
 		<br />
 
 		<fieldset>
 			<legend>
 				<spring:message code="chirp.text" />
 			</legend>
-			<jstl:out value="${chirpForm.text}" />
+			<acme:mask text="${chirpForm.text}" />
 		</fieldset>
 		<br />
 	</jstl:if>
@@ -54,8 +54,7 @@
 		<form:select path="recipient">
 			<jstl:forEach items="${chorbis}" var="chorbi">
 				<form:option value="${chorbi.id}">
-					<jstl:out
-						value="${chorbi.name} ${chorbi.surname} (${chorbi.userAccount.username})" />
+					<acme:mask text="${chorbi.name} ${chorbi.surname} (${chorbi.userAccount.username})" />
 				</form:option>
 			</jstl:forEach>
 		</form:select>
@@ -66,7 +65,7 @@
 	<jstl:if test="${chirpForm.action eq 1 }">
 		<form:hidden path="recipient" />
 		<spring:message code="chirp.for" />:
-	<jstl:out value="${chirpForm.recipient.name} ${chirpForm.recipient.surname} (${chirpForm.recipient.userAccount.username})" />
+	<acme:mask text="${chirpForm.recipient.name} ${chirpForm.recipient.surname} (${chirpForm.recipient.userAccount.username})" />
 		<br />
 	</jstl:if>
 
